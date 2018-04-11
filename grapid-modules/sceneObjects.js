@@ -127,9 +127,9 @@
 						}
 					}
 					
+					obj.index = objArray.length;
 					objArray.push(obj);
-					let index = objArray.length - 1;
-					initBuffers(index);
+					initBuffers(obj.index);
 					break;
 				}	
 				
@@ -192,7 +192,6 @@ function drawScene() {
 					gl.drawArrays(gl.TRIANGLES, 0, currObj.numVert); 
 					break;
 				case "square" :
-			
 					gl.drawArrays(gl.TRIANGLE_STRIP, 0, currObj.numVert);
 					break;
 				default : 
@@ -218,6 +217,10 @@ function drawScene() {
 		
 		"createObject" : function(objClass, options) {
 			return createObject(objClass, options);
+		},
+		
+		"getObjArray" : function() {
+			return objArray;
 		}
 		
 	};
