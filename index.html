@@ -6,35 +6,16 @@
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
-
 <script type="text/javascript" src="webgl-utils.js"></script>
 
-<script id="shader-fs" type="x-shader/x-fragment">
-    precision mediump float;
+<script src = "Models\shaderBased\shader.js"> </script>
 
-    varying vec4 vColor;
+<script type="text/javascript" src="Models\objectBased\Cube.js"></script>
+<script type="text/javascript" src="Models\objectBased\SquarePyramid.js"></script>
 
-    void main(void) {
-        gl_FragColor = vColor;
-    }
-</script>
 
-<script id="shader-vs" type="x-shader/x-vertex">
-    attribute vec3 aVertexPosition;
-    attribute vec4 aVertexColor;
 
-    uniform mat4 uMVMatrix;
-    uniform mat4 uPMatrix;
 
-    varying vec4 vColor;
-	varying vec3 vRotation;
-
-    void main(void) {
-        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-        vColor = aVertexColor;
-		
-    }
-</script>
 
 
 <script type="text/javascript">
@@ -54,68 +35,10 @@
     }
 
 
-    function getShader(gl, id) {
-        var shaderScript = document.getElementById(id);
-        if (!shaderScript) {
-            return null;
-        }
-
-        var str = "";
-        var k = shaderScript.firstChild;
-        while (k) {
-            if (k.nodeType == 3) {
-                str += k.textContent;
-            }
-            k = k.nextSibling;
-        }
-
-        var shader;
-        if (shaderScript.type == "x-shader/x-fragment") {
-            shader = gl.createShader(gl.FRAGMENT_SHADER);
-        } else if (shaderScript.type == "x-shader/x-vertex") {
-            shader = gl.createShader(gl.VERTEX_SHADER);
-        } else {
-            return null;
-        }
-
-        gl.shaderSource(shader, str);
-        gl.compileShader(shader);
-
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            alert(gl.getShaderInfoLog(shader));
-            return null;
-        }
-
-        return shader;
-    }
 
 
-    var shaderProgram;
 
-    function initShaders() {
-        var fragmentShader = getShader(gl, "shader-fs");
-        var vertexShader = getShader(gl, "shader-vs");
 
-        shaderProgram = gl.createProgram();
-        gl.attachShader(shaderProgram, vertexShader);
-        gl.attachShader(shaderProgram, fragmentShader);
-        gl.linkProgram(shaderProgram);
-
-        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-            alert("Could not initialise shaders");
-        }
-
-        gl.useProgram(shaderProgram);
-
-        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
-        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
-
-        shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
-        gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
-
-        shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
-        shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
-    }
 
 
     var mvMatrix = mat4.create();
@@ -189,8 +112,8 @@
             -1.0, -1.0,  1.0
         ];
 		
-		pyramid.positionBufferItemSize=3;
-		pyramid.positionBufferNumItems=12;
+		//pyramid.positionBufferItemSize=3;
+		//pyramid.positionBufferNumItems=12;
 		
 		pyramid.colorBuffer= gl.createBuffer();
 		
@@ -216,13 +139,16 @@
             0.0, 1.0, 0.0, 1.0
         ];
 		
-		pyramid.colorBufferItemSize=4;
-		pyramid.colorBufferNumItems=12;
-		pyramid.rotationAxis=[0,1,0];
-		pyramid.rotationDegree=0;
-		pyramid.rotationSpeed=90;
+		//pyramid.colorBufferItemSize=4;
+		//pyramid.colorBufferNumItems=12;
+		//pyramid.rotationAxis=[0,1,0];
+		//pyramid.rotationDegree=0;
+		//pyramid.rotationSpeed=90;
+		
+
     
 		
+		//--------------------------CUBE------------------------
 		
 		cube=gl.createBuffer();
 		cube.name="cube 1";
@@ -266,8 +192,8 @@
             -1.0,  1.0, -1.0
         ];
 		
-		cube.positionBufferItemSize=3;
-		cube.positionBufferNumItems=24;
+		//cube.positionBufferItemSize=3;
+		//cube.positionBufferNumItems=24;
 		
 		cube.colorBuffer= gl.createBuffer();
 		
@@ -289,8 +215,8 @@
 		
 		cube.colors=unpackedColors;
 		
-		cube.colorBufferItemSize=4;
-		cube.colorBufferNumItems=24;
+		//cube.colorBufferItemSize=4;
+		//cube.colorBufferNumItems=24;
 		
 		
 		cube.indexBuffer= gl.createBuffer()
@@ -303,28 +229,38 @@
             20, 21, 22,   20, 22, 23  // Left face
         ];
 		
-		cube.indexBufferItemSize = 1;
-        cube.indexBufferNumItems = 36;
-		cube.rotationAxis=[1,1,1];
-		cube.rotationDegree=0;
-		cube.rotationSpeed=-75;
+		//cube.indexBufferItemSize = 1;
+		// cube.indexBufferNumItems = 36;
+		//cube.rotationAxis=[1,1,1];
+		//cube.rotationDegree=0;
+		//cube.rotationSpeed=-75;
+		
+		//----------object creation ------
+		
+		
+		var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices)
+		cubeTest.setRotationAxis([1,1,1]);
+		cubeTest.setRotationDegree(0);
+		cubeTest.setRotationSpeed(-75);
+		
+		var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors)
+		pyramidTest.setRotationAxis([0,1,0]);
+		pyramidTest.setRotationDegree(0);
+		pyramidTest.setRotationSpeed(90);
 		
 		
 		
 		
 		
-		
-		
-		
-		objectsToRender.push(pyramid);
-		objectsToRender.push(cube);
+		objectsToRender.push(pyramidTest);
+		objectsToRender.push(cubeTest);
 		
 		for(var i=0;i<objectsToRender.length;i++)
 		{
 			var initObj=objectsToRender[i];
 			
 			
-			gl.bindBuffer(gl.ARRAY_BUFFER, initObj);
+			gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);
 			
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.vertices), gl.STATIC_DRAW);
 		   
@@ -364,13 +300,16 @@
 		for(var i=0;i<objectsToRender.length;i++)
 		{
 			var renderObj=objectsToRender[i];
+			
+			
+			
 			mvPushMatrix();
 			
 			mat4.translate(mvMatrix,renderObj.position);
 			
-			mat4.rotate(mvMatrix, degToRad(objectsToRender[i].rotationDegree), renderObj.rotationAxis);
+			mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
 			
-			gl.bindBuffer(gl.ARRAY_BUFFER, renderObj);
+			gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
 			gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
 
 			gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
@@ -384,7 +323,8 @@
 				
 			}
 			else
-			{
+			{	
+				
 				setMatrixUniforms();
 				gl.drawArrays(gl.TRIANGLES, 0, renderObj.positionBufferNumItems);
 			}
@@ -427,7 +367,8 @@
 			
 			for(var i=0;i<objectsToRender.length;i++)
 			{
-				objectsToRender[i].rotationDegree=objectsToRender[i].rotationDegree+(objectsToRender[i].rotationSpeed*elapsed)/1000;
+				objectsToRender[i].setRotationDegree(objectsToRender[i].rotationDegree+(objectsToRender[i].rotationSpeed*elapsed)/1000);
+				
 			}
 
            // rPyramid += (90 * elapsed) / 1000.0;
