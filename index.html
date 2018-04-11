@@ -216,9 +216,9 @@
 		
 		pyramid.colorBufferItemSize=4;
 		pyramid.colorBufferNumItems=12;
-		
-		
-		 
+		pyramid.rotationAxis=[0,1,0];
+		pyramid.rotationDegree=0;
+		pyramid.rotationSpeed=90;
     
 		
 		
@@ -303,6 +303,16 @@
 		
 		cube.indexBufferItemSize = 1;
         cube.indexBufferNumItems = 36;
+		cube.rotationAxis=[1,1,1];
+		cube.rotationDegree=0;
+		cube.rotationSpeed=-75;
+		
+		
+		
+		
+		
+		
+		
 		
 		objectsToRender.push(pyramid);
 		objectsToRender.push(cube);
@@ -338,8 +348,10 @@
 
     var rPyramid = 0;
     var rCube = 0;
-
+	var lastTime = 0;
+	
     function drawScene() {
+		
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -354,7 +366,7 @@
 			
 			mat4.translate(mvMatrix,renderObj.position);
 			
-			mat4.rotateX(mvMatrix, degToRad(rCube));
+			mat4.rotate(mvMatrix, degToRad(objectsToRender[i].rotationDegree), renderObj.rotationAxis);
 			
 			gl.bindBuffer(gl.ARRAY_BUFFER, renderObj);
 			gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
@@ -410,9 +422,14 @@
         var timeNow = new Date().getTime();
         if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
+			
+			for(var i=0;i<objectsToRender.length;i++)
+			{
+				objectsToRender[i].rotationDegree=objectsToRender[i].rotationDegree+(objectsToRender[i].rotationSpeed*elapsed)/1000;
+			}
 
-            rPyramid += (90 * elapsed) / 1000.0;
-            rCube -= (75 * elapsed) / 1000.0;
+           // rPyramid += (90 * elapsed) / 1000.0;
+           // rCube -= (75 * elapsed) / 1000.0;
         }
         lastTime = timeNow;
     }
