@@ -4,6 +4,8 @@
 	//all the vertices *note should add size check*
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
+	//@@@@@ variables inside the constructor here have values,but outside they are undefined,aka in the setters down below
+	var positionBufferNumItems;
 		function Cube(name,position,vertices,colors,vertexIndices,drawType)
 		{
 			
@@ -11,6 +13,7 @@
 			this.position=position;
 			this.vertices=vertices;
 			this.colors=colors;
+	
 			this.vertexIndices=vertexIndices;
 			this.drawType=drawType;
 			
@@ -31,6 +34,8 @@
 			this.rotationAxis=[0,0,0];
 			this.rotationDegree=0;
 			this.rotationSpeed=0;
+			
+			
 		}
 
 
@@ -38,7 +43,8 @@
 	
 	//sets colors,defaults to black if invalid size or nothing is passed
 		Cube.prototype.setColor = function (color)
-		{
+		{	
+			
 			if((color===undefined)|| ((color.length/4)!=this.positionBufferNumItems))
 			{
 				console.log("defaulting colour to black");
@@ -52,11 +58,11 @@
 					}
 				}
 				
-				this.color=unpackedColors;
+				this.colors=unpackedColors;
 			}
 			else
 			{
-				this.color=color;
+				this.colors=color;
 			}
 		}
 

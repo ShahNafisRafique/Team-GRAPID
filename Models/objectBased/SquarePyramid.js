@@ -4,6 +4,7 @@
 	//all the vertices *note should add size check*
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
+	//@@@@@ variables inside the constructor here have values,but outside they are undefined,aka in the setters down below
 		function SquarePyramid(name,position,vertices,colors,drawType)
 		{
 			

@@ -35,6 +35,7 @@
 //attributes change per vertex
 //uniform changes per object
 //varying is for data that is i guess derived? made in vertex shader,read in frag shader
+//This shader code also calculates the position of the vertices
 	var vShader = (function() {
 		
 		var type = "vertex-shader";
@@ -65,51 +66,51 @@
 		};				
 	}());
 
-	
-function getShader(gl, id) {
-		var shaderScript = "";
-		var type = "";
-		try {
-			if (id === vShader.type()){ 
-				shaderScript = vShader.getScript();
-				type = id;
-			} else if (id === fShader.type()){
-				shaderScript = fShader.getScript();
-				type = id;
+//shader code not too sure how it works
+	function getShader(gl, id) {
+			var shaderScript = "";
+			var type = "";
+			try {
+				if (id === vShader.type()){ 
+					shaderScript = vShader.getScript();
+					type = id;
+				} else if (id === fShader.type()){
+					shaderScript = fShader.getScript();
+					type = id;
+				}
+				
+			} catch (e) {
+				console.error(e);
+			}
+
+			if (!shaderScript) {
+				console.log("shader script failed to load");
+				return null;
+			}
+
+			var shader;
+			if (type === "fragment-shader") {
+				shader = gl.createShader(gl.FRAGMENT_SHADER);
+			} else if (type === "vertex-shader") {
+				shader = gl.createShader(gl.VERTEX_SHADER);
+			} else {
+				console.error("shader type not set");
+				return null;
+			}
+			gl.shaderSource(shader, shaderScript);
+			
+			gl.compileShader(shader);
+
+			if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+				console.error(gl.getShaderInfoLog(shader));
+				return null;
 			}
 			
-		} catch (e) {
-			console.error(e);
+			return shader;
+			
 		}
 
-        if (!shaderScript) {
-			console.log("shader script failed to load");
-            return null;
-        }
-
-        var shader;
-        if (type === "fragment-shader") {
-            shader = gl.createShader(gl.FRAGMENT_SHADER);
-        } else if (type === "vertex-shader") {
-            shader = gl.createShader(gl.VERTEX_SHADER);
-        } else {
-			console.error("shader type not set");
-            return null;
-        }
-        gl.shaderSource(shader, shaderScript);
-		
-        gl.compileShader(shader);
-
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-            console.error(gl.getShaderInfoLog(shader));
-            return null;
-        }
-		
-        return shader;
-		
-    }
-
-
+//initz shaders,enables which attributes are actually being used
     var shaderProgram;
 
     function initShaders() {

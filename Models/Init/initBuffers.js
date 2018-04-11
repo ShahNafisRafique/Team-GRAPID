@@ -169,48 +169,52 @@
 			//----------object creation end ------
 			
 			
-			
-			var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices,gl.TRIANGLES)
-			cubeTest.setRotationAxis([1,1,1]);
-			cubeTest.setRotationDegree(0);
-			cubeTest.setRotationSpeed(-75);
-			
-			var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES)
-			pyramidTest.setRotationAxis([0,1,0]);
-			pyramidTest.setRotationDegree(0);
-			pyramidTest.setRotationSpeed(90);
-			
-			
-			
-			
-			
-			objectsToRender.push(pyramidTest);
-			objectsToRender.push(cubeTest);
-			
-			for(var i=0;i<objectsToRender.length;i++)
-			{
-				var initObj=objectsToRender[i];
+			//now create the objects by passing in needed parameters. beacuse ik that these two objects will rotate
+			//im going to specify their rotation properties
+				var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices,gl.TRIANGLES)
+				cubeTest.setRotationAxis([1,1,1]);
+				cubeTest.setRotationDegree(0);
+				cubeTest.setRotationSpeed(-75);
 				
-				
-				gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);
-				
-				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.vertices), gl.STATIC_DRAW);
-			   
-				gl.bindBuffer(gl.ARRAY_BUFFER, initObj.colorBuffer);
-			   
-				gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.colors), gl.STATIC_DRAW);
-
+				var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES)
+				pyramidTest.setRotationAxis([0,1,0]);
+				pyramidTest.setRotationDegree(0);
+				pyramidTest.setRotationSpeed(90);
 			
-				if(!(initObj.vertexIndices===undefined))
+			
+			
+			
+			//adds them to the grand ole list of rendable objects
+				objectsToRender.push(pyramidTest);
+				objectsToRender.push(cubeTest);
+			
+			//This here assings the vertex and color attributes to the shader so that the shaders know what data to us
+			//in the case of the cube the if statement area tells to store a element based array that will then call the 
+			//index values from the position buffer that is first defined
+				for(var i=0;i<objectsToRender.length;i++)
 				{
+					var initObj=objectsToRender[i];
 					
-					gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.indexBuffer);
+					
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);
+					
+					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.vertices), gl.STATIC_DRAW);
+				   
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.colorBuffer);
+				   
+					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.colors), gl.STATIC_DRAW);
+
 				
-					gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.vertexIndices), gl.STATIC_DRAW);
+					if(!(initObj.vertexIndices===undefined))
+					{
+						
+						gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.indexBuffer);
+					
+						gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.vertexIndices), gl.STATIC_DRAW);
+					}
+		 
+				
+				
 				}
-	 
-			
-			
-			}
 			
 		}
