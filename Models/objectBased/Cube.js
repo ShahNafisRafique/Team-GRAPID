@@ -4,7 +4,7 @@
 	//all the vertices *note should add size check*
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
-		function Cube(name,position,vertices,colors,vertexIndices)
+		function Cube(name,position,vertices,colors,vertexIndices,drawType)
 		{
 			
 			this.name=name;
@@ -12,6 +12,7 @@
 			this.vertices=vertices;
 			this.colors=colors;
 			this.vertexIndices=vertexIndices;
+			this.drawType=drawType;
 			
 			//based off above
 			

@@ -4,14 +4,14 @@
 	//all the vertices *note should add size check*
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
-		function SquarePyramid(name,position,vertices,colors)
+		function SquarePyramid(name,position,vertices,colors,drawType)
 		{
 			
 			this.name=name;
 			this.position=position;
 			this.vertices=vertices;
 			this.colors=colors;
-			
+			this.drawType=drawType;
 			//this.vertexIndices=vertexIndices;
 			
 			//based off above
