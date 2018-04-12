@@ -188,6 +188,7 @@
 				objectsToRender.push(pyramidTest);
 				objectsToRender.push(cubeTest);
 			
+			
 			//This here assings the vertex and color attributes to the shader so that the shaders know what data to us
 			//in the case of the cube the if statement area tells to store a element based array that will then call the 
 			//index values from the position buffer that is first defined
