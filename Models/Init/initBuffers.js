@@ -171,7 +171,7 @@
 			
 			//now create the objects by passing in needed parameters. beacuse ik that these two objects will rotate
 			//im going to specify their rotation properties
-				var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices,gl.TRIANGLES)
+				var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices,gl.TRIANGLE_STRIP);
 				cubeTest.setRotationAxis([1,1,1]);
 				cubeTest.setRotationDegree(0);
 				cubeTest.setRotationSpeed(-75);

@@ -32,7 +32,7 @@
 								mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
 						}
 					
-					//hey remember those buffers I made at initBuffers...yea those,lets do stuff with em
+					//hey remember those buffers I made at initBuffers...yea those,lets do stuff with em ; Shah these comments are meaningless
 						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
 						gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
 

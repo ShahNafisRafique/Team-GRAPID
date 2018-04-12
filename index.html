@@ -48,13 +48,10 @@
     
    
     function webGLStart(canvasID) {
-		//@@@@@yes yes yes ik I should pass the canvas id in rather then hard coding it in
-		//but alas idk how to do that with html,plz halp .
+		
         var canvas = document.getElementById(canvasID);
 				canvas.width = window.screen.availWidth;
 				canvas.height = window.screen.availHeight;
-				console.log(canvas.width);
-				console.log(window.screen.availHeight);
 		
 		//inits the GL functions.
         initGL(canvas);

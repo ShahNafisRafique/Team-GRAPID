@@ -5,43 +5,43 @@
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
 	//@@@@@ variables inside the constructor here have values,but outside they are undefined,aka in the setters down below
-		function SquarePyramid(name,position,vertices,colors,drawType)
-		{
+		var SquarePyramid = function(name,position,vertices,colors,drawType) {
 			
-			this.name=name;
-			this.position=position;
-			this.vertices=vertices;
-			this.colors=colors;
-			this.drawType=drawType;
-			//this.vertexIndices=vertexIndices;
+			var me = this;
+			
+			me.name=name;
+			me.position=position;
+			me.vertices=vertices;
+			me.colors=colors;
+			me.drawType=drawType;
+			//me.vertexIndices=vertexIndices;
 			
 			//based off above
 			
-			this.positionBuffer=gl.createBuffer();
-			this.positionBufferItemSize=3;
-			this.positionBufferNumItems=(this.vertices.length)/(this.positionBufferItemSize);
+			me.positionBuffer=gl.createBuffer();
+			me.positionBufferItemSize=3;
+			me.positionBufferNumItems=(me.vertices.length)/(me.positionBufferItemSize);
 			
-			this.colorBuffer= gl.createBuffer();
-			this.colorBufferItemSize=4;
-			this.colorBufferNumItems=(this.colors.length)/(this.colorBufferItemSize);
+			me.colorBuffer= gl.createBuffer();
+			me.colorBufferItemSize=4;
+			me.colorBufferNumItems=(me.colors.length)/(me.colorBufferItemSize);
 			
-			/* As of right now this square pyramid doesnt have a square base :P might need this for when it will actually have one
-			this.indexBuffer= gl.createBuffer()
-			this.indexBufferItemSize=1;
-			this.indexBufferNumItems=(this.vertexIndices.length)/(	this.indexBufferItemSize);
+			/* As of right now me square pyramid doesnt have a square base :P might need me for when it will actually have one
+			me.indexBuffer= gl.createBuffer()
+			me.indexBufferItemSize=1;
+			me.indexBufferNumItems=(me.vertexIndices.length)/(	me.indexBufferItemSize);
 			*/
-			this.rotationAxis=[0,0,0];
-			this.rotationDegree=0;
-			this.rotationSpeed=0;
-		}
+			me.rotationAxis=[0,0,0];
+			me.rotationDegree=0;
+			me.rotationSpeed=0;
+		
 
 
 //setter functions
 	
 	//sets colors,defaults to black if invalid size or nothing is passed
-		SquarePyramid.prototype.setColor = function (color)
-		{
-			if((color===undefined)|| ((color.length/4)!=this.positionBufferNumItems))
+		this.setColor = function (color) {
+			if((color===undefined)|| ((color.length/4)!=me.positionBufferNumItems))
 			{
 				console.log("defaulting colour to black");
 				
@@ -54,86 +54,80 @@
 					}
 				}
 				
-				this.color=unpackedColors;
+				me.color=unpackedColors;
 			}
 			else
 			{
-				this.color=color;
+				me.color=color;
 			}
 		}
 
 	//sets name of object
-		SquarePyramid.prototype.setName = function (name)
-		{
-			this.name=name;
+		this.setName = function (name) {
+			me.name=name;
 		}
 		
 	//sets position of object,defaults to [0,0,0] if invalid or no input given
-		SquarePyramid.prototype.setPosition = function (pos)
-		{
+		this.setPosition = function (pos) {
 			if((pos===undefined) || (pos.length!=3))
 			{
 				console.log("defaulting position vector");
-				this.position=[0,0,0];
+				me.position=[0,0,0];
 			}
 			else
 			{
-				this.position=pos;
+				me.position=pos;
 			}
 		}
 
 	//sets rotation axis, defaults to no rotation if invalid or no input given
-		SquarePyramid.prototype.setRotationAxis = function (rotAxis)
-		{
+		this.setRotationAxis = function (rotAxis) {
 			if((rotAxis===undefined) || (rotAxis.length!=3))
 			{
-				this.rotationAxis=[0,0,0];
+				me.rotationAxis=[0,0,0];
 				console.log("defaulting to no rotation axis");
 			}
 			else
 			{
-				this.rotationAxis=rotAxis;
+				me.rotationAxis=rotAxis;
 			}
 			
 		};
 		
 	//sets degree to rotate by, if no or invalid input defaults to 0	
-		SquarePyramid.prototype.setRotationDegree = function (rotDeg)
-		{
+		this.setRotationDegree = function (rotDeg) {
 			if((rotDeg===undefined) || (typeof rotDeg != 'number'))
 			{
-				this.rotationDegree=0;
+				me.rotationDegree=0;
 				console.log("defaulting to no rotation degree");
 			}
 			else
 			{
-				this.rotationDegree=rotDeg;
+				me.rotationDegree=rotDeg;
 			}
 			
 		}
 		
 	//sets speed to rotate by, if no or invalid input defaults to 0	
-		SquarePyramid.prototype.setRotationSpeed= function (rotSpeed)
-		{
+		this.setRotationSpeed= function (rotSpeed) {
 			if((rotSpeed===undefined) || (typeof rotSpeed != 'number'))
 			{
-				this.rotSpeed=0;
+				me.rotSpeed=0;
 				console.log("defaulting to no rotation degree");
 			}
 			else
 			{
-				this.rotationSpeed=rotSpeed;
+				me.rotationSpeed=rotSpeed;
 			}
 			
 		}
 
 	//sets vertices,defaults if invalid or no input given to 1x1x1 SquarePyramid
-		SquarePyramid.prototype.setVertices = function (vertices)
-		{
+		this.setVertices = function (vertices) {
 			if((vertices===undefined))
 			{
 				console.log("defaulting to default pyramid");
-				this.vertices=[
+				me.vertices=[
 					// Front face
 					 0.0,  1.0,  0.0,
 					-1.0, -1.0,  1.0,
@@ -157,9 +151,10 @@
 			}
 			else
 			{
-				this.vertices=vertices;
+				me.vertices=vertices;
 			}
 		}
+	};
 
 	/*
 	//sets the vertex indicies,aka the triangles of a square's face and which vertex is part of wat triangle, defaults to default one???
@@ -168,7 +163,7 @@
 			if((vertIndi===undefined))
 			{
 				console.log("defaulting vertex indicies");
-				this.vertexIndices=[
+				me.vertexIndices=[
 					0, 1, 2,      0, 2, 3,    // Front face
 					4, 5, 6,      4, 6, 7,    // Back face
 					8, 9, 10,     8, 10, 11,  // Top face
@@ -179,7 +174,7 @@
 			}
 			else
 			{
-				this.vertexIndices=vertIndi;
+				me.vertexIndices=vertIndi;
 			}
 		}
 	*/
