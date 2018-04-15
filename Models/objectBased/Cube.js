@@ -5,7 +5,7 @@
 	//color *note add size check*
 	//vertexIndices for the vertices of the triangles *note add size check
 	//@@@@@ variables inside the constructor here have values,but outside they are undefined,aka in the setters down below
-	var positionBufferNumItems;
+	
 
 		function Cube(name,position,vertices,colors,vertexIndices,drawType)
 		{
@@ -86,7 +86,7 @@
 						if((rotDeg===undefined) || (typeof rotDeg != 'number'))
 						{
 							thisObject.rotationDegree=0;
-							console.log("defaulting to no rotation degree");
+							console.log("defaulting to no inital rotation degree");
 						}
 						else
 						{
@@ -101,7 +101,7 @@
 						if((rotSpeed===undefined) || (typeof rotSpeed != 'number'))
 						{
 							thisObject.rotSpeed=0;
-							console.log("defaulting to no rotation degree");
+							console.log("defaulting to no rotation speed");
 						}
 						else
 						{
@@ -185,12 +185,14 @@
 			
 			//constructors
 
+				//sets some of the parameters to variables,just to store them.
 				thisObject.name=name;
 				thisObject.position=position;
 				thisObject.vertices=vertices;
 				thisObject.colors=colors;
 		
 				thisObject.vertexIndices=vertexIndices;
+				//need to find away to error check this.
 				thisObject.drawType=drawType;
 				
 				//check to see if valid name is passed
@@ -226,3 +228,4 @@
 			//end constructor
 
 		}
+		

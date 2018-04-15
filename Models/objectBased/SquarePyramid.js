@@ -80,7 +80,7 @@
 						if((rotDeg===undefined) || (typeof rotDeg != 'number'))
 						{
 							thisObject.rotationDegree=0;
-							console.log("defaulting to no rotation degree");
+							console.log("defaulting to no inital rotation degree");
 						}
 						else
 						{
@@ -95,7 +95,7 @@
 						if((rotSpeed===undefined) || (typeof rotSpeed != 'number'))
 						{
 							thisObject.rotSpeed=0;
-							console.log("defaulting to no rotation degree");
+							console.log("defaulting to no rotation speed");
 						}
 						else
 						{
