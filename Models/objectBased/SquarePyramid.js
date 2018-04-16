@@ -203,5 +203,8 @@
 				thisObject.rotationDegree=0;
 				thisObject.rotationSpeed=0;
 				
+				thisObject.rotationAxisBuffer=gl.createBuffer();
+				thisObject.rotationAxisBufferItemSize=thisObject.rotationAxis.length;
+				
 			//end constructor
 		}

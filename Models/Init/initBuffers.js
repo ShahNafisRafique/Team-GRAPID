@@ -185,7 +185,7 @@
 			
 			
 			//adds them to the grand ole list of rendable objects
-				//objectsToRender.push(pyramidTest);
+				objectsToRender.push(pyramidTest);
 				objectsToRender.push(cubeTest);
 			
 			
