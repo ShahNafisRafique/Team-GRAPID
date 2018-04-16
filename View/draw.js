@@ -29,7 +29,7 @@
 						if((renderObj.rotationDegree !== undefined) && (renderObj.rotationAxis!==undefined))
 						{	
 							//scary linear algebra stuff, not really Dr.Igor is lit
-								mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
+							//mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
 						}
 					
 					//hey remember those buffers I made at initBuffers...yea those,lets do stuff with em ; Shah these comments are meaningless
@@ -39,16 +39,23 @@
 					//remember those colors,yea do stuff
 						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
 						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+						
+			
+				
+						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.rotationAxis);
+						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.rotationDegree));
+						console.log(renderObj.rotationDegree);
 					
 					//for any object that has this vertex indices defined, aka the cube
 						if(!(renderObj.vertexIndices===undefined))
 						{
 							//remember that buffer with the indecies
-								gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.indexBuffer);
+								gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.indexBuffer);														
 								
 							setMatrixUniforms();
 							
 							//draw
+								//console.log( gl.getVertexAttrib(2,gl.VERTEX_ATTRIB_ARRAY_STRIDE));
 								gl.drawElements(gl.TRIANGLES, renderObj.indexBufferNumItems, gl.UNSIGNED_SHORT, 0);
 							
 						}

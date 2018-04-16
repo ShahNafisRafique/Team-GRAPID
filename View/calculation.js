@@ -16,9 +16,9 @@
 					//@@@@@btw this returns a error if(!(objectsToRender[i].rotationSpeed==0)) of undefined
 						for(var i=0;i<objectsToRender.length;i++)
 						{
-							
-							objectsToRender[i].setRotationDegree(objectsToRender[i].rotationDegree+(objectsToRender[i].rotationSpeed*elapsed)/1000);
-							
+							var currentObj=objectsToRender[i];
+							currentObj.setRotationDegree(currentObj.rotationDegree+(currentObj.rotationSpeed*elapsed)/1000);
+						
 						}
 						
 

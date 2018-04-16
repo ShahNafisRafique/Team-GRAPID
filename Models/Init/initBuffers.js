@@ -185,7 +185,7 @@
 			
 			
 			//adds them to the grand ole list of rendable objects
-				objectsToRender.push(pyramidTest);
+				//objectsToRender.push(pyramidTest);
 				objectsToRender.push(cubeTest);
 			
 			
@@ -197,14 +197,18 @@
 					var initObj=objectsToRender[i];
 					
 					
-					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);
-					
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);		
 					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.vertices), gl.STATIC_DRAW);
 				   
-					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.colorBuffer);
 				   
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.colorBuffer);			   
 					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.colors), gl.STATIC_DRAW);
-
+					
+				
+					
+					
+				
+				
 				
 					if(!(initObj.vertexIndices===undefined))
 					{

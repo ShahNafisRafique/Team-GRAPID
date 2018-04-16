@@ -221,9 +221,19 @@
 				thisObject.indexBufferItemSize=1;
 				thisObject.indexBufferNumItems=(thisObject.vertexIndices.length)/(	thisObject.indexBufferItemSize);
 				
+		
 				thisObject.rotationAxis=[0,0,0];
 				thisObject.rotationDegree=0;
 				thisObject.rotationSpeed=0;
+				
+				thisObject.rotationAxisBuffer=gl.createBuffer();
+				thisObject.rotationAxisBufferItemSize=thisObject.rotationAxis.length;
+
+				
+			
+				
+				
+			
 				
 			//end constructor
 
