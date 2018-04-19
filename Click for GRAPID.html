@@ -12,8 +12,8 @@
 	that theres a browser independent way to recall a function,aka whenever screen
 	refreshes.->
 	
-	<script type="text/javascript" src="Util\mathBased\glMatrix-0.9.5.min.js"></script>
-	<script type="text/javascript" src="Util\mathBased\mathFunctions.js"></script>
+	<script type="text/javascript" src="Util\math_based\glMatrix-0.9.5.min.js"></script>
+	<script type="text/javascript" src="Util\math_based\math_functions.js"></script>
 	<script type="text/javascript" src="Util\webgl-utils.js"></script>
 
 <!- shaderBased folder is for all shader based files.
@@ -21,13 +21,13 @@
 	probably should use inheriance but idk how to do that in javascript.
 	finally Init folder is the files that run for the first them when the main html file is clicked->
 	
-	<script src = "Models\shaderBased\shader.js"> </script>
+	<script src = "Models\shader_based\shader.js"> </script>
 
-	<script type="text/javascript" src="Models\objectBased\Cube.js"></script>
-	<script type="text/javascript" src="Models\objectBased\SquarePyramid.js"></script>
+	<script type="text/javascript" src="Models\object_based\cube.js"></script>
+	<script type="text/javascript" src="Models\object_based\square_pyramid.js"></script>
 
-	<script type="text/javascript" src="Models\Init\initGL.js"></script>
-	<script type="text/javascript" src="Models\Init\initBuffers.js"></script>
+	<script type="text/javascript" src="Models\init\init_gl.js"></script>
+	<script type="text/javascript" src="Models\init\init_buffers.js"></script>
 
 <!- These files effect/affect the view portion of this program directly, viewMatrix is 
 	the matrix that basicly says where 'eye' is looking at.
@@ -35,8 +35,8 @@
 	to be refreshed. aka at every tick the program calculates positions of objects and then draws them.
 	in the future these calculatiosn will be moved to the shaders as the gpu is much faster at mathz->
 	
-	<script type="text/javascript" src="View\viewMatrix.js"></script>
-	<script type="text/javascript" src="View\calculation.js"></script>
+	<script type="text/javascript" src="View\view_matrix.js"></script>
+	<script type="text/javascript" src="Models\calculations\calculation.js"></script>
 	<script type="text/javascript" src="View\draw.js"></script>
 	
 
