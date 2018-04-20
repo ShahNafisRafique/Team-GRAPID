@@ -19,6 +19,9 @@
 					var renderObj=objectsToRender[i];
 					
 					
+				
+				
+					
 					//stores the currnet view so that we can go back to it once we are done creating the object
 					mvPushMatrix();
 					
@@ -44,7 +47,7 @@
 				
 						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.rotationAxis);
 						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.rotationDegree));
-						console.log(renderObj.rotationDegree);
+						
 					
 					//for any object that has this vertex indices defined, aka the cube
 						if(!(renderObj.vertexIndices===undefined))
