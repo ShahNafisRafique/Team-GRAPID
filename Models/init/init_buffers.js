@@ -181,8 +181,18 @@
 				pyramidTest.setRotationDegree(0);
 				pyramidTest.setRotationSpeed(90);
 			
+			//	var testObj=new baseobject(1,2,3,4,5);
+				
+			//	testObj.rotationAxis=setRotationAxis(7+10);
+				
+			//	console.log(testObj.rotationAxis);
 			
+			var linerAlge=new line("dank","blue");
+			linerAlge.pirntAll();
 			
+			var linerAlge2=new	polygun("dank","blue");
+			linerAlge2.killAlllHumans(123);
+			//console.log(linerAlge.color+" -------"+linerAlge.name+" ------"+ linerAlge.rot);
 			
 			//adds them to the grand ole list of rendable objects
 				objectsToRender.push(pyramidTest);
