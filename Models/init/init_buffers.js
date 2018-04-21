@@ -168,24 +168,32 @@
 			
 			//----------object creation end ------
 			
-			
+			//
 			//now create the objects by passing in needed parameters. beacuse ik that these two objects will rotate
 			//im going to specify their rotation properties
-				var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,cube.vertexIndices,gl.TRIANGLE_STRIP);
+				var cubeTest=new Cube("cube 1",cube.position,cube.vertices,unpackedColors,gl.TRIANGLE_STRIP,cube.vertexIndices);
+				
 				cubeTest.setRotationAxis([1,1,1]);
 				cubeTest.setRotationDegree(0);
 				cubeTest.setRotationSpeed(-75);
 				
-				var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES)
+				
+				
+				//var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES)
+				var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
 				pyramidTest.setRotationAxis([0,1,0]);
-				pyramidTest.setRotationDegree(0);
+				pyramidTest.setRotationDegree(50);
 				pyramidTest.setRotationSpeed(90);
 			
-		
+		/*
 			var testOb=new baseObj("dank",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
 			testOb.setDrawType(gl.TRIANGLES);
-		
-			//console.log(linerAlge.color+" -------"+linerAlge.name+" ------"+ linerAlge.rot);
+			testOb.setColor(pyramid.colors);
+			testOb.setName("wow");
+			testOb.setPosition(pyramid.position);
+			testOb.setVertices(pyramid.vertices);
+			*/
+			
 			
 			//adds them to the grand ole list of rendable objects
 				objectsToRender.push(pyramidTest);
@@ -200,27 +208,32 @@
 					var initObj=objectsToRender[i];
 					
 					
-					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.positionBuffer);		
-					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.vertices), gl.STATIC_DRAW);
+					
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getPositionBuffer());		
+					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getVertices()), gl.STATIC_DRAW);
 				   
 				   
-					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.colorBuffer);			   
-					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.colors), gl.STATIC_DRAW);
+					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
+					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
 					
 				
 					
 					
 				
+					try {
 				
-				
-					if(!(initObj.vertexIndices===undefined))
-					{
+						if(!(initObj.getVertexIndice()===undefined))
+						{
+							
+							gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.getIndexBuffer());
 						
-						gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.indexBuffer);
-					
-						gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.vertexIndices), gl.STATIC_DRAW);
+							gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.getVertexIndice()), gl.STATIC_DRAW);
+						}
+						
 					}
-		 
+					catch(err) {
+						
+					}
 				
 				
 				}

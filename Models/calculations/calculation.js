@@ -17,7 +17,7 @@
 						for(var i=0;i<objectsToRender.length;i++)
 						{
 							var currentObj=objectsToRender[i];
-							currentObj.setRotationDegree(currentObj.rotationDegree+(currentObj.rotationSpeed*elapsed)/1000);
+							currentObj.setRotationDegree(currentObj.getRotationDegree()+(currentObj.getRotationSpeed()*elapsed)/1000);
 							
 						}
 						

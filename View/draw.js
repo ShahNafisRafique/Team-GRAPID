@@ -45,31 +45,33 @@
 						
 			
 				
-						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.rotationAxis);
-						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.rotationDegree));
+						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.getRotationAxis());
+						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
 						
 					
 					//for any object that has this vertex indices defined, aka the cube
-						if(!(renderObj.vertexIndices===undefined))
+					try {
+						if(!(renderObj.getVertexIndice()===undefined))
 						{
 							//remember that buffer with the indecies
-								gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.indexBuffer);														
+								gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.getIndexBuffer());														
 								
 							setMatrixUniforms();
 							
 							//draw
 								//console.log( gl.getVertexAttrib(2,gl.VERTEX_ATTRIB_ARRAY_STRIDE));
-								gl.drawElements(gl.TRIANGLES, renderObj.indexBufferNumItems, gl.UNSIGNED_SHORT, 0);
+								gl.drawElements(gl.TRIANGLES, renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 							
 						}
-						else
-						{	
-							//for objects that done have the above defined, aka pyramid
-								setMatrixUniforms();
-								
-								//draw
-									gl.drawArrays(gl.TRIANGLES, 0, renderObj.positionBufferNumItems);
-						}
+					}
+					catch(err) {	
+						//for objects that done have the above defined, aka pyramid
+							setMatrixUniforms();
+							
+							//draw
+							
+								gl.drawArrays(gl.TRIANGLES, 0, renderObj.getPositionBufferNumItems());
+					}
 						
 					//go back to where the eye was
 						mvPopMatrix();
