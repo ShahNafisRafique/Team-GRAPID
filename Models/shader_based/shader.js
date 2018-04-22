@@ -13,7 +13,9 @@
 			precision mediump float;
 
 			varying vec4 vColor;
-
+			
+			varying vec2 vTextureCoord;
+			
 			void main(void) {
 				gl_FragColor = vColor;
 			}`
@@ -68,7 +70,7 @@
 			uniform mat4 uPMatrix;
 			
 
-			varying vec2 vTextureCoord;
+		 varying vec2 vTextureCoord;
 
 			varying vec4 vColor;
 
@@ -76,7 +78,7 @@
 				
 				
 				gl_Position = uPMatrix * uMVMatrix*rotationMatrix(uRotationAxis,uRotationDegree) *vec4(aVertexPosition, 1.0);
-				vTextureCoord = aTextureCoord;
+				
 				
 				vColor = aVertexColor;
 			}`
