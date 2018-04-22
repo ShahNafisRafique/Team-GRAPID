@@ -185,18 +185,50 @@
 				pyramidTest.setRotationDegree(50);
 				pyramidTest.setRotationSpeed(90);
 			
-		/*
-			var testOb=new baseObj("dank",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
-			testOb.setDrawType(gl.TRIANGLES);
-			testOb.setColor(pyramid.colors);
-			testOb.setName("wow");
-			testOb.setPosition(pyramid.position);
-			testOb.setVertices(pyramid.vertices);
-			*/
+					var textureCoords = [
+						// Front face
+						0.0, 0.0,
+						1.0, 0.0,
+						1.0, 1.0,
+						0.0, 1.0,
+
+						// Back face
+						1.0, 0.0,
+						1.0, 1.0,
+						0.0, 1.0,
+						0.0, 0.0,
+
+						// Top face
+						0.0, 1.0,
+						0.0, 0.0,
+						1.0, 0.0,
+						1.0, 1.0,
+
+						// Bottom face
+						1.0, 1.0,
+						0.0, 1.0,
+						0.0, 0.0,
+						1.0, 0.0,
+
+						// Right face
+						1.0, 0.0,
+						1.0, 1.0,
+						0.0, 1.0,
+						0.0, 0.0,
+
+						// Left face
+						0.0, 0.0,
+						1.0, 0.0,
+						1.0, 1.0,
+						0.0, 1.0,
+						];
+			
 			
 			
 			//adds them to the grand ole list of rendable objects
-				objectsToRender.push(pyramidTest);
+				//objectsToRender.push(pyramidTest);
+				cubeTest.setTextureCoordinate(textureCoords);
+				
 				objectsToRender.push(cubeTest);
 			
 			
@@ -213,27 +245,36 @@
 					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getVertices()), gl.STATIC_DRAW);
 				   
 				   
+					
+				
+					
+					if(initObj.getHasTexture())
+					{
+						
+						
+						
 					gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
-					gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
-					
-				
-					
-					
-				
-					try {
-				
-						if(!(initObj.getVertexIndice()===undefined))
-						{
-							
-							gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.getIndexBuffer());
-						
-							gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.getVertexIndice()), gl.STATIC_DRAW);
-						}
+						gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
 						
 					}
-					catch(err) {
+					else
+					{
 						
+						gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
+						gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
 					}
+				
+					
+				
+					if(!(initObj.getVertexIndice()===undefined))
+					{
+						
+						gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.getIndexBuffer());
+					
+						gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.getVertexIndice()), gl.STATIC_DRAW);
+					}
+						
+					
 				
 				
 				}

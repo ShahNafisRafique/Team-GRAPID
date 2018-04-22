@@ -9,7 +9,8 @@ class baseObj {
 		this.color=_color;
 		this.drawType=_drawType;
 		
-		
+		this.hasTexture=false;
+		this.hasColor=true;
 		
 		
 	}
@@ -46,6 +47,15 @@ class baseObj {
 	
 	getDrawType() {
 		return this.drawType;
+	}
+	
+	getHasColor()
+	{
+		return this.hasColor;
+	}
+	
+	getHasTexture() {
+		return this.hasTexture;
 	}
 	
 	getIndexBuffer() {
@@ -102,6 +112,28 @@ class baseObj {
 		}
 		
 		return this.rotationSpeed;
+	}
+	
+	getTexture() {
+		if(this.hasTexture)
+		{
+			return this.texture;
+		}
+		return undefined;
+	}
+	
+	getTextureBuffer() {
+		return this.textureBuffer;
+		
+	}
+	
+	getTextureCoordinate() {
+		if(this.hasTexture)
+		{
+			return this.textureCoordinate;
+		}
+		
+		return undefined;
 	}
 	
 	getVertices() {
@@ -230,6 +262,22 @@ class baseObj {
 			this.rotationSpeed=0;
 		}
 	}
+	
+	//find away to check input
+	setTexture(_tex) {
+		this.texture=_tex;
+		this.hasTexture=true;
+	}
+	
+	//find away to check input
+	setTextureCoordinate(_texCoord) {
+		this.textureCoordinate=_texCoord;
+		this.textureBuffer=gl.createBuffer();
+		this.textureBufferItemSize=2;
+		this.textureBufferNumItem=24;
+		this.hasTexture=true;
+	}
+	
 	
 	setVertices(_vert){
 		

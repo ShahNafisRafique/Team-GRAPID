@@ -40,14 +40,27 @@
 						gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
 
 					//remember those colors,yea do stuff
+					
+					if(renderObj.getHasTexture())
+					{
+						
+						
+						
 						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
 						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+							
+					}
+					else
+					{
 						
+						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
+						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+					}
 			
-				
+					
 						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.getRotationAxis());
 						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
-						
+					
 					
 					//for any object that has this vertex indices defined, aka the cube
 					
@@ -60,7 +73,10 @@
 							
 							//draw
 								//console.log( gl.getVertexAttrib(2,gl.VERTEX_ATTRIB_ARRAY_STRIDE));
-								gl.drawElements(gl.TRIANGLES, renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
+								
+	
+							
+							gl.drawElements(gl.TRIANGLES, renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 							
 						}	
 						else 
@@ -72,7 +88,7 @@
 							
 								gl.drawArrays(gl.TRIANGLES, 0, renderObj.getPositionBufferNumItems());
 						
-						
+						}
 					//go back to where the eye was
 						mvPopMatrix();
 				}

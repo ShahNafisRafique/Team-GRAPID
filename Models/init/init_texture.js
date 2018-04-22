@@ -1,4 +1,11 @@
-    function initTexture() {
+  
+
+  var neheTexture;
+   function initTexture() {
+		
+		
+		
+/*
 		//creates text ref
         neheTexture = gl.createTexture();
 		//js images ovject
@@ -11,5 +18,7 @@
             handleLoadedTexture(neheTexture)
         }
 
-        neheTexture.image.src = "https://i.imgur.com/CjXRd1p.gif";
+        neheTexture.image.src = "nehe.gif";
+		*/
+		
     }
