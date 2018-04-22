@@ -68,7 +68,7 @@
 			uniform mat4 uPMatrix;
 			
 
-
+			varying vec2 vTextureCoord;
 
 			varying vec4 vColor;
 
@@ -76,8 +76,8 @@
 				
 				
 				gl_Position = uPMatrix * uMVMatrix*rotationMatrix(uRotationAxis,uRotationDegree) *vec4(aVertexPosition, 1.0);
-			
-				gl_Position=gl_Position;
+				vTextureCoord = aTextureCoord;
+				
 				vColor = aVertexColor;
 			}`
 		};
