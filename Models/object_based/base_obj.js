@@ -48,6 +48,15 @@ class baseObj {
 		return this.drawType;
 	}
 	
+	getIndexBuffer() {
+		
+		return undefined;
+	}
+	
+	getIndexBufferNumItems() {
+		return undefined;
+	}
+	
 	getName(){
 		return this.name;
 	}
@@ -99,6 +108,9 @@ class baseObj {
 		return this.vertices;
 	}
 	
+	getVertexIndice() {
+		return undefined;
+	}
 	
 	setColor(_color) {
 		

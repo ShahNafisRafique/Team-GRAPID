@@ -70,7 +70,7 @@
 			uniform mat4 uPMatrix;
 			
 
-		 varying vec2 vTextureCoord;
+		    varying vec2 vTextureCoord;
 
 			varying vec4 vColor;
 

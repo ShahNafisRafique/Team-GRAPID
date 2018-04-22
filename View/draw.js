@@ -50,7 +50,7 @@
 						
 					
 					//for any object that has this vertex indices defined, aka the cube
-					try {
+					
 						if(!(renderObj.getVertexIndice()===undefined))
 						{
 							//remember that buffer with the indecies
@@ -62,16 +62,16 @@
 								//console.log( gl.getVertexAttrib(2,gl.VERTEX_ATTRIB_ARRAY_STRIDE));
 								gl.drawElements(gl.TRIANGLES, renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 							
-						}
-					}
-					catch(err) {	
+						}	
+						else 
+						{	
 						//for objects that done have the above defined, aka pyramid
 							setMatrixUniforms();
 							
 							//draw
 							
 								gl.drawArrays(gl.TRIANGLES, 0, renderObj.getPositionBufferNumItems());
-					}
+						
 						
 					//go back to where the eye was
 						mvPopMatrix();

@@ -13,7 +13,7 @@ class Cube extends baseObj {
 
 	createBuffers() {
 		super.createBuffers();
-		console.log(this.getPositionBuffer());
+		
 		if(this.indexBuffer===undefined)
 		{
 			
