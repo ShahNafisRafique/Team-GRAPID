@@ -10,14 +10,17 @@
 		
 		function getScript() {
 			return `
+			
 			precision mediump float;
 
 			varying vec4 vColor;
-			
-			varying vec2 vTextureCoord;
+			varying vec2 vTexCoord;
+			uniform sampler2D uTex;
 			
 			void main(void) {
-				gl_FragColor = vColor;
+				gl_FragColor = texture2D(uTex, vTexCoord) * vColor;
+				
+				
 			}`
 		};
 		
@@ -60,6 +63,8 @@
 			
 			attribute vec3 aVertexPosition;
 			attribute vec4 aVertexColor;
+			attribute vec2 aTexCoord;
+			
 
 			uniform vec3 uRotationAxis;
 			uniform float uRotationDegree;
@@ -70,17 +75,17 @@
 			uniform mat4 uPMatrix;
 			
 
-		    varying vec2 vTextureCoord;
-
+		    varying vec2 vTexCoord;
 			varying vec4 vColor;
 
 			void main(void) {
 				
 				
 				gl_Position = uPMatrix * uMVMatrix*rotationMatrix(uRotationAxis,uRotationDegree) *vec4(aVertexPosition, 1.0);
-				
-				
 				vColor = aVertexColor;
+				vTexCoord=aTexCoord;
+				
+				
 			}`
 		};
 		
@@ -156,20 +161,29 @@
 
         gl.useProgram(shaderProgram);
 
+		//Location of this attribute is 0.
         shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
         gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
+		
+		//Location of this attribute is 1.
         shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
         gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
 
+		//Location of this attribute is 2.
+		shaderProgram.vertexTexAttribute=gl.getAttribLocation(shaderProgram, "aTexCoord");
+		gl.enableVertexAttribArray(shaderProgram.vertexTexAttribute);
 		
-	    
-	   shaderProgram.uniformRotationAxis = gl.getUniformLocation(shaderProgram, "uRotationAxis");
+		
+	    //These var is a uniform variable,aka a varialbe that is constant per object,that set
+		shaderProgram.uniformRotationAxis = gl.getUniformLocation(shaderProgram, "uRotationAxis");
 		shaderProgram.uniformRotationDegree = gl.getUniformLocation(shaderProgram, "uRotationDegree");
 		
 		
         shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
         shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+		
+		shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uTex");
 		
 		
 		

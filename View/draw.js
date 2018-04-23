@@ -16,7 +16,7 @@
 			//goes through every rendable object
 				for(var i=0;i<objectsToRender.length;i++)
 				{
-					var renderObj=objectsToRender[i];
+					var renderObj =objectsToRender[i];
 					
 					
 				
@@ -26,32 +26,39 @@
 					mvPushMatrix();
 					
 					//moves to the place where the object would like to be draw
-						mat4.translate(mvMatrix,renderObj.position);
+					mat4.translate(mvMatrix,renderObj.position);
 					
 					//if theres rotation properties are defined,rotate
-						if((renderObj.rotationDegree !== undefined) && (renderObj.rotationAxis!==undefined))
-						{	
-							//scary linear algebra stuff, not really Dr.Igor is lit
-							//mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
-						}
+					if((renderObj.rotationDegree !== undefined) && (renderObj.rotationAxis!==undefined))
+					{	
+						//scary linear algebra stuff, not really Dr.Igor is lit
+						//mat4.rotate(mvMatrix, degToRad(renderObj.rotationDegree), renderObj.rotationAxis);
+					}
 					
 					//hey remember those buffers I made at initBuffers...yea those,lets do stuff with em ; Shah these comments are meaningless
-						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
-						gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
+					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
+					gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
 
 					//remember those colors,yea do stuff
 					
 					if(renderObj.getHasTexture())
 					{
 						
+						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.getTextureBuffer());
+						gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, renderObj.getTextureBufferItemSize(), gl.FLOAT, false, 0, 0);
 						
+						//console.log("pos "+  shaderProgram.vertexPositionAttribute + "color " +   shaderProgram.vertexColorAttribute+ "text "+ shaderProgram.vertexTexAttribute);
 						
-						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
-						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+						//gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
+						//gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
 							
 					}
 					else
 					{
+						
+						gl.bindTexture(gl.TEXTURE_2D, whiteTexture);
+						
+						gl.disableVertexAttribArray(shaderProgram.vertexTexAttribute);
 						
 						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
 						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
@@ -66,13 +73,18 @@
 					
 						if(!(renderObj.getVertexIndice()===undefined))
 						{
+							gl.activeTexture(gl.TEXTURE0);
+							gl.bindTexture(gl.TEXTURE_2D, neheTexture);
+							gl.uniform1i(shaderProgram.samplerUniform, 0);
+							
+						
 							//remember that buffer with the indecies
-								gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.getIndexBuffer());														
+							gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, renderObj.getIndexBuffer());														
 								
 							setMatrixUniforms();
 							
 							//draw
-								//console.log( gl.getVertexAttrib(2,gl.VERTEX_ATTRIB_ARRAY_STRIDE));
+								
 								
 	
 							

@@ -32,6 +32,14 @@ class baseObj {
 		}
 	}
 	
+	createTextureBuffer() {
+		if(this.textureBuffer===undefined)
+		{
+			this.textureBuffer=gl.createBuffer();
+		}
+		
+	}
+	
 	//getters
 	getColor() {
 		return this.color;
@@ -125,6 +133,10 @@ class baseObj {
 	getTextureBuffer() {
 		return this.textureBuffer;
 		
+	}
+	
+	getTextureBufferItemSize() {
+		return this.textureBufferItemSize;
 	}
 	
 	getTextureCoordinate() {
