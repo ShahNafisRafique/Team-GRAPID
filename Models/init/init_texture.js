@@ -1,27 +1,30 @@
-var neheTexture;
-var whiteTexture;
+var activeTexutreList=[];
+//activeTexutreList.push(gl.TEXTURE0);
+
+
+var texturePaths=["nehe.gif"//];
+,"nehe2.gif"];
+var textureList=[];
 function initTexture() {
-	/*
-	whiteTex = gl.createTexture();
-	gl.bindTexture(gl.TEXTURE_2D, whiteTex);
-	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
-    new Uint8Array([1, 1, 1, 1]));
 
-	
-
-	//creates text ref
-	neheTexture = gl.createTexture();
-	//js images ovject
-	neheTexture.image = new Image();
-	
-	//out images into an attribute
-	//runs when images is loaded
-	neheTexture.image.onload = function () {
+	for(var i=0;i<texturePaths.length;i++)
+	{
+		var textureTemp=gl.createTexture();
+		textureTemp.image=new Image();
+		
+		textureTemp.image.onload = function () {
 		//above thhe init text
-		handleLoadedTexture(neheTexture)
+		handleLoadedTexture(textureTemp)
+		}
+		
+		textureTemp.image.src = texturePaths[i];
+		
+		
+		textureList.push(textureTemp);
+		
 	}
 
-	neheTexture.image.src = "nehe.gif";
-	*/
+
+	
 	
 }

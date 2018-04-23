@@ -32,14 +32,6 @@ class baseObj {
 		}
 	}
 	
-	createTextureBuffer() {
-		if(this.textureBuffer===undefined)
-		{
-			this.textureBuffer=gl.createBuffer();
-		}
-		
-	}
-	
 	//getters
 	getColor() {
 		return this.color;
@@ -122,30 +114,24 @@ class baseObj {
 		return this.rotationSpeed;
 	}
 	
-	getTexture() {
-		if(this.hasTexture)
-		{
-			return this.texture;
-		}
-		return undefined;
+	getTextureCoordBuffer() {
+		return this.textureCoordBuffer;
 	}
 	
-	getTextureBuffer() {
-		return this.textureBuffer;
-		
+	getTextureCoord() {
+		return this.textureCoord
 	}
 	
-	getTextureBufferItemSize() {
-		return this.textureBufferItemSize;
+	getTextureCoordItemSize() {
+		return 2;
 	}
 	
-	getTextureCoordinate() {
-		if(this.hasTexture)
-		{
-			return this.textureCoordinate;
-		}
-		
-		return undefined;
+	getTextureCoordNumItem() {
+		return this.textureCoordNumItem;
+	}
+	
+	getTextureObject() {
+		return this.textureObj;
 	}
 	
 	getVertices() {
@@ -275,22 +261,15 @@ class baseObj {
 		}
 	}
 	
-	//find away to check input
-	setTexture(_tex) {
-		this.texture=_tex;
-		this.hasTexture=true;
+	setTexture(_text,_textCoord) {
+		//this.textureCoordBuffer=_textBuffer;
+		this.textureCoordBuffer=gl.createBuffer();
+		this.textureCoord=_textCoord;
+		this.textureCoordNumItem=_textCoord.length/2;
+		this.textureObj=_text;
+		
 	}
-	
-	//find away to check input
-	setTextureCoordinate(_texCoord) {
-		this.textureCoordinate=_texCoord;
-		this.textureBuffer=gl.createBuffer();
-		this.textureBufferItemSize=2;
-		this.textureBufferNumItem=24;
-		this.hasTexture=true;
-	}
-	
-	
+
 	setVertices(_vert){
 		
 		if(_vert===undefined)

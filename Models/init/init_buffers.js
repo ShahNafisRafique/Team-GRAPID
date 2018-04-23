@@ -1,3 +1,5 @@
+var cubeVertexTextureCoordBuffer
+
 //This method creates any object that is going to be  made on startup.
 function initBuffers() {
 		
@@ -162,6 +164,9 @@ function initBuffers() {
 	cubeTest.setRotationDegree(0);
 	cubeTest.setRotationSpeed(-75);
 	
+	cubeVertexTextureCoordBuffer = gl.createBuffer()//
+    
+	
 	//Since the cube is going to have a texture,this array stores the coordinates of the texture.
 	var textureCoords = [
 		// Front face
@@ -200,9 +205,13 @@ function initBuffers() {
 		1.0, 1.0,
 		0.0, 1.0,
 		];
-
-	//Sets the texture coordinate property of the cube.
-	cubeTest.setTextureCoordinate(textureCoords);
+	
+    cubeVertexTextureCoordBuffer.itemSize = 2;
+    cubeVertexTextureCoordBuffer.numItems = 24;
+	
+	
+	
+	cubeTest.setTexture(textureList[0],textureCoords);
 
 	//Just like the cube above, the variable defined earlier are being passed into the pyramid constructor.
 	var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
@@ -212,11 +221,11 @@ function initBuffers() {
 	pyramidTest.setRotationDegree(50);
 	pyramidTest.setRotationSpeed(90);
 
-	
+	pyramidTest.setTexture(textureList[1],textureCoords);
 	
 	
 	//These two lines adds the two objects made to teh global array that has all objects that are to be renedered on screen.
-	//objectsToRender.push(pyramidTest);
+	objectsToRender.push(pyramidTest);
 	objectsToRender.push(cubeTest);
 
 
@@ -231,30 +240,16 @@ function initBuffers() {
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getVertices()), gl.STATIC_DRAW);
 	   
 	   
-		
+	   
+		gl.bindBuffer(gl.ARRAY_BUFFER,initObj.getTextureCoordBuffer());
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getTextureCoord()), gl.STATIC_DRAW);
 
 		//This if statement decides if an object has a texture set,if so the texture buffer will be bound and color disabled, else color will be enabled and texture disabled.
-		if(initObj.getHasTexture())
-		{
-			
-			//gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
-			//gl.vertexAttrib4f(shaderProgram.vertexColorAttribute, 1, 1, 1, 1);
-			
-			
-		   // gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getTextureBuffer());
-			//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getTextureCoordinate()), gl.STATIC_DRAW);
+	
 		
-			
-			gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
-			
-		}
-		else
-		{
-			// gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
-			gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
-		}
+		gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
+		
 
 		
 		//This if statment checks if a object has vertex indices, if not then those buffers wont be bound.

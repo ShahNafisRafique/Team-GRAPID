@@ -39,43 +39,33 @@
 					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
 					gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
 
-					//remember those colors,yea do stuff
 					
-					if(renderObj.getHasTexture())
-					{
+					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.getTextureCoordBuffer());
+					gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, renderObj.getTextureCoordItemSize(), gl.FLOAT, false, 0, 0);
+					
+					
+					
+					gl.activeTexture(gl.TEXTURE0);
+					//---------------------------------------
+					
+					console.log(gl.getParameter(gl.ACTIVE_TEXTURE));
+					gl.bindTexture(gl.TEXTURE_2D, renderObj.getTextureObject());
+					gl.uniform1i(shaderProgram.samplerUniform, 0);
 						
-						//gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.getTextureBuffer());
-						//gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, renderObj.getTextureBufferItemSize(), gl.FLOAT, false, 0, 0);
-						
-						//console.log("pos "+  shaderProgram.vertexPositionAttribute + "color " +   shaderProgram.vertexColorAttribute+ "text "+ shaderProgram.vertexTexAttribute);
-						
-						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
-						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
-						
-					}
-					else
-					{
-						
-						//gl.bindTexture(gl.TEXTURE_2D, whiteTexture);
-						
-						//gl.disableVertexAttribArray(shaderProgram.vertexTexAttribute);
-						
-						gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
-						gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
-					}
+					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
+					gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+					
 			
 					
-						gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.getRotationAxis());
-						gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
+					gl.uniform3fv( shaderProgram.uniformRotationAxis, renderObj.getRotationAxis());
+					gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
 					
 					
 					//for any object that has this vertex indices defined, aka the cube
 					
 						if(!(renderObj.getVertexIndice()===undefined))
 						{
-							gl.activeTexture(gl.TEXTURE0);
-							gl.bindTexture(gl.TEXTURE_2D, neheTexture);
-							gl.uniform1i(shaderProgram.samplerUniform, 0);
+							
 							
 						
 							//remember that buffer with the indecies

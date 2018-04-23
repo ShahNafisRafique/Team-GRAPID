@@ -88,10 +88,12 @@
 		//inits shaders. shaders shade.
         initShaders()
 		
+		initTexture();
+		
 		//init buffers, aka create any objects that are going to be in the world at start.
         initBuffers();
 
-		initTexture();
+		
 		
 		//make the background black.
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
