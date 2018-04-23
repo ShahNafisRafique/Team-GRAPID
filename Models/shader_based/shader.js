@@ -14,12 +14,12 @@
 			precision mediump float;
 
 			varying vec4 vColor;
-			varying vec2 vTexCoord;
-			uniform sampler2D uTex;
+		//	varying vec2 vTexCoord;
+		//	uniform sampler2D uTex;
 			
 			void main(void) {
-				gl_FragColor = texture2D(uTex, vTexCoord) * vColor;
-				
+			//	gl_FragColor = texture2D(uTex, vTexCoord) * vColor;
+				gl_FragColor=vColor;
 				
 			}`
 		};
@@ -75,7 +75,7 @@
 			uniform mat4 uPMatrix;
 			
 
-		    varying vec2 vTexCoord;
+		  //  varying vec2 vTexCoord;
 			varying vec4 vColor;
 
 			void main(void) {
@@ -83,7 +83,7 @@
 				
 				gl_Position = uPMatrix * uMVMatrix*rotationMatrix(uRotationAxis,uRotationDegree) *vec4(aVertexPosition, 1.0);
 				vColor = aVertexColor;
-				vTexCoord=aTexCoord;
+				//vTexCoord=aTexCoord;
 				
 				
 			}`
@@ -171,8 +171,8 @@
         gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
 
 		//Location of this attribute is 2.
-		shaderProgram.vertexTexAttribute=gl.getAttribLocation(shaderProgram, "aTexCoord");
-		gl.enableVertexAttribArray(shaderProgram.vertexTexAttribute);
+		//shaderProgram.vertexTexAttribute=gl.getAttribLocation(shaderProgram, "aTexCoord");
+		//gl.enableVertexAttribArray(shaderProgram.vertexTexAttribute);
 		
 		
 	    //These var is a uniform variable,aka a varialbe that is constant per object,that set
@@ -183,7 +183,7 @@
         shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
         shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 		
-		shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uTex");
+		//shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uTex");
 		
 		
 		

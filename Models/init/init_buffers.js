@@ -237,16 +237,16 @@ function initBuffers() {
 		if(initObj.getHasTexture())
 		{
 			
-			gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
-			gl.vertexAttrib4f(shaderProgram.vertexColorAttribute, 1, 1, 1, 1);
+			//gl.disableVertexAttribArray(shaderProgram.vertexColorAttribute);
+			//gl.vertexAttrib4f(shaderProgram.vertexColorAttribute, 1, 1, 1, 1);
 			
 			
-		    gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getTextureBuffer());
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getTextureCoordinate()), gl.STATIC_DRAW);
+		   // gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getTextureBuffer());
+			//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getTextureCoordinate()), gl.STATIC_DRAW);
 		
 			
-			//gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
-			//gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
+			gl.bindBuffer(gl.ARRAY_BUFFER, initObj.getColorBuffer());			   
+			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initObj.getColor()), gl.STATIC_DRAW);
 			
 		}
 		else
