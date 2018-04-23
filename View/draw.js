@@ -45,11 +45,12 @@
 					
 					
 					
-					gl.activeTexture(gl.TEXTURE0);
+					gl.activeTexture(gl.TEXTURE0+i);
 					//---------------------------------------
 					
-					console.log(gl.getParameter(gl.ACTIVE_TEXTURE));
+					//console.log(gl.getParameter(gl.ACTIVE_TEXTURE));
 					gl.bindTexture(gl.TEXTURE_2D, renderObj.getTextureObject());
+					
 					gl.uniform1i(shaderProgram.samplerUniform, 0);
 						
 					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);

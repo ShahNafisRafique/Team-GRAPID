@@ -1,9 +1,8 @@
-var activeTexutreList=[];
-//activeTexutreList.push(gl.TEXTURE0);
 
 
-var texturePaths=["nehe.gif"//];
-,"nehe2.gif"];
+
+var texturePaths=["nehe.gif"];
+//,"nehe2.gif"];
 var textureList=[];
 function initTexture() {
 
