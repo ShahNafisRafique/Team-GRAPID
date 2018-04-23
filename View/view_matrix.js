@@ -1,4 +1,4 @@
-//Shah, the mvMatrix is the matrix that defines the local coordinate system of an object, it's not the eye/camera object matrix.
+//create eye/model matrix to define object and viewer positions in global co-ordinate system.
 	var mvMatrix = mat4.create();
 	
 //keeps track of old positions of the eye
@@ -25,8 +25,8 @@
         mvMatrix = mvMatrixStack.pop();
     }
 
-//frustum,squishes everything down?? Nope, this function just passes the global coordinates (pMatrix)
-// and local coordinates (mvMatrix) of the current object into the shader's uniform variables in the GPU;
+//This function passes the perspective matrix (pMatrix) and global coordinates 
+//of the current object (mvMatrix) into the shader's uniform variables in the GPU;
 // see https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/uniformMatrix
     function setMatrixUniforms() {
         gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
