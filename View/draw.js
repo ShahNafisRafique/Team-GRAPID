@@ -50,8 +50,19 @@
 					
 					//console.log(gl.getParameter(gl.ACTIVE_TEXTURE));
 					//console.log(renderObj.getTextureObject()," owo" ,textureList[i])
-					gl.bindTexture(gl.TEXTURE_2D,textureList[renderObj.getTextureObject()]);
 					
+					
+					
+					if(renderObj.getHasTexture())
+					{
+						gl.bindTexture(gl.TEXTURE_2D,textureList[renderObj.getTextureIndex()]);
+						
+					}
+					else
+					{
+						gl.bindTexture(gl.TEXTURE_2D,textureList[0]);
+						//console.log(renderObj.getName(),renderObj.getColor());
+					}
 					gl.uniform1i(shaderProgram.samplerUniform, 0);
 						
 					gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);

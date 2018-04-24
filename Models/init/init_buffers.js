@@ -211,7 +211,7 @@ function initBuffers() {
 	
 	
 	
-	cubeTest.setTexture(0,textureCoordsCube);
+	cubeTest.setTexture(3,textureCoordsCube,true);
 
 	//Just like the cube above, the variable defined earlier are being passed into the pyramid constructor.
 	var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
@@ -249,13 +249,38 @@ function initBuffers() {
 	
 		];
 	
-	pyramidTest.setTexture(1,textureCoordsPyr);
+	console.log(texturePaths);
+	
+	pyramidTest.setTexture(1,textureCoordsPyr,true);
+	
+	
+	
+	
+	var pyramidTest2 = new SquarePyramid("pyramid test 2",[0,2,-10],pyramid.vertices,pyramid.colors,gl.TRIANGLES);
+	pyramidTest2.setTexture(2,textureCoordsPyr,true);
+
+	//pyramidTest2.setRotationAxis([0,1,0]);
+	//pyramidTest2.setRotationDegree(00);
+	//pyramidTest2.setRotationSpeed(90);
+	
+	
+	
+	
+	
+	
+	var cubeTest2=new Cube("cube 2",[0,-2,-10],cube.vertices,cube.colors,gl.TRIANGLE_STRIP,cube.vertexIndices);
+	//cubeTest2.setRotationAxis([1,1,1]);
+	//cubeTest2.setRotationDegree(0);
+	//cubeTest2.setRotationSpeed(-75);
+	cubeTest2.setTexture(0,textureCoordsCube,false);
+
 	
 	
 	//These two lines adds the two objects made to teh global array that has all objects that are to be renedered on screen.
 	objectsToRender.push(pyramidTest);
+	objectsToRender.push(pyramidTest2);
 	objectsToRender.push(cubeTest);
-
+	objectsToRender.push(cubeTest2);
 
 	//This loop goes through each object and binds the buffers for each variable in the shaders
 	for(var i=0;i<objectsToRender.length;i++)

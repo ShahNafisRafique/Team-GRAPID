@@ -1,7 +1,7 @@
 
 
 
-var texturePaths=["nehe.gif","nehe2.gif"];
+var texturePaths=["whiteTexture.gif","neheNorm.gif","neheRed.gif","neheGreen.gif"];
 var textureList=[];
 
  function initTexture(callback) {

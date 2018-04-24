@@ -13,6 +13,7 @@ class baseObj {
 		this.hasColor=true;
 		
 		
+		
 	}
 	
 	createBuffers() {
@@ -130,8 +131,8 @@ class baseObj {
 		return this.textureCoordNumItem;
 	}
 	
-	getTextureObject() {
-		return this.textureObj;
+	getTextureIndex() {
+		return this.textureIndex;
 	}
 	
 	getVertices() {
@@ -261,13 +262,32 @@ class baseObj {
 		}
 	}
 	
-	setTexture(_text,_textCoord) {
+	setTexture(_textIndex,_textCoord,_shouldTexture) {
 		//this.textureCoordBuffer=_textBuffer;
+		
+		
 		this.textureCoordBuffer=gl.createBuffer();
 		this.textureCoord=_textCoord;
 		this.textureCoordNumItem=_textCoord.length/2;
-		this.textureObj=_text;
+		this.textureIndex=_textIndex;
 		
+		if(_shouldTexture)
+		{
+			//console.log(this.name);
+			for(var i=0;i<this.color.length;i++)
+			{
+				this.color[i]=1;
+			}	
+		
+			this.hasTexture=true;
+		}
+		else
+		{
+			this.hasTexture=false;
+		
+			
+			
+		}
 	}
 
 	setVertices(_vert){
