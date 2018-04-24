@@ -19,7 +19,7 @@
 			
 			void main(void) {
 			//	gl_FragColor = texture2D(uTex, vTexCoord) * vColor;
-				gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t));
+				gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t))*vColor;
 			//	gl_FragColor=vColor;
 				
 			}`
