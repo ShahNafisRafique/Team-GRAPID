@@ -33,7 +33,7 @@
 
 	
 
-	
+	<script type="text/javascript" src="View\draw.js"></script>
 	<script type="text/javascript" src="Models\init\init_gl.js"></script>
 	<script type="text/javascript" src="Models\init\init_buffers.js"></script>
 	<script type="text/javascript" src="Models\init\init_texture.js"></script>
@@ -46,7 +46,7 @@
 	
 	<script type="text/javascript" src="View\view_matrix.js"></script>
 	<script type="text/javascript" src="Models\calculations\calculation.js"></script>
-	<script type="text/javascript" src="View\draw.js"></script>
+	
 	<script type="text/javascript" src="Controler\tick.js"></script>
 	
 
@@ -83,7 +83,7 @@
 		//but alas idk how to do that with html,plz halp .
         var canvas = document.getElementById("lesson04-canvas");
 		
-		
+	
 		
 		//inits the GL functions.
         initGL(canvas);
@@ -91,7 +91,7 @@
 		//inits shaders. shaders shade.
         initShaders()
 		
-		initTexture();
+		initTexture(drawScene);
 		
 		//init buffers, aka create any objects that are going to be in the world at start.
         initBuffers();
