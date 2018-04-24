@@ -259,19 +259,38 @@ function initBuffers() {
 	var pyramidTest2 = new SquarePyramid("pyramid test 2",[0,2,-10],pyramid.vertices,pyramid.colors,gl.TRIANGLES);
 	pyramidTest2.setTexture(2,textureCoordsPyr,true);
 
-	//pyramidTest2.setRotationAxis([0,1,0]);
-	//pyramidTest2.setRotationDegree(00);
-	//pyramidTest2.setRotationSpeed(90);
+	pyramidTest2.setRotationAxis([0,1,0]);
+	pyramidTest2.setRotationDegree(00);
+	pyramidTest2.setRotationSpeed(90);
+	
+	
+	var colors2 = [
+		[1.0, 0.0, 0.0, 1.0], // Front face-RED=RED
+		[1.0, 1.0, 0.0, 1.0], // Back face-RED+GREEN=yellow?
+		[0.0, 1.0, 0.0, 1.0], // Top face-GREEN=GREEN
+		[1.0, 0.5, 0.5, 1.0], // Bottom face-idk
+		[1.0, 0.0, 1.0, 1.0], // Right face-RED+BLUE=purple?
+		[0.0, 0.0, 1.0, 1.0]  // Left face-BLUE=BLUE
+	];
+
+	
+	var unpackedColors2 = [];
+	for (var i in colors) {
+		var color = colors[i];
+		
+		for (var j=0; j < 4; j++) {
+			unpackedColors2 = unpackedColors2.concat(color);
+		}
+	}
 	
 	
 	
 	
 	
-	
-	var cubeTest2=new Cube("cube 2",[0,-2,-10],cube.vertices,cube.colors,gl.TRIANGLE_STRIP,cube.vertexIndices);
-	//cubeTest2.setRotationAxis([1,1,1]);
-	//cubeTest2.setRotationDegree(0);
-	//cubeTest2.setRotationSpeed(-75);
+	var cubeTest2=new Cube("cube 2",[0,-2,-10],cube.vertices,unpackedColors2,gl.TRIANGLE_STRIP,cube.vertexIndices);
+	cubeTest2.setRotationAxis([1,1,1]);
+	cubeTest2.setRotationDegree(0);
+	cubeTest2.setRotationSpeed(-75);
 	cubeTest2.setTexture(0,textureCoordsCube,false);
 
 	
