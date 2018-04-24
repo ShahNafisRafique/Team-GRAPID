@@ -47,6 +47,7 @@
 	<script type="text/javascript" src="View\view_matrix.js"></script>
 	<script type="text/javascript" src="Models\calculations\calculation.js"></script>
 	<script type="text/javascript" src="View\draw.js"></script>
+	<script type="text/javascript" src="Controler\tick.js"></script>
 	
 
 
@@ -82,6 +83,8 @@
 		//but alas idk how to do that with html,plz halp .
         var canvas = document.getElementById("lesson04-canvas");
 		
+		
+		
 		//inits the GL functions.
         initGL(canvas);
 		
@@ -105,7 +108,7 @@
 		
 		//the calculation-draw file caller, whenever the screen is 
 		//ready to refresh,this tick calls it.
-        tick();
+        tick(gl);
     }
 
 </script>
