@@ -49,7 +49,8 @@
 					//---------------------------------------
 					
 					//console.log(gl.getParameter(gl.ACTIVE_TEXTURE));
-					gl.bindTexture(gl.TEXTURE_2D,textureList[1]);
+					//console.log(renderObj.getTextureObject()," owo" ,textureList[i])
+					gl.bindTexture(gl.TEXTURE_2D,textureList[renderObj.getTextureObject()]);
 					
 					gl.uniform1i(shaderProgram.samplerUniform, 0);
 						

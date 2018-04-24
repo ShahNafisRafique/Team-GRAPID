@@ -211,7 +211,7 @@ function initBuffers() {
 	
 	
 	
-	cubeTest.setTexture(textureList[0],textureCoordsCube);
+	cubeTest.setTexture(0,textureCoordsCube);
 
 	//Just like the cube above, the variable defined earlier are being passed into the pyramid constructor.
 	var pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
@@ -249,7 +249,7 @@ function initBuffers() {
 	
 		];
 	
-	pyramidTest.setTexture(textureList[0],textureCoordsPyr);
+	pyramidTest.setTexture(1,textureCoordsPyr);
 	
 	
 	//These two lines adds the two objects made to teh global array that has all objects that are to be renedered on screen.
