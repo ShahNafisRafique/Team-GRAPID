@@ -17,10 +17,26 @@
 			varying vec2 vTexCoord;
 			uniform sampler2D uTexSamp;
 			
+			vec4 checkColor(in vec4 _color) {
+			 if((_color.w-.02)<0.01)
+			 {
+				 return vec4(1,0,0,1);
+			 }
+			 else
+			 {
+				 return vec4(_color.x,_color.y,_color.z,_color.w);
+			 }
+			}
+			
 			void main(void) {
 			//	gl_FragColor = texture2D(uTex, vTexCoord) * vColor;
-				gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t))*vColor;
-			//	gl_FragColor=vColor;
+			
+		//	gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t))*vColor;
+			//gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t));
+			gl_FragColor = texture2D(uTexSamp, vec2(vTexCoord.s, vTexCoord.t))*checkColor(vColor);
+			
+			
+			
 				
 			}`
 		};
@@ -83,7 +99,10 @@
 				
 				
 				gl_Position = uPMatrix * uMVMatrix*rotationMatrix(uRotationAxis,uRotationDegree) *vec4(aVertexPosition, 1.0);
+				
+
 				vColor = aVertexColor;
+				
 				vTexCoord=aTexCoord;
 				
 				
