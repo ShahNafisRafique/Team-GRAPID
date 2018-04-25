@@ -67,43 +67,61 @@ based on the class attributes of the DOM element div tags below-->
 				<!-- then we create a division with an id attribute = 'grapid-app', we use this id to link 
 				the elements in this section with the vue instance defined in canvasView.js -->
 				<div id = "grapid-app">
+        
 				<!-- we initialize a custom vue instance, canvas-view, based on the vue 
 				component constructor defined in canvasView.js -->
+        
 					<canvas-view></canvas-view>
+          
 					<!-- we do the same for the color-picker and shape-adder components -->
+          
 					<color-picker :change = "updateColor"></color-picker>
 					<shape-adder v-bind:hue = "hue"></shape-adder>
 					
 				</div>
+        
 				<!-- Vue components are made up of DOM elements, data, and functions; 
 				the html templates below describe the DOM elements that we include 
 				in a each component (e.g. the canvas-view component has a canvas element)  -->
+        
 				<template id = "canvas-view-template">
+        
 					<div class = "canvas-el">
 						<canvas ref = "grapid-canvas"></canvas>
 					</div>
+          
 				</template>
 				
 				<!-- credit to Florian Schulz for this color-picker template, 
 				see color-picker.js for link to his code -->
+        
 				<template id= "color-picker-template">
-					<div class = "color-picker">
+					
+          <div class = "color-picker">
 						<div class="color-picker__inner">
+            
 							<div class = "control" v-bind:style = "gradientH">
 								<input type = "range" min = "0" max = "360" v-model = "h"> </input>
 							</div>
+              
 						</div>
+            
 						<div class = "swatch" v-bind:style= "{'background': color}" v-on:click = "toggle">
 						</div>
+            
 					</div>
+          
 				</template>
 				
 				<template id= "shape-adder-template">
+        
 					<div>
+          
 					<!-- v-btn is a stylized button courtesy of vuetify.js;
 							in the element tag we set the color attribute to teal 
 							and bind the behavior on click events to the function 
-							"draw" defined in the shape-adder component constructor-->
+							"draw" defined in the shape-adder component constructor -->
+              
 						<v-btn 
 							fab dark small color = "teal"
 							@click.native = "draw"
@@ -120,12 +138,15 @@ based on the class attributes of the DOM element div tags below-->
 						<option>circle</option>
 						</select>
 					</div>
+          
 				</template>
 				
 		</div>
+
 		 <!-- We may at some point look into using Require.js or something to asynchonously load scripts while maintaining  -->
 		 <!-- the dependency chain at runtime but for now I'm just including them with script tags in the necessary order -->
 		 <!-- for why I'm including the scripts here, see https://www.html5rocks.com/en/tutorials/speed/script-loading/ -->
+     
 			<script src = "./resources/grapid-views/shape_adder.js" type = "text/javascript"></script>
 			<script src = "./resources/gl-matrix-min.js" type = "text/javascript"> </script>
 			<script src = "./resources/grapid-modules/init.js" type = "text/javascript"> </script>
@@ -134,5 +155,8 @@ based on the class attributes of the DOM element div tags below-->
 			<script src = "./resources/grapid-views/color-picker.js" type = "text/javascript"> </script>	
 			<script src = "./resources/grapid-views/canvas_view.js" type = "text/javascript"></script>
 			<script src = "./resources/grapid-modules/sceneObjects.js" type = "text/javascript"> </script>
+			<script src = "./resources/grapid-modules/base_obj.js" type = "text/javascript"> </script>
+			<script src = "./resources/grapid-modules/cube.js" type = "text/javascript"> </script>
+			<script src = "./resources/grapid-modules/square_pyramid.js" type = "text/javascript"> </script>
 	</body>
 </html>
