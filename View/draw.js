@@ -55,7 +55,14 @@
 					
 					if(renderObj.getHasTexture())
 					{
+						try
+						{
+							
 						gl.bindTexture(gl.TEXTURE_2D,textureList[renderObj.getTextureIndex()]);
+						}
+						catch(error) {
+							gl.bindTexture(gl.TEXTURE_2D,textureList[0]);
+						}
 						
 					}
 					else
