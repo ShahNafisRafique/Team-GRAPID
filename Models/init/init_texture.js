@@ -17,6 +17,7 @@ var textureList=[];
 		
         texture.src = image_src;
          texture.image = new Image();
+		 texture.image.crossOrigin = "anonymous";
 		
        /* if (!image) {
           reject(new Error('Failed to create the image object'));
