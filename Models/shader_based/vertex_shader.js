@@ -1,8 +1,8 @@
-//vertex shader ,runz on vertices
-//attributes change per vertex
-//uniform changes per object
-//varying is for data that is i guess derived? made in vertex shader,read in frag shader
-//This shader code also calculates the position of the vertices
+/*Now this 'variable' actually stores the vertex shader code which is in GLSL which is a C type language. When called
+	this variable returns that code and that code is ran in the gpu. This is why any math is suggested to be done in the shader code
+	as the GPU is really fast at doing that compared to the CPU. Vertex shader deals with the vertices ,so properties such as position,
+	color and texture and such are relevant.
+*/
 	var vShader = (function() {
 		
 		var type = "vertex-shader";

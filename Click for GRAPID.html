@@ -20,9 +20,11 @@
 	<script type="text/javascript" src="Models\init\init_gl.js"></script>
 	
 	
+	<!- Loads the vertex and fragment shader code along with the function to get those two codes so that the initShader function can use them ->
 	<script src = "Models\shader_based\vertex_shader.js"> </script>
 	<script src = "Models\shader_based\fragment_shader.js"> </script>
 	<script src = "Models\shader_based\get_shader.js"> </script>
+	
 	<!- This file has the functions that initializes the shaders and shader variables. ->
 	<script src = "Models\shader_based\shader.js"> </script>
 	
@@ -31,6 +33,7 @@
 	<script type="text/javascript" src="Models\texture\load_texture.js"></script>
 	
 	<!- Creates the data for and creates any object that is going to be rendered at start time, additionally also binds the buffers defined from the shader file. ->
+	<script type="text/javascript" src="Models\init\init_buffer_test_function.js"></script>	
 	<script type="text/javascript" src="Models\init\init_buffers.js"></script>	
 	
 	<!- Loads the file that calls the drawScene method whenever the screen gets updated, also loads the file that has the drawScene method and also loads the file
@@ -71,15 +74,16 @@
 		//Creates the canvas that webgl will work with, size is already defined in the html sections.
         var canvas = document.getElementById("lesson04-canvas");
 	
-		//inits the GL functions and the global variable called gl.
+		//Inits the GL functions and the global variable called gl.
         initGL(canvas);
 		
-		//inits shaders and shader variables aswell as enable them for use.
+		//Inits shaders and shader variables aswell as enable them for use.
         initShaders()
 		
+		//Initlizes the textures and then calls the tick method once all of them have been loaded.
 		initTexture(tick);
 		
-		//init buffers, and creates the data for and creates the objects for anything that will be rendered on start time.
+		//Init buffers, and creates the data for and creates the objects for anything that will be rendered on start time.
         initBuffers();
 
 		//Clears the background color and sets it to black.
