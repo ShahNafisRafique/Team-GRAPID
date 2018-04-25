@@ -11,7 +11,7 @@ function defaultRotationSpeed() {
 }
 
 function defaultColor() {
-	
+	return [0.0,0.0,0.0,0.0];
 }
 
 function defaultColor(_vert) {
