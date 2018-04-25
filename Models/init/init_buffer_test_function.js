@@ -379,7 +379,7 @@ function objectTestFunction() {
 	
 	pyramidTest2.setRotationAxis([0,1,0]);
 	pyramidTest2.setRotationDegree(00);
-	pyramidTest2.setRotationSpeed(-150);
+	pyramidTest2.setRotationSpeed(-450);
 	
 	pyramidTest2.setTexture(2,textureCoordsPyr,true);
 	
@@ -387,7 +387,7 @@ function objectTestFunction() {
 	//Creates the 2nd cube which has 'no texture' and only color and sets rotation properties.
 	cubeTest2 =new Cube("cube 2",cube2.pos,cube2.vertices,cube2.color,gl.TRIANGLE_STRIP,cube.vertexIndices);
 	
-	cubeTest2.setRotationAxis([1,0,0]);
+	cubeTest2.setRotationAxis([1,.9,0]);
 	cubeTest2.setRotationDegree(60);
 	cubeTest2.setRotationSpeed(80);
 	
