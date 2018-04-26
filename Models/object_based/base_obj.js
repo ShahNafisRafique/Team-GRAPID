@@ -20,6 +20,7 @@ class BaseObj {
 	createBuffers() {
 		if(this.positionBuffer ===undefined &&  this.vertices !==undefined)
 		{
+			//console.log("no position and vertice buffer made,creating ",this.name);
 			this.positionBuffer=gl.createBuffer();
 			this.positionBufferItemSize=3;
 			this.positionBufferNumItems=(this.vertices.length)/(this.positionBufferItemSize);
@@ -28,6 +29,7 @@ class BaseObj {
 		
 		if(this.colorBuffer===undefined)
 		{
+			//console.log("no color buffer has been made, creating now ",this.name);
 			this.colorBuffer= gl.createBuffer();
 			this.colorBufferItemSize=4;
 			this.colorBufferNumItems=(this.color.length)/(this.colorBufferItemSize);
@@ -111,7 +113,7 @@ class BaseObj {
 	getRotationDegree() {
 		if( this.rotationDegree===undefined)
 		{
-			
+			console.log("rotation degree undefined,defaulting",this.name);
 			 this.rotationDegree=0;
 			 return  this.rotationDegree;
 		}
@@ -123,6 +125,7 @@ class BaseObj {
 	getRotationSpeed() {
 		if(this.rotationSpeed===undefined)
 		{
+			console.log("rotation speed undefined,defaulting",this.name);
 			this.rotationSpeed=0;
 			return this.rotationSpeed;
 		}
@@ -172,7 +175,7 @@ class BaseObj {
 		//If vertices are undefined then default to a square baseless pyramid.
 		if(this.vertices===undefined){
 			
-			
+			console.log("vertices undefined,defaulting",this.name);
 			
 			this.vertices=[
 			
@@ -198,13 +201,13 @@ class BaseObj {
 			];
 		}
 		
-		//If any of these are false,default to white color.
+		
 		if((this.vertices!==undefined)&& ((_color.length/4)==(this.vertices.length/3)) && (isCorrectArrayType(_color,"number")) ) {
 			console.log("color set");
 			this.color=_color;
 		}
 		else {
-			console.log("defaulting color to black");
+			console.log("defaulting color to black",this.name);
 							
 							
 			var unpackedColors = [];
@@ -229,6 +232,7 @@ class BaseObj {
 		}
 		else
 		{
+			console.log("draw type undefined,defaulting",this.name);
 			this.drawType=gl.POINTS;								
 		}
 	}
@@ -243,7 +247,7 @@ class BaseObj {
 	setPosition(_pos) {
 	
 		if((this._pos!==undefined)&& ((_pos.length)==3) && (isCorrectArrayType(_pos,"number")) ) {
-			
+			console.log("position undefined,defaulting",this.name);
 			this.position=_pos;
 		}
 		else {
@@ -260,6 +264,7 @@ class BaseObj {
 		}
 		else
 		{
+				console.log("rotation axis undefined,defaulting",this.name);
 			this.rotationAxis=[0,0,0];
 		}
 	}
@@ -274,7 +279,7 @@ class BaseObj {
 		}
 		else
 		{
-			//console.log("deg error");
+				console.log("rotation degree undefined,defaulting",this.name);
 			this.rotationDegree=0;
 		}
 	}
@@ -288,6 +293,7 @@ class BaseObj {
 		}
 		else
 		{
+				console.log("rotation speed undefined,defaulting",this.name);
 			this.rotationSpeed=0;
 		}
 	}
@@ -324,6 +330,7 @@ class BaseObj {
 	setTextureCoord(_textCoord) {
 		if(_textCoord!==undefined) 
 		{
+			
 			this.textureCoordBuffer=gl.createBuffer();
 			this.textureCoord=_textCoord;
 			this.textureCoordNumItem=_textCoord.length/2;
@@ -335,6 +342,8 @@ class BaseObj {
 		
 		if(_vert===undefined)
 		{
+			
+				console.log("vertices undefined,defaulting",this.name);
 			//Sets to square pyramid vertices
 			this.vertices=[
 			// Front face

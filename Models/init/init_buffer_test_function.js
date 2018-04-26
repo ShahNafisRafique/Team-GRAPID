@@ -2,7 +2,7 @@ var pyramidTest;
 var cubeTest;
 var pyramidTest2;
 var cubeTest2;
-var sphere1;
+var sphereTest;
 //This variable is created to help with storing some data that will be used to create a cube.
 //var cubeVertexTextureCoordBuffer;
 	
@@ -350,10 +350,15 @@ function objectTestFunction() {
 	cube2.color=unpackedColors2;
 	
 	
-	var sphereTest=new Sphere("Sphere 1 ",[1,1,-5],[1,1,1,1],gl.TRIANGLES,2,30,30);
-	//console.log(sphereTest.getVertices());
+	
+	
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
 	
+	sphereTest=new Sphere("Sphere 1",[1,1,-5],[1,1,1,1],gl.TRIANGLES,2,30,30);
+	sphereTest.setRotationAxis([0,1,0]);
+	sphereTest.setRotationDegree(50);
+	sphereTest.setRotationSpeed(90);
+	sphereTest.setTexture(1,textureCoordsPyr,true);
 	
 	//Creates the 1st pyramid and set a rotation to it and set the texture for it.
 	pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
