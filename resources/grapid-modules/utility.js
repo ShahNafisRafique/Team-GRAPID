@@ -1,13 +1,25 @@
 /* 
 Utility Module - encapsulates helper functions
+
 Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
+
+Last Updated: 4/26/2018
 */
 
 "use strict";
 
 var utilityModule = (function () {
 	
-	/*
+  
+  //Converts degrees to radians and returns it
+  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ check for invalid input
+  
+  function degToRad(_degrees) {
+    return _degrees * Math.PI / 180;
+  }
+  
+  
+  /*
 	  Transform hsl data to rgb
 	  
 	  credit to michael jackson https://gist.github.com/mjackson/5311256
@@ -16,8 +28,10 @@ var utilityModule = (function () {
 	  @param   Number  s       saturation
 	  @param   Number  l       lightness
 	  @return  Array   mapped  rgb values
+    
 	 */
-	 
+	
+  
 	function hslToRgb(_h, _s, _l) {
 			  let r, g, b;
 
@@ -38,6 +52,7 @@ var utilityModule = (function () {
 
 			  return mapped;
 	}
+  
 	
 	function hue2rgb(_p, _q, _t) {
 				  if (_t < 0) _t += 1;
@@ -45,7 +60,7 @@ var utilityModule = (function () {
 				  if (_t < 1/6) return _p + (_q - _p) * 6 * _t;
 				  if (_t < 1/2) return _q;
 				  if (_t < 2/3) return _p + (_q - _p) * (2/3 - _t) * 6;
-				  return p;
+				  return _p;
 				}
 	
 	
@@ -54,11 +69,11 @@ var utilityModule = (function () {
 	function isCorrectArrayType(_arr,_type) {
 		var returnAnswer=true;
 		
-		for(var i=0;i<_arr.length;i++) {
+		for(var i = 0; i < _arr.length; i++) {
 			
 			//If any one of the elements is the wrong data type then the who return variable goes false.
 			
-			returnAnswer=returnAnswer&&(typeof _arr[i]==_type);
+			returnAnswer = returnAnswer && (typeof _arr[i] == _type);
 			
 			//Breaks if the return varialbe goes false.
 			
@@ -69,13 +84,22 @@ var utilityModule = (function () {
 		
 		return returnAnswer;
 	}
+  
+  
 			
 	return {
+    
 		"hslToRgb" : function(_h, _s, _l) {
 			return hslToRgb(_h, _s, _l);
 		},
+    
 		"isCorrectArrayType" : function(_arr, _type) {
 			return isCorrectArrayType(_arr, _type);
-		}
+		},
+    
+     "degToRad" : function(_degrees) {
+      return _degrees * Math.PI / 180;
+    }
+    
 	};
 }());	
