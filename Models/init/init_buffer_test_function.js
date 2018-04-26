@@ -349,6 +349,9 @@ function objectTestFunction() {
 	
 	cube2.color=unpackedColors2;
 	
+	
+	var sphereTest=new Sphere("Sphere 1 ",[1,1,-5],[1,1,1,1],gl.TRIANGLES,2,30,30);
+	console.log(sphereTest.getVertices());
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
 	
 	
