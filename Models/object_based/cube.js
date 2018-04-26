@@ -25,7 +25,7 @@ class Cube extends BaseObj {
 		}
 	}// end buffer
 	
-	//gets the index buffer for the cube.
+	//gets the index buffer for the cube. The index buffers refers to the points that define the triangle for a face.
 	getIndexBuffer() {
 		
 		return this.indexBuffer;
