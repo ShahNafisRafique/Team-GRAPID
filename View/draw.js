@@ -17,6 +17,7 @@ function drawScene() {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ NOTE add a property to check if renderability is on.
 	for(var i=0;i<objectsToRender.length;i++)
 	{
+		
 		//This is a temporary varialbe to hold the currnet renderable object.
 		var renderObj =objectsToRender[i];
 
