@@ -1,4 +1,4 @@
-class Cube extends baseObj {
+class Cube extends BaseObj {
 
 	//Assings the parameters to attributes of the cube and calls parent constructor.
 	constructor(_name,_position,_vertices,_color,_drawType,_vertexIndices) {

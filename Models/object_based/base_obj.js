@@ -1,4 +1,4 @@
-class baseObj {
+class BaseObj {
 	
 	//Sets basic attributes of the objects that are passed in.
 	constructor(_name,_position,_vertices,_color,_drawType) {
