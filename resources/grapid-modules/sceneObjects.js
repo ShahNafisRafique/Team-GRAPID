@@ -349,7 +349,6 @@ function drawScene() {
 			
 			if(currObj.objClass == "cube"){
 				let indexBufferRef = "cube_indices_buffer";
-				console.log(objArray[indexBufferRef]);
 				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, objArray[indexBufferRef]);
 			}
 			

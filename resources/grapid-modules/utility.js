@@ -61,8 +61,9 @@ var utilityModule = (function () {
 		"hslToRgb" : function(h, s, l)  {
 			return hslToRgb(h, s, l);
 		},
-    "isCorrectArrayType" = function(_arr, _type)  {
+    "isCorrectArrayType" : function(_arr, _type)  {
         return isCorrectArrayType(_arr, _type);
+		}
 	};
   
 }());	
