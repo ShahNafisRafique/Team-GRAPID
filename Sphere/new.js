@@ -54,6 +54,8 @@
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sphereVertexIndexBuffer);
     setMatrixUniforms();
     gl.drawElements(gl.TRIANGLES, sphereVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+	
+
   }
   var sphereVertexPositionBuffer;
   var sphereVertexNormalBuffer;

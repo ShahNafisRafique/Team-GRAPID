@@ -27,8 +27,9 @@ class Sphere extends BaseObj {
 		{
 			
 			this.indexBuffer= gl.createBuffer();
-			this.indexBufferItemSize=2;
-			console.log((this.vertexIndice.length), " num item");
+			
+			this.indexBufferItemSize=1;
+			
 			this.indexBufferNumItems=(this.vertexIndice.length)/(	this.indexBufferItemSize);
 		}
 	}// end buffer
@@ -45,13 +46,13 @@ class Sphere extends BaseObj {
         var textureCoordData = [];
 		var count=0;
 		//console.log(count);
-        for (var latNumber=0; latNumber < latitudeBands; latNumber++) {
+        for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
 			
             var theta = latNumber * Math.PI / latitudeBands;
             var sinTheta = Math.sin(theta);
             var cosTheta = Math.cos(theta);
 			
-            for (var longNumber=0; longNumber < longitudeBands; longNumber++) {
+            for (var longNumber=0; longNumber <= longitudeBands; longNumber++) {
 				
                 var phi = longNumber * 2 * Math.PI / longitudeBands;
                 var sinPhi = Math.sin(phi);
@@ -75,7 +76,7 @@ class Sphere extends BaseObj {
 		this.textureCoord=textureCoordData;
 		this.normal=normalData;
 		this.setVertices(vertexPositionData);
-		
+	//	console.log(vertexPositionData.length," hi");
 	}//end sphereVertices function
 	
 	createColorData(_vertices) {
@@ -104,7 +105,7 @@ class Sphere extends BaseObj {
                 indexData.push(first + 1);
             }
         }
-		
+	
 		return indexData;
 	}//end create vertex index
 
@@ -117,6 +118,7 @@ class Sphere extends BaseObj {
 	
 	//Gets the number of index buffer items
 	getIndexBufferNumItems() {
+		
 		return this.indexBufferNumItems;
 	}
 	
@@ -131,6 +133,7 @@ class Sphere extends BaseObj {
 		}
 		else
 		{
+			//console.log(this.vertexIndice.length,"asdasdas");
 			return this.vertexIndice;
 		}
 		

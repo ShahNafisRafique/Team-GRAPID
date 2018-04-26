@@ -94,6 +94,11 @@ class BaseObj {
 	}
 	
 	//Returns how many position buffer items there are.
+	getPositionBufferItemSize() {
+		return this.positionBufferItemSize;
+	}
+	
+	//Returns how many position buffer items there are.
 	getPositionBufferNumItems() {
 		return this.positionBufferNumItems;
 	}

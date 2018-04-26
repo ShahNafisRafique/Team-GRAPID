@@ -7,10 +7,10 @@ function initBuffers() {
 	objectTestFunction();
 
 	//These lines adds the objects made to the global array that has all objects that are to be renedered on screen.
-	objectsToRender.push(pyramidTest);
-	objectsToRender.push(pyramidTest2);
-	objectsToRender.push(cubeTest);
-	objectsToRender.push(cubeTest2);
+	//objectsToRender.push(pyramidTest);
+	//objectsToRender.push(pyramidTest2);
+	//objectsToRender.push(cubeTest);
+	//objectsToRender.push(cubeTest2);
 	objectsToRender.push(sphereTest);
 
 	//This loop goes through each object and binds the buffers for each variable in the shaders
@@ -39,7 +39,10 @@ function initBuffers() {
 		//This if statment checks if a object has vertex indices, if not then those buffers wont be bound.
 		if(!(initObj.getVertexIndice()===undefined))
 		{	
+			
+			
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, initObj.getIndexBuffer());
+
 			gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(initObj.getVertexIndice()), gl.STATIC_DRAW);
 		}//end if
 
