@@ -1,39 +1,51 @@
-
-
-
-var texturePaths=["whiteTexture.gif","neheNorm.gif","neheRed.gif","neheGreen.gif"];
-var textureList=[];
-
- function initTexture(callback) {
+//Callback is the function that will be called once all textures have been loaded in, and only if all the textures have been loaded in. 
+function initTexture(callback) {
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     var promises = [];
+	
+	/*This loop goes through each texture and updates that element by adding in the root path. Also stores that location
+		in the image variable, creates that texture and checks to see that it was made. Finally adds the onLoad property that pushes
+		the texture onto the global texture object array and calls the loadTexutre method.
+	*/
     for (var i=0; i<texturePaths.length; i++) {
-      var image_src = texturePaths[i];
+      var image_src = texturePathRoot+texturePaths[i];
+	  texturePaths[i]=image_src;
+	  
+	  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       var prom = new Promise(function(resolve, reject) {
-        var texture = gl.createTexture();
+      var texture = gl.createTexture();
 		
-       /* if (!texture) {
+		//This checks if the texture has been made.
+       if (!texture) {
           reject(new Error('Failed to create the texture object'));
-        }*/
+        }//end if
 		
+		//Creates a image for the texture.
         texture.src = image_src;
-         texture.image = new Image();
-		 texture.image.crossOrigin = "anonymous";
+        texture.image = new Image();
 		
-       /* if (!image) {
+		//Checks to see if image was correclty made.
+       if (!texture.image) {
           reject(new Error('Failed to create the image object'));
-        }*/
+        }//end if
 		
+		//Adds a propterty which runs the code inside once the image has been loaded.
         texture.image.onload = function(){
-         // _textureList[texture.src] = texture;
+        
 		  textureList.push( texture);
           loadTexture(texture);
           resolve("success");
-        };
+        };//end onLoad
+		
         texture.image.src = image_src;
-      });
+		
+      });//end promise
+	  
       promises.push(prom);
     }
 
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     Promise.all(promises).then(function() {
       if (callback) {
 		
@@ -42,20 +54,8 @@ var textureList=[];
       }
     }, function(error) {
       console.log('Error loading images', error);
-    })
-  }
+    })//end Promise.all(promises)
+	
+}//end initTexture(callback)
 
-  function loadTexture(texture) {
-  //tell webgl texture is currnet texture
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-		//the image used here have the cord increase as u go down,aka 0,0 is top left. 
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-		//load into rtexture space. kind of image,level of detail,format,size of each channle,and image it self
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
-		//how to scale up
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-		//how to scale down
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-		//sets to null?
-        gl.bindTexture(gl.TEXTURE_2D, null);
-  }
+ 

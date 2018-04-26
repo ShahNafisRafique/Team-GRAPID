@@ -50,6 +50,7 @@ Vue.component('shape-adder', {
 								sceneObjectModule.createObject(this.selected, options);
 								//It then calls the drawScene function, which draws objects in the objArray to the canvas
 								sceneObjectModule.drawScene();
+								this.spin();
 							}
 						},
 						computed: {
