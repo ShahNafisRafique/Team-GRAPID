@@ -21,7 +21,7 @@ class Cube extends BaseObj {
 			
 			this.indexBuffer= gl.createBuffer()
 			this.indexBufferItemSize=1;
-			console.log((this.vertexIndice.length)/(	this.indexBufferItemSize), " num item");
+			
 			this.indexBufferNumItems=(this.vertexIndice.length)/(	this.indexBufferItemSize);
 		}
 	}// end buffer

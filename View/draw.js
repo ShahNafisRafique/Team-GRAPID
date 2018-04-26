@@ -29,7 +29,7 @@ function drawScene() {
 				
 		//Binds the position buffer with the position of the currnet object.
 		gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
-		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.positionBufferItemSize, gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.getPositionBufferItemSize(), gl.FLOAT, false, 0, 0);
 
 		//Binds the texture coord buffer with the texture coord of the current object
 		gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.getTextureCoordBuffer());
@@ -90,8 +90,8 @@ function drawScene() {
 			setMatrixUniforms();
 			
 			//Draw the object now on the screen.
-		//	5400,2700
-		//	console.log(renderObj.getIndexBufferNumItems(), renderObj.getVertices().length);
+		//console.log( renderObj.getPositionBufferItemSize(), renderObj.getTextureCoordItemSize(),3,renderObj.getIndexBufferNumItems());
+			//console.log(gl.getBufferParameter(gl.ELEMENT_ARRAY_BUFFER, gl.BUFFER_SIZE));
 			gl.drawElements(renderObj.getDrawType(), renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 			
 		}	
