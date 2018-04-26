@@ -1,17 +1,19 @@
-//grand varialbe gl,creates the gl object
-	var gl;
-	//@@@@@ again idk how to pass the canvas id
-	//otherwise this gets the gl object and if it fails it sends a sad message
-    function initGL(canvas) {
-        try {
-            gl = canvas.getContext("experimental-webgl");
-            gl.viewportWidth = canvas.width;
-            gl.viewportHeight = canvas.height;
-        } catch (e) {
-        }
-        if (!gl) {
-            alert("Could not initialise WebGL, sorry :-(");
-        }
-    }
+//Creates the global variable gl 
+var gl;
+
+//This function takes the canvas passed in and creates the gl variable, and if it cant it displays an alert.
+function initGL(_canvas) {
+	try {
+		gl = _canvas.getContext("experimental-webgl");
+		
+		//Sets the viewports to the size of the canvas which is defined in the html section.
+		gl.viewportWidth = _canvas.width;
+		gl.viewportHeight = _canvas.height;
+	} catch (e) {
+	}
+	if (!gl) {
+		alert("Could not initialise WebGL, sorry :-(");
+	}
+}
 	
 	
