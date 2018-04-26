@@ -297,10 +297,8 @@ class BaseObj {
 	setTexture(_textIndex,_textCoord,_shouldTexture) {
 		//this.textureCoordBuffer=_textBuffer;
 		
-		
-		this.textureCoordBuffer=gl.createBuffer();
-		this.textureCoord=_textCoord;
-		this.textureCoordNumItem=_textCoord.length/2;
+		this.setTextureCoord(_textCoord);
+
 		this.textureIndex=_textIndex;
 		
 		if(_shouldTexture)
@@ -319,6 +317,16 @@ class BaseObj {
 		
 			
 			
+		}
+	}
+	
+	
+	setTextureCoord(_textCoord) {
+		if(_textCoord!==undefined) 
+		{
+			this.textureCoordBuffer=gl.createBuffer();
+			this.textureCoord=_textCoord;
+			this.textureCoordNumItem=_textCoord.length/2;
 		}
 	}
 
