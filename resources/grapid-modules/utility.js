@@ -4,6 +4,9 @@
 
 var utilityModule = (function () {
 	
+  //algorithm to convert hsl to rgb only slightly modified from original
+  //Credit to mjackson https://gist.github.com/mjackson/5311256
+  
 	function hslToRgb(h, s, l) {
 			  var r, g, b;
 
@@ -27,13 +30,39 @@ var utilityModule = (function () {
 				g = hue2rgb(p, q, h);
 				b = hue2rgb(p, q, h - 1/3);
 			  }
+        
+        let rgb = [r, g, b];
+        let map = rgb.map(x => Math.floor(x * 256));
 
-			  return [ r * 255, g * 255, b * 255 ];
+			  return map;
 			}
+      
+      
+  function isCorrectArrayType(_arr, _type) {
+	
+  var returnAnswer=true;
+	
+	for(var i = 0;i < _arr.length; i++) {
+		
+		//If any one of the elements is the wrong data type then return false.
+		returnAnswer = returnAnswer&&(typeof _arr[i]==_type);
+		
+		//Breaks if the return variable goes false.
+		if(!returnAnswer) {
+			break;
+		}
+	}
+	
+	return returnAnswer;
+}
+
 			
 	return {
-		"hslToRgb" : function(h, s, l){
+		"hslToRgb" : function(h, s, l)  {
 			return hslToRgb(h, s, l);
-		}
+		},
+    "isCorrectArrayType" = function(_arr, _type)  {
+        return isCorrectArrayType(_arr, _type);
 	};
+  
 }());	
