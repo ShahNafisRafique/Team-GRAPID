@@ -91,7 +91,7 @@ function drawScene() {
 			
 			//Draw the object now on the screen.
 		//console.log( renderObj.getPositionBufferItemSize(), renderObj.getTextureCoordItemSize(),3,renderObj.getIndexBufferNumItems());
-			console.log(gl.getBufferParameter(gl.ELEMENT_ARRAY_BUFFER, gl.BUFFER_SIZE));
+			//console.log(gl.getBufferParameter(gl.ELEMENT_ARRAY_BUFFER, gl.BUFFER_SIZE));
 			gl.drawElements(renderObj.getDrawType(), renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 			
 		}	

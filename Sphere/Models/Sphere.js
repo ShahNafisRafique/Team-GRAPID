@@ -82,7 +82,7 @@
         sphereVertexPositionBuffer.itemSize = 3;
         sphereVertexPositionBuffer.numItems = vertexPositionData.length / 3;
 
-		console.log(indexData );
+	
 		
         sphereVertexIndexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sphereVertexIndexBuffer);
