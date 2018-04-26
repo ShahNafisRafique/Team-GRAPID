@@ -1,4 +1,4 @@
-class Cube extends baseObj {
+class Cube extends BaseObj {
 
 	//Assings the parameters to attributes of the cube and calls parent constructor.
 	constructor(_name,_position,_vertices,_color,_drawType,_vertexIndices) {
@@ -25,7 +25,7 @@ class Cube extends baseObj {
 		}
 	}// end buffer
 	
-	//gets the index buffer for the cube.
+	//gets the index buffer for the cube. The index buffers refers to the points that define the triangle for a face.
 	getIndexBuffer() {
 		
 		return this.indexBuffer;

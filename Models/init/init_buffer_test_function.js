@@ -2,9 +2,9 @@ var pyramidTest;
 var cubeTest;
 var pyramidTest2;
 var cubeTest2;
-
+var sphere1;
 //This variable is created to help with storing some data that will be used to create a cube.
-var cubeVertexTextureCoordBuffer;
+//var cubeVertexTextureCoordBuffer;
 	
 //These two variables are simply here to store values that will then be passed to a constructor.
 var pyramid;
