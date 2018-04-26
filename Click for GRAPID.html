@@ -5,71 +5,63 @@
 <title>This is a Chrome Tab &mdash; v1.0</title>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
-
-<!- matrix transformations for rotation,translation, identiy matrix and such.
-	then theres a file with math functions such as degrees to radians.
-	and then finally there is a file that is google provided code that makes it so
-	that theres a browser independent way to recall a function,aka whenever screen
-	refreshes.->
+	<!- Thses are the util and math functions used. ->
 	<script type="text/javascript" src="Util\isArrayType.js"></script>
 	<script type="text/javascript" src="Util\math_based\glMatrix-0.9.5.min.js"></script>
 	<script type="text/javascript" src="Util\math_based\math_functions.js"></script>
 	<script type="text/javascript" src="Util\webgl-utils.js"></script>
-
-<!- shaderBased folder is for all shader based files.
-	objectBased folder is where predefined objects like cubes and pyramids will be
-	probably should use inheriance but idk how to do that in javascript.
-	finally Init folder is the files that run for the first them when the main html file is clicked->
+	<script type="text/javascript" src="Util\default_values.js"></script>
 	
+	<!- This file creates a few global variables that deal with the way the objects are positionned on the global coordinate system and 
+		creates functions to restore the position of the eye->
+	<script type="text/javascript" src="View\view_matrix.js"></script>
+	
+	
+	<!- This file initializes the variable called gl that is used through out the program. ->
+	<script type="text/javascript" src="Models\init\init_gl.js"></script>
+	
+	
+	<!- Loads the vertex and fragment shader code along with the function to get those two codes so that the initShader function can use them ->
+	<script src = "Models\shader_based\vertex_shader.js"> </script>
+	<script src = "Models\shader_based\fragment_shader.js"> </script>
+	<script src = "Models\shader_based\get_shader.js"> </script>
+	
+	<!- This file has the functions that initializes the shaders and shader variables. ->
 	<script src = "Models\shader_based\shader.js"> </script>
 	
+	<!- Initializes the texutres and loads the textures into a glboal array for use. ->
+	<script type="text/javascript" src="Models\init\init_texture.js"></script>
+	<script type="text/javascript" src="Models\texture\load_texture.js"></script>
+	
+	<!- Creates the data for and creates any object that is going to be rendered at start time, additionally also binds the buffers defined from the shader file. ->
+	<script type="text/javascript" src="Models\init\init_buffer_test_function.js"></script>	
+	<script type="text/javascript" src="Models\init\init_buffers.js"></script>	
+	
+	<!- Loads the file that calls the drawScene method whenever the screen gets updated, also loads the file that has the drawScene method and also loads the file
+		that calculates what is going to happen to the objects on the next scene.->
+	<script type="text/javascript" src="Controler\tick.js"></script>
+	<script type="text/javascript" src="View\draw.js"></script>
+	<script type="text/javascript" src="Models\calculations\calculation.js"></script>
 
+	
+	<!- These are the classes for the various basic type of objects that can be made. ->
 	<script type="text/javascript" src="Models\object_based\base_obj.js"></script>
 	<script type="text/javascript" src="Models\object_based\square_pyramid.js"></script>
 	<script type="text/javascript" src="Models\object_based\cube.js"></script>
 
-
-	
-
-	
-
-	<script type="text/javascript" src="View\draw.js"></script>
-	<script type="text/javascript" src="Models\init\init_gl.js"></script>
-	<script type="text/javascript" src="Models\init\init_buffers.js"></script>
-	<script type="text/javascript" src="Models\init\init_texture.js"></script>
-	<script type="text/javascript" src="Models\texture\load_texture.js"></script>
-<!- These files effect/affect the view portion of this program directly, viewMatrix is 
-	the matrix that basicly says where 'eye' is looking at.
-	calculation and draw file are both called right after eachother whenever the screen is ready
-	to be refreshed. aka at every tick the program calculates positions of objects and then draws them.
-	in the future these calculatiosn will be moved to the shaders as the gpu is much faster at mathz->
-	
-	<script type="text/javascript" src="View\view_matrix.js"></script>
-	<script type="text/javascript" src="Models\calculations\calculation.js"></script>
-	
-	<script type="text/javascript" src="Controler\tick.js"></script>
-	
-
-
 <script type="text/javascript">
 
-   
-
-
-   
-
-
-
-
-
-
-	//a list of every single object that is getting render even if its off screen. Be hold its grandness.
+	//Constant array of all textures that are going to all be loaded up at start time.
+	const texturePaths=["whiteTexture.gif","neheNorm.gif","neheRed.gif","neheGreen.gif"];
+	
+	//Constant variable that has the root path for textures.
+	const texturePathRoot="textures/";
+	
+	//This is the array that will contain the finalized texture objects for use after init_texture is done.
+	var textureList=[];
+	
+	//This array contains every object that will be rendered.
 	var objectsToRender=[];
-	
-
-
-    
-
 
 
 
@@ -77,39 +69,35 @@
 
    
 
-
+	//This is the main function that starts everything off.
     function webGLStart() {
-		//@@@@@yes yes yes ik I should pass the canvas id in rather then hard coding it in
-		//but alas idk how to do that with html,plz halp .
+		
+		//Creates the canvas that webgl will work with, size is already defined in the html sections.
         var canvas = document.getElementById("lesson04-canvas");
-		
 	
-		
-		//inits the GL functions.
+		//Inits the GL functions and the global variable called gl.
         initGL(canvas);
 		
-		//inits shaders. shaders shade.
+		//Inits shaders and shader variables aswell as enable them for use.
         initShaders()
 		
-		initTexture(drawScene);
+		//Initlizes the textures and then calls the tick method once all of them have been loaded.
+		initTexture(tick);
 		
-		//init buffers, aka create any objects that are going to be in the world at start.
+		//Init buffers, and creates the data for and creates the objects for anything that will be rendered on start time.
         initBuffers();
 
-		
-		
-		//make the background black.
+		//Clears the background color and sets it to black.
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		
-		//enable depth aka projective view.
+		//Enables depth testing so that anything behind something will not be rendered.
         gl.enable(gl.DEPTH_TEST);
 		
 		
 		
-		//the calculation-draw file caller, whenever the screen is 
-		//ready to refresh,this tick calls it.
-        tick(gl);
-    }
+	
+	  
+    }//end webGLStart()
 
 </script>
 
