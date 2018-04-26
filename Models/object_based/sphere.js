@@ -27,7 +27,8 @@ class Sphere extends BaseObj {
 		{
 			
 			this.indexBuffer= gl.createBuffer();
-			this.indexBufferItemSize=1;
+			this.indexBufferItemSize=2;
+			console.log((this.vertexIndice.length), " num item");
 			this.indexBufferNumItems=(this.vertexIndice.length)/(	this.indexBufferItemSize);
 		}
 	}// end buffer
@@ -42,14 +43,15 @@ class Sphere extends BaseObj {
         var vertexPositionData = [];
         var normalData = [];
         var textureCoordData = [];
-		
-        for (var latNumber=0; latNumber <= latitudeBands; latNumber++) {
+		var count=0;
+		//console.log(count);
+        for (var latNumber=0; latNumber < latitudeBands; latNumber++) {
 			
             var theta = latNumber * Math.PI / latitudeBands;
             var sinTheta = Math.sin(theta);
             var cosTheta = Math.cos(theta);
 			
-            for (var longNumber=0; longNumber <= longitudeBands; longNumber++) {
+            for (var longNumber=0; longNumber < longitudeBands; longNumber++) {
 				
                 var phi = longNumber * 2 * Math.PI / longitudeBands;
                 var sinPhi = Math.sin(phi);
@@ -59,7 +61,7 @@ class Sphere extends BaseObj {
                 var z = sinPhi * sinTheta;
                 var u = 1 - (longNumber / longitudeBands);
                 var v = 1 - (latNumber / latitudeBands);
-				
+				count++;
 				//?
                 normalData.push(x,y,z);
 				//send to text
@@ -69,7 +71,7 @@ class Sphere extends BaseObj {
 
             }//end long
         }//end lat
-		
+		//	console.log(count);
 		this.textureCoord=textureCoordData;
 		this.normal=normalData;
 		this.setVertices(vertexPositionData);

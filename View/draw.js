@@ -72,7 +72,13 @@ function drawScene() {
 		gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
 		
 		
+		if(renderObj.getName()=="Sphere 1")
+		{
+			//console.log(renderObj.getVertices().length);
+			//console.log(renderObj.position,renderObj.positionBufferItemSize,renderObj.getTextureCoordBuffer(),renderObj.getTextureCoordItemSize(),renderObj.getTextureIndex(),renderObj.colorBuffer,renderObj.colorBufferItemSize,renderObj.getRotationAxis(),renderObj.getRotationDegree());
+		}
 		
+	//	console.log(renderObj.getVertices().length);
 		//This checks if the current object has vertex indices or not.
 		if(!(renderObj.getVertexIndice()===undefined))
 		{
@@ -84,6 +90,8 @@ function drawScene() {
 			setMatrixUniforms();
 			
 			//Draw the object now on the screen.
+		//	5400,2700
+		//	console.log(renderObj.getIndexBufferNumItems(), renderObj.getVertices().length);
 			gl.drawElements(renderObj.getDrawType(), renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 			
 		}	
