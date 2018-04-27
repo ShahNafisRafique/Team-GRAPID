@@ -1,142 +1,127 @@
-/* 
-Contents: Scene Object Module - Provides methods for the creation of renderable geometric objects.
-
-Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
-
-Last Updated: 4/26/2018
-*/
-
+ 
 "use strict";
 	
  var sceneObjectModule = (function () {
 	 
-	// declare and initialize an empty array to hold scene objects.
-  
+	
 	var objArray = [];
-  
-  //attach empty object literal to object array to track types of 
-  //objects that have been created.
 	
 	objArray.activeClasses = {};
-	/* 
-    When a new type of object is create, createBuffers 
-    creates a webgl buffer for each property that kind of object has.
-    
-    @params obj  type: undefined   object with properties attribute
-  */
-	function createBuffers(obj) {
-    
-    //Declare object property and buffer idententifiers.
-    
-		var bufferKey;
-    var props;
-    
-    //for each key in the object's properties dictionary
-    
-		props = Object.keys(obj.properties);
-    
-		for(let prop of props){
-      
-      //create a key from object type and property 
-      //attach it to the object array 
-      //and set it's value to a new webgl buffer
-      
-			bufferKey = obj.type + prop;
-			objArray[bufferKey] = gl.createBuffer();
-			
-    }
-		
-	}
-  
 	
-	function createObject(_type, _options) {
-		
-		let obj = {};
-		obj.type = _type;
-		obj.properties = {
-			"_vertexArray" : [],
-			"_color" : []
-		};
-    
-		if(_type == "cube") obj.properties._indices = _options.vertexIndices;
-		let recognized = true;
-    
-		if(!objArray.activeClasses[_type]){
-      
-			createBuffers(obj);
-      
-      objArray.activeClasses[_type] = _type;
+	function createBuffers(obj) {
+		var buffer_name;
+		if(!objArray.activeClasses[obj.objClass]){
+			let property_names = Object.keys(obj.properties);
+			for(let i = 0; i < property_names.length; i++){
+				buffer_name = obj.objClass + "_" + property_names[i] + "_buffer";
+				objArray[buffer_name] = gl.createBuffer();
+			}
 			
 		}
+		objArray.activeClasses[obj.objClass] = obj.objClass;
+	}
 	
-			switch (_type) {
+	function createObject(objClass, options) {
+		
+		let obj = {};
+		obj.objClass = objClass;
+		obj.properties = {
+			"position" : [],
+			"color" : []
+		};
+		if(obj.objClass == "cube") obj.properties.indices = options.vertexIndices;
+		let recognized = true;
+		
+		createBuffers(obj);
+	
+			switch (objClass) {
 				
 				case "triangle" : {
+				
 					
 					obj.vertSize = 3;
 					obj.numVert = 3;
 					obj.colorSize = 4;
 					obj.numColor = 3;
 				
-					obj.properties._vertexArray = defaults.triangleVertexArray;
+					obj.properties.position = [
+						0.0,  1.0,  0.0,
+					   -1.0, -1.0,  0.0,
+						1.0, -1.0,  0.0
+					];
 						
 					//check if there are parameters for place and color, if not, use default values
-					if (!_options){  
+					if (!options){  
 				
-						obj.place = defaults.position; 
+						obj.place = [0.0, 0.0, -7.0]; 
 							
-						obj.properties._color = defaults.triangleColorArray;
+						obj.properties.color = [
+							0.0, 0.0, 1.0, 1.0,
+							0.0, 0.0, 1.0, 1.0,
+							0.0, 0.0, 1.0, 1.0
+							];
 						
 					} else {
 					
-						if (_options.place && _options.color) {
-              
-							obj.place = _options.place;
-							obj.properties._color = _options.color;
-              
-						} else if (_options.color) {
-              
-							obj.place = defaults.position;
-							obj.properties._color = _options.color;
-              
-						} else if(_options.place) {
-              
-							obj.place = _options.place;
-							obj.properties._color = defaults.triangleColorArray;
-              
+						if (options.place && options.color) {
+							obj.place = options.place;
+							obj.properties.color = options.color;
+						} else if (options.color) {
+							obj.place = [0.0, 0.0, -7.0];
+							obj.properties.color = options.color;
+						} else if(options.place){
+							obj.place = options.place;
+							obj.properties.color = [
+							0.0, 1.0, 0.0, 1.0,
+							0.0, 1.0, 0.0, 1.0,
+							0.0, 1.0, 0.0, 1.0
+							];
 						}
-            
 					}
 					
 					break;
 				}
 					
 				case "square" : {
-          
 					obj.vertSize = 3;
 					obj.numVert = 4;
 					obj.colorSize = 4;
 					obj.numColor = 4;
 					
-					obj.properties._vertexArray = defaults.squareVertexArray;
+					obj.properties.position = [
+						 1.0,  1.0,  0.0,
+						-1.0,  1.0,  0.0,
+						 1.0, -1.0,  0.0,
+						-1.0, -1.0,  0.0
+					];
 					
-					if (!_options){  
+					if (!options){  
 	
-						obj.place = defaults.position; 
+						obj.place = [0.0, 0.0, -7.0]; 
 							
-						obj.properties._color = defaults.vertColor(obj.numVert);
+						obj.properties.color = [
+							0.0, 0.0, 1.0, 1.0,
+							0.0, 0.0, 1.0, 1.0,
+							0.0, 0.0, 1.0, 1.0,
+							0.0, 0.0, 1.0, 1.0
+							];
 						
 					} else {
 					
-						if (_options.place && _options.color) {
-							obj.place = _options.place;
-							obj.properties._color = _options.color;
-						} else if (_options.color) {
-							obj.place = defaults.position;
-							obj.properties._color = _options.color;
-						} else if(_options.place){
-							obj.place = _options.place;
-							obj.properties._color = defaults.vertColor(obj.numVert);
+						if (options.place && options.color) {
+							obj.place = options.place;
+							obj.properties.color = options.color;
+						} else if (options.color) {
+							obj.place = [0.0, 0.0, -7.0];
+							obj.properties.color = options.color;
+						} else if(options.place){
+							obj.place = options.place;
+							obj.properties.color = [
+							0.0, 1.0, 0.0, 1.0,
+							0.0, 1.0, 0.0, 1.0,
+							0.0, 1.0, 0.0, 1.0,
+							0.0, 1.0, 0.0, 1.0	
+							];
 						}
 					}
 					
@@ -150,30 +135,88 @@ Last Updated: 4/26/2018
 					obj.colorSize = 4;
 					obj.numColor = 12;
 				
-					obj.properties._vertexArray = defaults.squarePyramidVertexArray;
+					obj.properties.position = [
+								// Front face
+								 0.0,  1.0,  0.0,
+								-1.0, -1.0,  1.0,
+								 1.0, -1.0,  1.0,
+
+								// Right face
+								 0.0,  1.0,  0.0,
+								 1.0, -1.0,  1.0,
+								 1.0, -1.0, -1.0,
+
+								// Back face
+								 0.0,  1.0,  0.0,
+								 1.0, -1.0, -1.0,
+								-1.0, -1.0, -1.0,
+
+								// Left face
+								 0.0,  1.0,  0.0,
+								-1.0, -1.0, -1.0,
+								-1.0, -1.0,  1.0
+								];
 						
 					//check if there are parameters for size and color, if not, use default values
-					if (!_options){  
+					if (!options){  
 				
-						obj.place = defaults.position; 
+						obj.place = [0.0, 0.0, -7.0]; 
 							
-						obj.properties._color = defaults.vertColor(obj.numVert);
+						obj.properties.color = [
+									// Front face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+
+									// Right face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+
+									// Back face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+
+									// Left face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+									0.0, 1.0, 0.0, 1.0
+									];
 						
 					} else {
 					
-						if (_options.place && _options.color) {
-							obj.place = _options.place;
-							obj.properties._color = _options.color;
-						} else if (_options.color) {
-							obj.place = defaults.position;
-							obj.properties._color = _options.color;
-						} else if(_options.place){
-							obj.place = _options.place;
-							obj.properties._color = defaults.vertColor(obj.numVert);
+						if (options.place && options.color) {
+							obj.place = options.place;
+							obj.properties.color = options.color;
+						} else if (options.color) {
+							obj.place = [0.0, 0.0, -7.0];
+							obj.properties.color = options.color;
+						} else if(options.place){
+							obj.place = options.place;
+							obj.properties.color = [
+									// Front face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+
+									// Right face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+
+									// Back face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 1.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+
+									// Left face
+									1.0, 0.0, 0.0, 1.0,
+									0.0, 0.0, 1.0, 1.0,
+									0.0, 1.0, 0.0, 1.0
+							];
 						}
-            
 					}
-          
 					break;
 				}
 				
@@ -181,48 +224,102 @@ Last Updated: 4/26/2018
 					
 					obj.vertSize = 3;
 					obj.colorSize = 4;
-					let position = defaults.position;
-					let vertArray = defaults.cubeVertexArray;
-					let vertexIndices = defaults.cubeVertexIndices;
+					let position = [0.0, 0.0, -7.0];
+					let vertArray = [
+								// Front face
+								-1.0, -1.0,  1.0,
+								 1.0, -1.0,  1.0,
+								 1.0,  1.0,  1.0,
+								-1.0,  1.0,  1.0,
+
+								// Back face
+								-1.0, -1.0, -1.0,
+								-1.0,  1.0, -1.0,
+								 1.0,  1.0, -1.0,
+								 1.0, -1.0, -1.0,
+
+								// Top face
+								-1.0,  1.0, -1.0,
+								-1.0,  1.0,  1.0,
+								 1.0,  1.0,  1.0,
+								 1.0,  1.0, -1.0,
+
+								// Bottom face
+								-1.0, -1.0, -1.0,
+								 1.0, -1.0, -1.0,
+								 1.0, -1.0,  1.0,
+								-1.0, -1.0,  1.0,
+
+								// Right face
+								 1.0, -1.0, -1.0,
+								 1.0,  1.0, -1.0,
+								 1.0,  1.0,  1.0,
+								 1.0, -1.0,  1.0,
+
+								// Left face
+								-1.0, -1.0, -1.0,
+								-1.0, -1.0,  1.0,
+								-1.0,  1.0,  1.0,
+								-1.0,  1.0, -1.0
+								];
+						let vertexIndices = [
+											0, 1, 2,      0, 2, 3,    // Front face
+											4, 5, 6,      4, 6, 7,    // Back face
+											8, 9, 10,     8, 10, 11,  // Top face
+											12, 13, 14,   12, 14, 15, // Bottom face
+											16, 17, 18,   16, 18, 19, // Right face
+											20, 21, 22,   20, 22, 23  // Left face
+										];
 					
-					let cube = new Cube("cube", position, vertArray, _options.color, gl.TRIANGLE_STRIP, vertexIndices);
-					//obj.properties._vertexArray = cube.getVertices();
-          obj.properties._vertexArray = vertArray;
-					obj.properties._color = cube.getColor();
-					obj.properties._indices = cube.getVertexIndice();
+					let cube = new Cube("cube", position, vertArray, options.color, gl.TRIANGLE_STRIP, vertexIndices);
+					obj.properties.position = cube.getVertices();
+					obj.properties.color = cube.getColor();
+					obj.properties.indices = cube.getVertexIndice();
 					obj.place = position;
-          obj.numVert = (vertArray.length + vertexIndices.length)/obj.vertSize;
-          
 					
 					break;
-          
 				}
 				
 				default: recognized = false;
-        
 			}
 			
 			if(recognized){
-        
 				obj.index = objArray.length;
 				objArray.push(obj);
-				init.buffers(obj, objArray);
-        
+				initBuffers(obj.index);
 			} else {
-        
-				console.log("createObject doesn't recognize input: " + type);
-        
+				console.log("createObject doesn't recognize input: " + objClass);
 			}
 	}
 
 
-function setMatrixUniforms(_shaderProgram, _perspectiveMatrix, _modelViewMatrix) {
-	gl.uniformMatrix4fv(_shaderProgram.pMatrixUniform, false, _perspectiveMatrix);
-	gl.uniformMatrix4fv(_shaderProgram.mvMatrixUniform, false, _modelViewMatrix);
+function setMatrixUniforms(perspectiveMatrix, modelViewMatrix) {
+	gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, perspectiveMatrix);
+	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, modelViewMatrix);
 	}
 
 
-function drawScene(_shaderProgram) {
+function initBuffers(index) {
+	
+	let currObj = objArray[index];
+	let bufferRef = currObj.objClass + "_position_buffer";
+	gl.bindBuffer(gl.ARRAY_BUFFER, objArray[bufferRef]);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(currObj.properties.position), gl.STATIC_DRAW);
+	
+	bufferRef = currObj.objClass + "_color_buffer";
+	gl.bindBuffer(gl.ARRAY_BUFFER, objArray[bufferRef]);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(currObj.properties.color), gl.STATIC_DRAW);
+	
+	if(currObj.objClass == "cube") {
+		bufferRef = currObj.objClass + "_indices_buffer";
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, objArray[bufferRef]);
+		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(currObj.properties.indices), gl.STATIC_DRAW);
+	}
+
+}
+
+
+function drawScene() {
 		
 		let modelViewMatrix = mat4.create();
 		let perspectiveMatrix = mat4.create();
@@ -240,54 +337,55 @@ function drawScene(_shaderProgram) {
 			mat4.translate(modelViewMatrix, modelViewMatrix, currObj.place);
 			mat4.rotateY(modelViewMatrix, modelViewMatrix, 30);
 			
-			let posBufferRef = currObj.type + "_vertexArray";
+			let posBufferRef = currObj.objClass + "_position_buffer";
+			
 			gl.bindBuffer(gl.ARRAY_BUFFER, objArray[posBufferRef]);
-			gl.vertexAttribPointer(_shaderProgram.vertexPositionAttribute, currObj.vertSize, gl.FLOAT, false, 0, 0);
+			gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, currObj.vertSize, gl.FLOAT, false, 0, 0);
 		  
-			let colBufferRef = currObj.type + "_color";
+			let colBufferRef = currObj.objClass + "_color_buffer";
 		  
 			gl.bindBuffer(gl.ARRAY_BUFFER, objArray[colBufferRef]);
-			gl.vertexAttribPointer(_shaderProgram.vertexColorAttribute, currObj.colorSize, gl.FLOAT, false, 0, 0);
-       
-       /* DEBUGGING STATEMENTS   
-       
-        console.log(_shaderProgram);
-        console.log(gl.getProgramParameter(_shaderProgram, gl.ACTIVE_ATTRIBUTES));
-           */
-      
-			if(currObj.type == "cube"){
+			gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, currObj.colorSize, gl.FLOAT, false, 0, 0);
 			
-				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, objArray["cube_indices"]);
-        
+			if(currObj.objClass == "cube"){
+				let indexBufferRef = "cube_indices_buffer";
+				console.log(objArray[indexBufferRef]);
+				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, objArray[indexBufferRef]);
 			}
 			
-			setMatrixUniforms(_shaderProgram, perspectiveMatrix, modelViewMatrix);
+			setMatrixUniforms(perspectiveMatrix, modelViewMatrix);
 		
-			switch (currObj.type) {
+			switch (currObj.objClass) {
 				case "triangle": 
-        
-      
-					gl.drawArrays(gl.TRIANGLES, 0, currObj.numVert); 
+          console.log(currObj.objClass);
           
+         // let muhTriangle = new BaseObject('t0', currObj.place, currObj.properties.position, currObj.properties.color, 'TRIANGLES', 3, 4);
+          
+          //muhTriangle.initBuffers(posBufferRef, colBufferRef, vertPosArr, vertColArr);
+
+          //bind buffers set attributes
+          //muhTriangle.setAttributes(posBufferRef, colBufferRef);  ---666
+
+          //send model/view and perspective matrices to shaders
+          //muhTriangle.setUniforms(perspectiveMatrix, modelViewMatrix);
+
+          //draw the things in the buffer
+          //gl.drawArrays(gl.TRIANGLES, 0, muhTriangle.numVert);
+          
+					gl.drawArrays(gl.TRIANGLES, 0, currObj.numVert); 
 					break;
 				case "square" :
-        
 					gl.drawArrays(gl.TRIANGLE_STRIP, 0, currObj.numVert);
-          
 					break;
 				case "square-pyramid" :
-        
 					gl.drawArrays(gl.TRIANGLES, 0, currObj.numVert);
-          
 					break;
 				case "cube" : 
-        
-					gl.drawElements(gl.TRIANGLES, currObj.numVert, gl.UNSIGNED_SHORT, 0);
-          
+				//console.log(objArray["cube_indices_buffer"].length); --returns undefined 
+					gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_SHORT, 0);
 					break;
 				default : 
-        
-					console.log("object type " + currObj.type + " not recognized in drawScene");
+					console.log("objectClass " + currObj.objClass + " not recognized in drawScene");
 			}
 		}
 		
@@ -295,16 +393,20 @@ function drawScene(_shaderProgram) {
 
 	return {
 		
-		"setMatrixUniforms" : function(_shaderProgram, _perspectiveMatrix, _modelViewMatrix) {
-			return setMatrixUniforms(_shaderProgram, _perspectiveMatrix, _modelViewMatrix);
+		"setMatrixUniforms" : function() {
+			return setMatrixUniforms();
 		},
 		
-		"drawScene" : function(_shaderProgram) {
-			return drawScene(_shaderProgram);
+		"initBuffers" : function() {
+			return initBuffers();
 		},
 		
-		"createObject" : function(type, options) {
-			return createObject(type, options);
+		"drawScene" : function() {
+			return drawScene();
+		},
+		
+		"createObject" : function(objClass, options) {
+			return createObject(objClass, options);
 		},
 		
 		"getObjArray" : function() {

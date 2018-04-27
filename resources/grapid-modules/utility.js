@@ -1,5 +1,5 @@
 /* 
-Contents: Utility Module - encapsulates helper functions
+Utility Module - encapsulates helper functions
 
 Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
 
@@ -102,5 +102,4 @@ var utilityModule = (function () {
     }
     
 	};
-  
 }());	

@@ -63,50 +63,75 @@
 	}());
 
 function getShader(gl, id) {
-  
 		var shaderScript = "";
-    var shader;
-    
+		var type = "";
 		try {
 			if (id === vShader.type()){ 
-      
 				shaderScript = vShader.getScript();
-        shader = gl.createShader(gl.VERTEX_SHADER);
-        
+				type = id;
 			} else if (id === fShader.type()){
-        
 				shaderScript = fShader.getScript();
-				shader = gl.createShader(gl.FRAGMENT_SHADER);
-			} else {
-        
-        console.error("shader type not set");
-        
-      }
+				type = id;
+			}
 			
 		} catch (e) {
 			console.error(e);
 		}
 
-    if (!shaderScript) {
+        if (!shaderScript) {
 			console.log("shader script failed to load");
-      return null;
+            return null;
+        }
+
+        var shader;
+        if (type === "fragment-shader") {
+            shader = gl.createShader(gl.FRAGMENT_SHADER);
+        } else if (type === "vertex-shader") {
+            shader = gl.createShader(gl.VERTEX_SHADER);
+        } else {
+			console.error("shader type not set");
+            return null;
+        }
+        gl.shaderSource(shader, shaderScript);
+		
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error(gl.getShaderInfoLog(shader));
+            return null;
+        }
+		
+        return shader;
+		
     }
 
-    gl.shaderSource(shader, shaderScript);
-		
-    gl.compileShader(shader);
-        
-    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error(gl.getShaderInfoLog(shader));
-      console.error("there's something wrong with the shader");
-      return null;
-    }
-		
-    return shader;
-		
-    }
-    
 
+    var shaderProgram;
+
+    function initShaders() {
+        var fragmentShader = getShader(gl, "fragment-shader");
+        var vertexShader = getShader(gl, "vertex-shader");
+
+        shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            console.error("Could not initialize shader");
+        }
+
+        gl.useProgram(shaderProgram);
+
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+
+        shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+        gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+
+        shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+        shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+    }
 	
 	
 

@@ -1,17 +1,7 @@
-/* 
-Contents: Vertex Shader Module - stores the GLSL vertex shader code. When instantited vShader immediately executes a 
-	lamda expression that returns an object literal, the keys of which retain access to the internal scope of the caller- thus,
-  we can interface with different shaders through the same method calls without fear of namespace issues.
-  
-  The vertex shader deals with vertices and their properties (e.g. position,
-	color, texture, etc.) and due to the parallel execution environment of the GPU, performs calculations extremely efficiently.
-
-Authors: Shah Nafis Rafique, Matt Smitherman, Yoonah Lee
-
-Last Updated: 4/26/2018
-*/
-
-/*
+/*Now this 'variable' actually stores the vertex shader code which is in GLSL which is a C type language. When called
+	this variable returns that code and that code is ran in the gpu. This is why any math is suggested to be done in the shader code
+	as the GPU is really fast at doing that compared to the CPU. Vertex shader deals with the vertices ,so properties such as position,
+	color and texture and such are relevant.
 */
 	var vShader = (function() {
 		
@@ -72,5 +62,4 @@ Last Updated: 4/26/2018
 				return getScript();
 			}
 		};				
-    
 	}());//end vertex Shader code

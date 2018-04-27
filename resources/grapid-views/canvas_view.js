@@ -1,20 +1,14 @@
-/* 
-Contents: canvas_view.js defines the vue.js component that acts as 
-our drawing canvas
-
-Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
-
-Last Updated: 4/26/2018
-*/
+//canvas view
 
 Vue.component("canvas-view", {
 	template: "#canvas-view-template",
+	props: {objArray: []},
 	data: function () {
 		return {
 			isVisible: true,
 			message: "",
-			height: 500,
-			width: 500,
+			height: 800,
+			width: 800,
 			mode: "drag",
 			selected: {},
 			provider: {
@@ -62,16 +56,14 @@ Vue.component("canvas-view", {
 				let canvas = this.$refs['grapid-canvas'];
 				canvas.width = this.width;
 				canvas.height = this.height;
-			},
-      
+			}
 		},
 		
 		mounted: function() {		
 			this.resize();
-			init.webGL(this.$refs['grapid-canvas']);
-		},
-    
-    
+			init.startWebGL(this.$refs['grapid-canvas']);
+			initShaders();
+		}
 })
 
 	var grapidApp = new Vue({
@@ -79,19 +71,13 @@ Vue.component("canvas-view", {
 		data: {
 			color: "",
 			hue : 200,
-      program: null
+			objArray: []
 		},
 		methods: {
 			updateColor: function(event) {
 				this.color = event.color
 				this.hue = event.hue
-			},
-      getShaderProgram: function () {
-        return init.shaders(); 
-      }
-		}, 
-    mounted: function(){
-      this.program = this.getShaderProgram();
-    }
+			}
+		}
 	})
 
