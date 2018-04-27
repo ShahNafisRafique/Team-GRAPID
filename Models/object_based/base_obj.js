@@ -32,6 +32,7 @@ class BaseObj {
 			//console.log("no color buffer has been made, creating now ",this.name);
 			this.colorBuffer= gl.createBuffer();
 			this.colorBufferItemSize=4;
+			console.log("color length",this.getColor().length);
 			this.colorBufferNumItems=(this.color.length)/(this.colorBufferItemSize);
 		}
 	}
@@ -46,9 +47,14 @@ class BaseObj {
 		return this.colorBuffer;
 	}
 	
-	//Returns how many colors are in colro buffer.
+	//Returns how many colors are in color buffer.
 	getColorBufferNumItems() {
 		return this.colorBufferNumItems;
+	}
+	
+	//Returns how many items per colors.
+	getColorBufferItemSize() {
+		return this.colorBufferItemSize;
 	}
 	
 	//Returns the draw type.
@@ -314,7 +320,7 @@ class BaseObj {
 		
 		if(_shouldTexture)
 		{
-			//console.log(this.name);
+			console.log("wiping color for texture");
 			for(var i=0;i<this.color.length;i++)
 			{
 				this.color[i]=1;

@@ -100,10 +100,11 @@
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, sphereTexture);
         gl.uniform1i(shaderProgram.samplerUniform, 0);
+		
 
         gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexPositionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, sphereVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-
+console.log( sphereVertexTextureCoordBuffer.itemSize,);
         gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexTextureCoordBuffer);
         gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, sphereVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -112,6 +113,8 @@
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sphereVertexIndexBuffer);
         setMatrixUniforms();
+		
+		
 		
         gl.drawElements(gl.TRIANGLES, sphereVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 		

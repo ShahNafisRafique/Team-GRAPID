@@ -26,14 +26,18 @@ function drawScene() {
 		
 		//moves to the place where the object would like to be draw
 		mat4.translate(mvMatrix,renderObj.position);
-				
+				//console.log("checking rneder pos 11",renderObj.position);
+
+		//console.log("color->",renderObj.getColor().length,"pos->",renderObj.getPosition().length,"text cord ->",renderObj.getTextureCoord().length,"vertex ->",renderObj.getVertices().length,"index ->",renderObj.getVertexIndice());
 		//Binds the position buffer with the position of the currnet object.
 		gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.positionBuffer);
-		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, renderObj.getPositionBufferItemSize(), gl.FLOAT, false, 0, 0);
-
+		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
+	
+		
+		
 		//Binds the texture coord buffer with the texture coord of the current object
 		gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.getTextureCoordBuffer());
-		gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, renderObj.getTextureCoordItemSize(), gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(shaderProgram.textureCoordAttribute,2, gl.FLOAT, false, 0, 0);
 		
 		//sets the 1st texture slot to active so that we cna place a texure on it.
 		gl.activeTexture(gl.TEXTURE0);
@@ -45,6 +49,7 @@ function drawScene() {
 			{
 				//This tries to bind the objects texture to the buffer.
 				gl.bindTexture(gl.TEXTURE_2D,textureList[renderObj.getTextureIndex()]);
+				
 			}
 			catch(error) {
 				//This sets the white texture to the current texture if a exception is thrown.
@@ -64,7 +69,8 @@ function drawScene() {
 		
 		//Binds the objects color to the color buffer.
 		gl.bindBuffer(gl.ARRAY_BUFFER, renderObj.colorBuffer);
-		gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.colorBufferItemSize, gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(shaderProgram.vertexColorAttribute,renderObj.getColorBufferItemSize(), gl.FLOAT, false, 0, 0);
+		//console.log( "num colors",renderObj.getColorBufferNumItems());
 		
 
 		//Binds the rotation data of the object to the rotation variables in the shader.
@@ -72,11 +78,7 @@ function drawScene() {
 		gl.uniform1f( shaderProgram.uniformRotationDegree, degToRad( renderObj.getRotationDegree()));
 		
 		
-		if(renderObj.getName()=="Sphere 1")
-		{
-			//console.log(renderObj.getVertices().length);
-			//console.log(renderObj.position,renderObj.positionBufferItemSize,renderObj.getTextureCoordBuffer(),renderObj.getTextureCoordItemSize(),renderObj.getTextureIndex(),renderObj.colorBuffer,renderObj.colorBufferItemSize,renderObj.getRotationAxis(),renderObj.getRotationDegree());
-		}
+	
 		
 	//	console.log(renderObj.getVertices().length);
 		//This checks if the current object has vertex indices or not.
@@ -90,8 +92,7 @@ function drawScene() {
 			setMatrixUniforms();
 			
 			//Draw the object now on the screen.
-		//console.log( renderObj.getPositionBufferItemSize(), renderObj.getTextureCoordItemSize(),3,renderObj.getIndexBufferNumItems());
-			//console.log(gl.getBufferParameter(gl.ELEMENT_ARRAY_BUFFER, gl.BUFFER_SIZE));
+		
 			gl.drawElements(renderObj.getDrawType(), renderObj.getIndexBufferNumItems(), gl.UNSIGNED_SHORT, 0);
 			
 		}	

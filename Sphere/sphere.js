@@ -1,3 +1,4 @@
+/*
 class Sphere extends baseObj {
 	
 	constructor(_name,_latitude,_longtitude,_radius,_position,_vertices,_color,_drawType) {
@@ -49,6 +50,8 @@ class Sphere extends baseObj {
 				
 			}
 		}
+		
+		console.log(textureCoordata.length,vertexPositionData.length);
 		var indexData = [];
 		
 		for( var lat_i =0; lat< this.latitude ; lat_i++) {
@@ -126,4 +129,4 @@ class Sphere extends baseObj {
 		return this.indexBufferNumItems;
 	}
 	
-}
+}*/

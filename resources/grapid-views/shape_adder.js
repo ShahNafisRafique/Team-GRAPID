@@ -1,9 +1,16 @@
-//shape-adder vue component constructor
+/* 
+Contents: shape-adder vue component constructor,
+where we define the data and methods that belong to 
+our shape-adder component
 
-	/* This is a vue component constructor, where we define the data 
-				and methods that belong to our shape-adder component */
+Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
+
+Last Updated: 4/26/2018
+*/
+
 
 Vue.component('shape-adder', {
+  
 						template: "#shape-adder-template",
 						// Props is short for 'properties inhereted from parent components'
 						// In this case, hue is inherited from the color-picker component

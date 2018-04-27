@@ -1,4 +1,11 @@
-//canvas view
+/* 
+Contents: canvas_view.js defines the vue.js component that acts as 
+our drawing canvas
+
+Authors: Matt Smitherman, Shah Nafis Rafique, Yoonah Lee
+
+Last Updated: 4/26/2018
+*/
 
 Vue.component("canvas-view", {
 	template: "#canvas-view-template",

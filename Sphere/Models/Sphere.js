@@ -48,7 +48,7 @@
                 vertexPositionData.push(radius * z);
             }
         }
-
+	//console.log(textureCoordData.length,vertexPositionData.length);
         var indexData = [];
         for (var latNumber=0; latNumber < latitudeBands; latNumber++) {
             for (var longNumber=0; longNumber < longitudeBands; longNumber++) {
@@ -63,7 +63,7 @@
                 indexData.push(first + 1);
             }
         }
-
+console.log(indexData.length);
         sphereVertexNormalBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexNormalBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalData), gl.STATIC_DRAW);
@@ -89,4 +89,6 @@
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indexData), gl.STATIC_DRAW);
         sphereVertexIndexBuffer.itemSize = 1;
         sphereVertexIndexBuffer.numItems = indexData.length;
+		
+console.log("vert ",vertexPositionData.length,"< text cord",textureCoordData.length," indices ->",indexData.length);
     }
