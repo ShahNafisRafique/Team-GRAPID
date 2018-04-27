@@ -7,6 +7,9 @@ var sphereGround;
 var sphereMoon;
 var sphereMars;
 var sphereSun;
+var sphereRocket;
+var cubeRocket;
+var sphereRocket2
 //This variable is created to help with storing some data that will be used to create a cube.
 //var cubeVertexTextureCoordBuffer;
 	
@@ -282,14 +285,14 @@ function objectTestFunction() {
 	];
 
 	
-	pyramid2.pos=[0,3,-10];
+	pyramid2.pos=[0,5,-20];
 	
 	
 	
 	//--------------------------------------------------------------------------- end pyramid 2-----------------------------------------------------------------------------
 	
 	var cube2=[];
-	cube2.pos=[0,1,-15];
+	cube2.pos=[-3,1,-15];
 	
 	cube2.vertices=[
 	// Front face
@@ -358,7 +361,8 @@ function objectTestFunction() {
 	
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
 	
-	sphereTest=new Sphere("Sphere test 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,10,30,30);
+	//Creates the world sphere that will have the sky texture.
+	sphereTest=new Sphere("Sphere test 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,20,30,30);
 	sphereTest.setRotationAxis([0,1,0]);
 	sphereTest.setRotationDegree(50);
 	sphereTest.setRotationSpeed(9);
@@ -366,29 +370,46 @@ function objectTestFunction() {
 
 	
 	
-	
+	//Creates ground 'sphere' thats actually a diamond that will have the grass texture.
 	sphereGround=new Sphere("Sphere ground",[0,-1,0],[1,1,1,1],gl.TRIANGLES,100,2,2);
 	sphereGround.setRotationAxis([1,0,0]);
 	sphereGround.setRotationDegree(90);
-	//sphereGround.setRotationSpeed(9);
-	sphereGround.setTexture(6,sphereGround.getTextureCoord(),true);
+	sphereGround.setTexture(9,sphereGround.getTextureCoord(),true);
 	
-	
-	
-	
+	//Creates the moon sphere that will have the moon texture.
 	sphereMoon=new Sphere("Sphere moon",[-4,3,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
 	sphereMoon.setRotationAxis([0,1,0]);
 	sphereMoon.setRotationDegree(90);
 	sphereMoon.setRotationSpeed(-10);
 	sphereMoon.setTexture(4,sphereMoon.getTextureCoord(),true);
 	
-	
-		sphereSun=new Sphere("Sphere sun",[4,3,-10],[1,1,1,1],gl.TRIANGLES,2,30,30);
+	//Creates the sun sphere that will have the sun texture.
+	sphereSun=new Sphere("Sphere sun",[4,3,-10],[1,1,1,1],gl.TRIANGLES,2,30,30);
 	sphereSun.setRotationAxis([0,-1,0]);
 	sphereSun.setRotationDegree(90);
 	sphereSun.setRotationSpeed(-10);
-	sphereSun.setTexture(7,sphereSun.getTextureCoord(),true);
+	sphereSun.setTexture(10,sphereSun.getTextureCoord(),true);
 	
+	//Creates the cube rocket that will have the metal rocket window texture.
+	cubeRocket=new Cube("cube rocket",[0,3,-20],cube.vertices,unpackedColors,gl.TRIANGLE_STRIP,cube.vertexIndices);
+	cubeRocket.setRotationAxis([0,1,0]);
+	cubeRocket.setRotationDegree(00);
+	cubeRocket.setRotationSpeed(-500);
+	cubeRocket.setTexture(7,textureCoordsCube,true);
+	
+	//Creates ones of the flames for the rocket sphere, has the fire texture.
+	sphereRocket=new Sphere("Sphere rocket",[0,2,-20],[1,1,1,1],gl.TRIANGLES,1,30,30);
+	sphereRocket.setRotationAxis([0,1,0]);
+	sphereRocket.setRotationDegree(90);
+	sphereRocket.setRotationSpeed(-500);
+	sphereRocket.setTexture(8,sphereRocket.getTextureCoord(),true);
+	
+	//Creates the 2nd fire sphere that also has the fire texture.
+	sphereRocket2=new Sphere("Sphere moon",[0,.5,-20],[1,1,1,1],gl.TRIANGLES,1.5,3,5);
+	sphereRocket2.setRotationAxis([0,1,0]);
+	sphereRocket2.setRotationDegree(-10);
+	sphereRocket2.setRotationSpeed(-400);
+	sphereRocket2.setTexture(8,sphereRocket2.getTextureCoord(),true);
 	
 	//Creates the 1st pyramid and set a rotation to it and set the texture for it.
 	pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
@@ -417,9 +438,9 @@ function objectTestFunction() {
 	
 	pyramidTest2.setRotationAxis([0,1,0]);
 	pyramidTest2.setRotationDegree(00);
-	pyramidTest2.setRotationSpeed(-100000);
+	pyramidTest2.setRotationSpeed(-500);
 	
-	pyramidTest2.setTexture(2,textureCoordsPyr,true);
+	pyramidTest2.setTexture(6,textureCoordsPyr,true);
 	
 	
 	//Creates the 2nd cube which has 'no texture' and only color and sets rotation properties.

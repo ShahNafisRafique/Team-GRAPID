@@ -15,6 +15,9 @@ function initBuffers() {
 	objectsToRender.push(sphereGround);
 	objectsToRender.push(sphereMoon);
 	objectsToRender.push(sphereSun);
+	objectsToRender.push(cubeRocket);
+	objectsToRender.push(sphereRocket);
+		objectsToRender.push(sphereRocket2);
 	//This loop goes through each object and binds the buffers for each variable in the shaders
 	for(var i=0;i<objectsToRender.length;i++)
 	{
