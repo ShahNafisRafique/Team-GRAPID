@@ -354,15 +354,15 @@ function objectTestFunction() {
 	
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
 	
-	sphereTest=new Sphere("Sphere 1",[1,1,-5],[1,1,1,1],gl.TRIANGLES,2,30,30);
+	sphereTest=new Sphere("Sphere 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
 	sphereTest.setRotationAxis([0,1,0]);
 	sphereTest.setRotationDegree(50);
 	sphereTest.setRotationSpeed(90);
-	sphereTest.setTexture(1,textureCoordsPyr,true);
+	sphereTest.setTexture(4,sphereTest.getTextureCoord(),true);
 	
 	//Creates the 1st pyramid and set a rotation to it and set the texture for it.
 	pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
-
+	
 	pyramidTest.setRotationAxis([0,1,0]);
 	pyramidTest.setRotationDegree(50);
 	pyramidTest.setRotationSpeed(90);

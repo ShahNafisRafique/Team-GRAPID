@@ -34,27 +34,9 @@ var defaults = (function () {
     }
     
     return unpackedColors;
-  }
+  }//end default color
   
   
-  return {
-   "defaultRotationAxis" : function() {
-  }
-
-   "defaultRotationDegree" : function() {
-      return 0;
-  }
-
-   "defaultRotationSpeed" : function() {
-    return 0;
-  }
-
-  function defaultColor() {
-    return [0.0,0.0,0.0,0.0];
-  }
-
-  function defaultColor(_vert) {
-    
-  };
+  
   
 }());

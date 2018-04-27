@@ -42,6 +42,7 @@ class Cube extends BaseObj {
 		
 		if(this.vertexIndice===undefined)
 		{
+			console.log("vertex indices undefined,defaulting");
 			this.vertexIndice=[
 			0, 1, 2,      0, 2, 3,    // Front face
 			4, 5, 6,      4, 6, 7,    // Back face
