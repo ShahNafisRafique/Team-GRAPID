@@ -1,7 +1,7 @@
 //Callback is the function that will be called once all textures have been loaded in, and only if all the textures have been loaded in. 
 function initTexture(callback) {
 	
-	//Creates the promise varialbe that is later used to store all the promises.
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     var promises = [];
 	
 	/*This loop goes through each texture and updates that element by adding in the root path. Also stores that location
@@ -12,7 +12,7 @@ function initTexture(callback) {
       var image_src = texturePathRoot+texturePaths[i];
 	  texturePaths[i]=image_src;
 	  
-	  //The promise object allowas for asynchronous loading of the textures by basicly promising that the texture will either be loaded or not. 
+	  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       var prom = new Promise(function(resolve, reject) {
       var texture = gl.createTexture();
 		
@@ -45,7 +45,7 @@ function initTexture(callback) {
       promises.push(prom);
     }
 
-	//Once all the promises are succesfull, as in all textures loaded, the callback is called, whichis tick which kicks off the animation process.
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     Promise.all(promises).then(function() {
       if (callback) {
 		
