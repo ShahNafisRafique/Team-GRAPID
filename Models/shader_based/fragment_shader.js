@@ -1,5 +1,13 @@
-/*This is the exact same as the vertex shader variable except that it stores the fragment shader code. Now the
-	fragment shader deals with every point between vertices,so it has to interpolate colors and textures. 
+/* 
+Contents: Fragment Shader Module - Stores the fragment shader script (the glsl code that is responsible for processing fragments 
+produced by rasterization to determine depth and color data for individual pixels) in a template literal and provides an accessor.
+Shah wrote the checkColor function to switch between displaying color and texture data without 
+changing shaders or modifying the template with tags.
+
+Authors: Shah Nafis Rafique, Matt Smitherman, Yoonah Lee
+
+Last Updated: 4/26/2018
+
 */
 	var fShader =  (function () {
 		
