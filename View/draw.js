@@ -53,7 +53,7 @@ function drawScene() {
 			}
 			catch(error) {
 				//This sets the white texture to the current texture if a exception is thrown.
-				gl.bindTexture(gl.TEXTURE_2D,textureList[0]);
+				gl.bindTexture(gl.TEXTURE_2D,textureList[0][0]);
 			}
 			
 		}

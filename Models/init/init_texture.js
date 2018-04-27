@@ -9,15 +9,15 @@ function initTexture(callback) {
 		the texture onto the global texture object array and calls the loadTexutre method.
 	*/
     for (var i=0; i<texturePaths.length; i++) {
-      var image_src = texturePathRoot+texturePaths[i];
-	  texturePaths[i]=image_src;
+      var image_src = texturePathRoot+texturePaths[i][0];
+	  texturePaths[i][0]=image_src;
 	  
 	  /*This creates a variable from the object promise which is a javascript object.
 		Promises allow the compeltion of loading images asynchronously and hold the value of if the loading failed or not.
 	  */
       var prom = new Promise(function(resolve, reject) {
       var texture = gl.createTexture();
-		
+		texture.rank=texturePaths[i][1];
 		//This checks if the texture has been made.
        if (!texture) {
           reject(new Error('Failed to create the texture object'));
@@ -50,7 +50,8 @@ function initTexture(callback) {
 	//This function is ran if the promise succesfully completes, so it calls the tick function which is passed in and thus kicks off the rest of the pipeline.
     Promise.all(promises).then(function() {
       if (callback) {
-		
+		textureList=orderTextureList(textureList);
+		console.log(textureList);
         callback();
 		 
       }

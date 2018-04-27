@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="Util\math_based\math_functions.js"></script>
 	<script type="text/javascript" src="Util\webgl-utils.js"></script>
 	<script type="text/javascript" src="Util\default_values.js"></script>
+
 	
 	<!- This file creates a few global variables that deal with the way the objects are positionned on the global coordinate system and 
 		creates functions to restore the position of the eye->
@@ -32,6 +33,8 @@
 	<!- Initializes the texutres and loads the textures into a glboal array for use. ->
 	<script type="text/javascript" src="Models\init\init_texture.js"></script>
 	<script type="text/javascript" src="Models\texture\load_texture.js"></script>
+	<script type="text/javascript" src="Models\texture\orderTexture.js"></script>
+	
 	
 	<!- Creates the data for and creates any object that is going to be rendered at start time, additionally also binds the buffers defined from the shader file. ->
 	<script type="text/javascript" src="Models\init\init_buffer_test_function.js"></script>	
@@ -53,7 +56,7 @@
 <script type="text/javascript">
 
 	//Constant array of all textures that are going to all be loaded up at start time.
-	const texturePaths=["whiteTexture.gif","neheNorm.gif","neheRed.gif","neheGreen.gif","moon.gif","sky.jpg","grass.jpg","metal.jpg","sun.jpg","rocket.jpg","fire.jpg"];
+	const texturePaths=[["whiteTexture.gif",0],["neheNorm.gif",1],["neheRed.gif",2],["neheGreen.gif",3],["moon.gif",4],["sky.jpg",5],["grass.jpg",6],["metal.jpg",7],["sun.jpg",8],["rocket.jpg",9],["fire.jpg",10]];
 	
 	//Constant variable that has the root path for textures.
 	const texturePathRoot="textures/";

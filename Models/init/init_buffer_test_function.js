@@ -368,13 +368,12 @@ function objectTestFunction() {
 	sphereTest.setRotationSpeed(9);
 	sphereTest.setTexture(5,sphereTest.getTextureCoord(),true);
 
-	
-	
+
 	//Creates ground 'sphere' thats actually a diamond that will have the grass texture.
 	sphereGround=new Sphere("Sphere ground",[0,-1,0],[1,1,1,1],gl.TRIANGLES,100,2,2);
 	sphereGround.setRotationAxis([1,0,0]);
 	sphereGround.setRotationDegree(90);
-	sphereGround.setTexture(9,sphereGround.getTextureCoord(),true);
+	sphereGround.setTexture(6,sphereGround.getTextureCoord(),true);
 	
 	//Creates the moon sphere that will have the moon texture.
 	sphereMoon=new Sphere("Sphere moon",[-4,3,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
@@ -388,28 +387,28 @@ function objectTestFunction() {
 	sphereSun.setRotationAxis([0,-1,0]);
 	sphereSun.setRotationDegree(90);
 	sphereSun.setRotationSpeed(-10);
-	sphereSun.setTexture(10,sphereSun.getTextureCoord(),true);
+	sphereSun.setTexture(8,sphereSun.getTextureCoord(),true);
 	
 	//Creates the cube rocket that will have the metal rocket window texture.
 	cubeRocket=new Cube("cube rocket",[0,3,-20],cube.vertices,unpackedColors,gl.TRIANGLE_STRIP,cube.vertexIndices);
 	cubeRocket.setRotationAxis([0,1,0]);
 	cubeRocket.setRotationDegree(00);
 	cubeRocket.setRotationSpeed(-500);
-	cubeRocket.setTexture(7,textureCoordsCube,true);
+	cubeRocket.setTexture(9,textureCoordsCube,true);
 	
 	//Creates ones of the flames for the rocket sphere, has the fire texture.
 	sphereRocket=new Sphere("Sphere rocket",[0,2,-20],[1,1,1,1],gl.TRIANGLES,1,30,30);
 	sphereRocket.setRotationAxis([0,1,0]);
 	sphereRocket.setRotationDegree(90);
 	sphereRocket.setRotationSpeed(-500);
-	sphereRocket.setTexture(8,sphereRocket.getTextureCoord(),true);
+	sphereRocket.setTexture(10,sphereRocket.getTextureCoord(),true);
 	
 	//Creates the 2nd fire sphere that also has the fire texture.
 	sphereRocket2=new Sphere("Sphere moon",[0,.5,-20],[1,1,1,1],gl.TRIANGLES,1.5,3,5);
 	sphereRocket2.setRotationAxis([0,1,0]);
 	sphereRocket2.setRotationDegree(-10);
 	sphereRocket2.setRotationSpeed(-400);
-	sphereRocket2.setTexture(8,sphereRocket2.getTextureCoord(),true);
+	sphereRocket2.setTexture(10,sphereRocket2.getTextureCoord(),true);
 	
 	//Creates the 1st pyramid and set a rotation to it and set the texture for it.
 	pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
@@ -440,7 +439,7 @@ function objectTestFunction() {
 	pyramidTest2.setRotationDegree(00);
 	pyramidTest2.setRotationSpeed(-500);
 	
-	pyramidTest2.setTexture(6,textureCoordsPyr,true);
+	pyramidTest2.setTexture(7,textureCoordsPyr,true);
 	
 	
 	//Creates the 2nd cube which has 'no texture' and only color and sets rotation properties.
