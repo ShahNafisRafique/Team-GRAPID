@@ -1,3 +1,5 @@
+/* These are the names of the objects that are made here.
+
 var pyramidTest;
 var cubeTest;
 var pyramidTest2;
@@ -10,12 +12,10 @@ var sphereSun;
 var sphereRocket;
 var cubeRocket;
 var sphereRocket2
-//This variable is created to help with storing some data that will be used to create a cube.
-//var cubeVertexTextureCoordBuffer;
-	
-//These two variables are simply here to store values that will then be passed to a constructor.
+
 var pyramid;
 var cube;
+*/
 
 function objectTestFunction() {
 	
@@ -30,22 +30,22 @@ function objectTestFunction() {
 
 	//This array is the position of the vertices relative to its position defined above. 
 	pyramid.vertices= [
-	// Front face
+	// Front face.
 	0.0,  1.0,  0.0,
 	-1.0, -1.0,  1.0,
 	1.0, -1.0,  1.0,
 
-	// Right face
+	// Right face.
 	0.0,  1.0,  0.0,
 	1.0, -1.0,  1.0,
 	1.0, -1.0, -1.0,
 
-	// Back face
+	// Back face.
 	0.0,  1.0,  0.0,
 	1.0, -1.0, -1.0,
 	-1.0, -1.0, -1.0,
 
-	// Left face
+	// Left face.
 	0.0,  1.0,  0.0,
 	-1.0, -1.0, -1.0,
 	-1.0, -1.0,  1.0
@@ -451,6 +451,17 @@ function objectTestFunction() {
 	
 	cubeTest2.setTexture(0,textureCoordsCube,false);
 	
-
+	//These lines adds the objects made to the global array that has all objects that are to be renedered on screen.
+	objectsToRender.push(pyramidTest);
+	objectsToRender.push(pyramidTest2);
+	objectsToRender.push(cubeTest);
+	objectsToRender.push(cubeTest2);
+	objectsToRender.push(sphereTest);
+	objectsToRender.push(sphereGround);
+	objectsToRender.push(sphereMoon);
+	objectsToRender.push(sphereSun);
+	objectsToRender.push(cubeRocket);
+	objectsToRender.push(sphereRocket);
+	objectsToRender.push(sphereRocket2);
 
 }//end test function

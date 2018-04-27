@@ -1,9 +1,9 @@
 //This function gets the vertex and fragment shader codes.
-//@@@@@@@@@@@@@@@ add more comments.
 function getShader(gl, id) {
 		var shaderScript = "";
 		var type = "";
 		try {
+			//Checks the id of the shader to see if its the right shader code.
 			if (id === vShader.type()){ 
 				shaderScript = vShader.getScript();
 				type = id;
@@ -15,12 +15,14 @@ function getShader(gl, id) {
 		} catch (e) {
 			console.error(e);
 		}
-
+		
+		//If shader codes dont exist.
 		if (!shaderScript) {
 			console.log("shader script failed to load");
 			return null;
 		}
-
+		
+		//Gets the shader code.
 		var shader;
 		if (type === "fragment-shader") {
 			shader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -41,4 +43,4 @@ function getShader(gl, id) {
 		
 		return shader;
 		
-	}//end getShader()
+	}//end getShader().

@@ -16,8 +16,7 @@ class Cube extends BaseObj {
 	createBuffers() {
 		super.createBuffers();
 		
-		if(this.indexBuffer===undefined)
-		{
+		if(this.indexBuffer===undefined) {
 			
 			this.indexBuffer= gl.createBuffer()
 			this.indexBufferItemSize=1;
@@ -40,8 +39,7 @@ class Cube extends BaseObj {
 	//Returns the vertex indices array.
 	getVertexIndice() {
 		
-		if(this.vertexIndice===undefined)
-		{
+		if(this.vertexIndice===undefined) {
 
 			this.vertexIndice = defaults.cubeIndexArray;
 
@@ -61,8 +59,7 @@ class Cube extends BaseObj {
 	//Sets the vertx indices but not before checking it.
 	
 	setVertexIndice(_vertIndi) {
-		if(_vertIndi!==undefined && (_vertIndi.length==this.vertices.length/3))
-		{
+		if(_vertIndi!==undefined && (_vertIndi.length==this.vertices.length/3)) {
 			this.vertexIndice=defaults.cubeVertexIndices;
 		}
 	}

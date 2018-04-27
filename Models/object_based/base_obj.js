@@ -184,7 +184,7 @@ class BaseObj {
 		
 		
 		//If vertices are undefined then default to a square baseless pyramid.
-		if(this.vertices===undefined){
+		if(this.vertices===undefined) {
 			
 			console.log("vertices undefined,defaulting",this.name);
 			
@@ -310,7 +310,6 @@ class BaseObj {
 	}
 	
 	//Sets the texture and creates the buffers for it. Also determines if the object 'should display' the texutre.
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ maybe add a checker for this?
 	setTexture(_textIndex,_textCoord,_shouldTexture) {
 		//this.textureCoordBuffer=_textBuffer;
 		

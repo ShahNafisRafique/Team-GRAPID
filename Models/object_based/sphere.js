@@ -8,24 +8,28 @@ class Sphere extends BaseObj {
 		console.log("passing to super for sphere 1");
 		super(_name,_position,0,_color,_drawType);
 		
+		//Creates vertex and texture data.
 		console.log("Creating vertex and text 2");
 		this.createVertexAndTextureData(_radius,_latBand,_longBand);
 		
+		//Creates the vertex indices for the triangles in each face.
 		console.log("creating index vertices 4");
 		this.createIndexVerticeData(_latBand,_longBand);
 		
+		//Sets the color by applying the passed in color to each  vertice.
 		console.log("create color 4.a");
 		this.setColor(_color);
 		
+		//Creates the buffers.
 		console.log("creating buffers 6");
 		this.createBuffers();
 	}
 	
+	//Calls the parent buffer and adds on the extra buffers needed.
 	createBuffers() {
 		super.createBuffers();
 		
-		if(this.indexBuffer===undefined)
-		{
+		if(this.indexBuffer===undefined) {
 			
 			this.indexBuffer= gl.createBuffer()
 			this.indexBufferItemSize=1;
@@ -46,18 +50,17 @@ class Sphere extends BaseObj {
 		return this.indexBufferNumItems;
 	}
 	
+	//Creates all the vertices while also making the texture data.
 	createVertexAndTextureData(_raduis,_lat,_long) {
 		var textureCoordData=[];
 		var vertexPositionData=[];
-		var count=0;
-		for (var latNumber=0; latNumber <= _lat; latNumber++) 
-		{
+		
+		for (var latNumber=0; latNumber <= _lat; latNumber++) {
 			var theta = latNumber * Math.PI / _lat;
 			var sinTheta = Math.sin(theta);
 			var cosTheta = Math.cos(theta);
 
-			for (var longNumber=0; longNumber <= _long; longNumber++) 
-			{
+			for (var longNumber=0; longNumber <= _long; longNumber++) {
 				var phi = longNumber * 2 * Math.PI / _long;
 				var sinPhi = Math.sin(phi);
 				var cosPhi = Math.cos(phi);
@@ -80,24 +83,23 @@ class Sphere extends BaseObj {
 
 				//and then calculate vertice multiplying radius on normal vector
 				vertexPositionData.push(_raduis * x,_raduis * y,_raduis * z);
-count++;
-			}//for
+
+			}//end for.
 	
-		}//for
+		}//end for.
 		
+		//Sets the appropriate arrays with the right data.
 		console.log("setting vertices 3",vertexPositionData.length,textureCoordData.length);
 		this.setVertices(vertexPositionData);
 		this.setTextureCoord(textureCoordData);
-		console.log("extra count ->",count);
+	
 	}//end create
 	
-	
+	//Creates the vertex indices based of the vertex data created above.
 	createIndexVerticeData(_lat,_long) {
 		var indexData = [];
-        for (var latNumber=0; latNumber < _lat; latNumber++) 
-		{
-            for (var longNumber=0; longNumber < _long; longNumber++) 
-			{
+        for (var latNumber=0; latNumber < _lat; latNumber++) {
+            for (var longNumber=0; longNumber < _long; longNumber++) {
                 var first = (latNumber * (_long + 1)) + longNumber;
                 var second = first + _long + 1;
                 indexData.push(first);
@@ -107,20 +109,19 @@ count++;
                 indexData.push(second);
                 indexData.push(second + 1);
                 indexData.push(first + 1);
-            }//end for
-        }//end for
+            }//end for.
+        }//end for.
 		
 		console.log("seting index 5",indexData.length);
 		this.setVertexIndice(indexData);
 		
-	}//end create index
+	}//end create index.
 	
 	
 	//Returns the vertex indices array.
 	getVertexIndice() {
 		
-		if(this.vertexIndice===undefined)
-		{
+		if(this.vertexIndice===undefined) {
 			console.log("vertex indices undefined,defaulting");
 			this.vertexIndice=[
 			0, 1, 2,      0, 2, 3,    // Front face
@@ -133,29 +134,32 @@ count++;
 		
 			return this.vertexIndice
 		}
-		else
-		{
+		else {
 			return this.vertexIndice;
 		}
 		
 	}
 	
+	//Sets the color based off the single color data passed in.
 	setColor(_color) {
 		var colorData=[];
-		
-		for(var i=0;i<this.getVertices().length;i++) 
-		{
-			colorData.push(_color);
+		if(color.length==4) {
+			for(var i=0;i<this.getVertices().length;i++) 
+			{
+				colorData.push(_color);
+			}
+			super.setColor(colorData);
+			
+			console.log("sphere class color ",this.color.length);
 		}
-		super.setColor(colorData);
-		
-		console.log("sphere class color ",this.color.length);
+		else {
+			console.log("color set failed");
+		}
 	}
 	
-	
+	//Sets the index vertices.
 	setVertexIndice(_vertIndi) {
-		if(_vertIndi!==undefined )
-		{
+		if(_vertIndi!==undefined ) {
 			this.vertexIndice=_vertIndi;
 		}
 	}

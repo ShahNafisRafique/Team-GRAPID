@@ -51,7 +51,7 @@ function initTexture(callback) {
     Promise.all(promises).then(function() {
       if (callback) {
 		textureList=orderTextureList(textureList);
-		console.log(textureList);
+	
         callback();
 		 
       }

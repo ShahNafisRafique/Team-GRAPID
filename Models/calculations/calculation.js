@@ -23,15 +23,15 @@ function calculations()
 				//Now if a object has no rotation speed,then it wont rotate, by default all objects have 0 rotation speed.
 				currentObj.setRotationDegree(currentObj.getRotationDegree()+(currentObj.getRotationSpeed()*elapsed)/1000);
 				
-			}//End for
+			}//End for.
 			
 
 	  
-	}//End if
+	}//End if.
 	
 	//Update last time this method was ran.
 	lastTime = timeNow;
 	
-}//End calculatios
+}//End calculations.
 
 
