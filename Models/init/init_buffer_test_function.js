@@ -3,6 +3,10 @@ var cubeTest;
 var pyramidTest2;
 var cubeTest2;
 var sphereTest;
+var sphereGround;
+var sphereMoon;
+var sphereMars;
+var sphereSun;
 //This variable is created to help with storing some data that will be used to create a cube.
 //var cubeVertexTextureCoordBuffer;
 	
@@ -19,7 +23,7 @@ function objectTestFunction() {
 	pyramid.name="pyramid 1";
 
 	//This variable stores the position relative to the eye for the object to be placed on.
-	pyramid.position=[-1.5,0,-8.0];
+	pyramid.position=[-3,0,-8.0];
 
 	//This array is the position of the vertices relative to its position defined above. 
 	pyramid.vertices= [
@@ -103,7 +107,7 @@ function objectTestFunction() {
 	cube.name="cube 1";
 
 	//This stores the position of the object relative to the eye.
-	cube.position=[1.5,0,-8.0];
+	cube.position=[3,.75,-8.0];
 
 	//This array stores the vertices position relative to the object position defined above.
 	cube.vertices=[
@@ -278,14 +282,14 @@ function objectTestFunction() {
 	];
 
 	
-	pyramid2.pos=[0,2,-10];
+	pyramid2.pos=[0,3,-10];
 	
 	
 	
 	//--------------------------------------------------------------------------- end pyramid 2-----------------------------------------------------------------------------
 	
 	var cube2=[];
-	cube2.pos=[0,-2,-10];
+	cube2.pos=[0,1,-15];
 	
 	cube2.vertices=[
 	// Front face
@@ -354,11 +358,37 @@ function objectTestFunction() {
 	
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
 	
-	sphereTest=new Sphere("Sphere 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
+	sphereTest=new Sphere("Sphere test 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,10,30,30);
 	sphereTest.setRotationAxis([0,1,0]);
 	sphereTest.setRotationDegree(50);
-	sphereTest.setRotationSpeed(90);
-	sphereTest.setTexture(4,sphereTest.getTextureCoord(),true);
+	sphereTest.setRotationSpeed(9);
+	sphereTest.setTexture(5,sphereTest.getTextureCoord(),true);
+
+	
+	
+	
+	sphereGround=new Sphere("Sphere ground",[0,-1,0],[1,1,1,1],gl.TRIANGLES,100,2,2);
+	sphereGround.setRotationAxis([1,0,0]);
+	sphereGround.setRotationDegree(90);
+	//sphereGround.setRotationSpeed(9);
+	sphereGround.setTexture(6,sphereGround.getTextureCoord(),true);
+	
+	
+	
+	
+	sphereMoon=new Sphere("Sphere moon",[-4,3,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
+	sphereMoon.setRotationAxis([0,1,0]);
+	sphereMoon.setRotationDegree(90);
+	sphereMoon.setRotationSpeed(-10);
+	sphereMoon.setTexture(4,sphereMoon.getTextureCoord(),true);
+	
+	
+		sphereSun=new Sphere("Sphere sun",[4,3,-10],[1,1,1,1],gl.TRIANGLES,2,30,30);
+	sphereSun.setRotationAxis([0,-1,0]);
+	sphereSun.setRotationDegree(90);
+	sphereSun.setRotationSpeed(-10);
+	sphereSun.setTexture(7,sphereSun.getTextureCoord(),true);
+	
 	
 	//Creates the 1st pyramid and set a rotation to it and set the texture for it.
 	pyramidTest = new SquarePyramid("pyramid test 1",pyramid.position,pyramid.vertices,pyramid.colors,gl.TRIANGLES);
