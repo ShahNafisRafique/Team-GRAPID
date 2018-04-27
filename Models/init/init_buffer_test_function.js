@@ -417,7 +417,7 @@ function objectTestFunction() {
 	
 	pyramidTest2.setRotationAxis([0,1,0]);
 	pyramidTest2.setRotationDegree(00);
-	pyramidTest2.setRotationSpeed(-450);
+	pyramidTest2.setRotationSpeed(-100000);
 	
 	pyramidTest2.setTexture(2,textureCoordsPyr,true);
 	
