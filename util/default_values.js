@@ -27,7 +27,7 @@ const defaults = {
     
     return unpackedColors;
 
-  }//end default color
+  },//end default color
   
   "cubeIndexArray" : [
 			0, 1, 2,      0, 2, 3,    // Front face
@@ -38,7 +38,7 @@ const defaults = {
 			20, 21, 22,   20, 22, 23  // Left face
 	],    
   
-<<<<<<< HEAD
+//<<<<<<< HEAD
   "triangleVertexArray" : [
     0.0,  1.0,  0.0,
 		-1.0, -1.0,  0.0,
