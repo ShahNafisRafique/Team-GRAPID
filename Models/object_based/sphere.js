@@ -143,7 +143,7 @@ class Sphere extends BaseObj {
 	//Sets the color based off the single color data passed in.
 	setColor(_color) {
 		var colorData=[];
-		if(color.length==4) {
+		if(_color.length==4) {
 			for(var i=0;i<this.getVertices().length;i++) 
 			{
 				colorData.push(_color);
