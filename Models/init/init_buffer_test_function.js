@@ -353,8 +353,8 @@ function objectTestFunction() {
 	
 	
 	//---------------------------------------------- end data creation-----------------------------------------------------------------------
-
-	sphereTest=new Sphere("Sphere 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,10,30,30);
+	
+	sphereTest=new Sphere("Sphere 1",[0,0,-10],[1,1,1,1],gl.TRIANGLES,1,30,30);
 	sphereTest.setRotationAxis([0,1,0]);
 	sphereTest.setRotationDegree(50);
 	sphereTest.setRotationSpeed(90);
