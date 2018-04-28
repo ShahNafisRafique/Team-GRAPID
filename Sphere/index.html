@@ -1,0 +1,200 @@
+<html>
+
+<head>
+<title>This is a Chrome Tab &mdash; v1.0</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript" src="./glMatrix-0.9.5.min.js"></script>
+<script type="text/javascript" src="./webgl-utils.js"></script>
+<script type="text/javascript" src="./Models/Sphere.js"></script>
+<script type="text/javascript" src="./Models/Texture.js"></script>
+<script type="text/javascript" src="./Models/Rotation.js"></script>
+<script type="text/javascript" src="./Models/keyboard.js"></script>
+<script type="text/javascript" src="./Models/shader_based/Shader.js"></script>
+
+
+
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+
+    varying vec2 vTextureCoord;
+    varying vec3 vLightWeighting;
+
+    uniform sampler2D uSampler;
+
+    void main(void) {
+        vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        gl_FragColor = vec4(textureColor.rgb * vLightWeighting, textureColor.a);
+    }
+</script>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexNormal;
+    attribute vec2 aTextureCoord;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+    uniform mat3 uNMatrix;
+
+    uniform vec3 uAmbientColor;
+
+    uniform vec3 uLightingDirection;
+    uniform vec3 uDirectionalColor;
+
+    uniform bool uUseLighting;
+
+    varying vec2 vTextureCoord;
+    varying vec3 vLightWeighting;
+
+    void main(void) {
+        gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+        vTextureCoord = aTextureCoord;
+
+        if (!uUseLighting) {
+            vLightWeighting = vec3(1.0, 1.0, 1.0);
+        } else {
+            vec3 transformedNormal = uNMatrix * aVertexNormal;
+            float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
+            vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+
+    var gl;
+
+    function initGL(canvas) {
+        try {
+            gl = canvas.getContext("experimental-webgl");
+            gl.viewportWidth = canvas.width;
+            gl.viewportHeight = canvas.height;
+        } catch (e) {
+        }
+        if (!gl) {
+            alert("Could not initialise WebGL, sorry :-(");
+        }
+    }
+
+	//draws the scene
+    function drawScene() {
+		
+		//sets the view port
+        gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+       
+	   //clears the screen and enables projective view
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+		
+		//sets field of vision and how far and close we can see
+        mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+
+		//4*4 identity matrix
+        mat4.identity(mvMatrix);
+
+        mat4.translate(mvMatrix, [0, 0, -6]);
+
+        mat4.multiply(mvMatrix, sphereRotationMatrix);
+
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, sphereTexture);
+        gl.uniform1i(shaderProgram.samplerUniform, 0);
+		
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, sphereVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+console.log( sphereVertexTextureCoordBuffer.itemSize,);
+        gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, sphereVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, sphereVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sphereVertexIndexBuffer);
+        setMatrixUniforms();
+		
+		
+		
+        gl.drawElements(gl.TRIANGLES, sphereVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+		
+			//console.log(sphereVertexPositionBuffer.itemSize, sphereVertexTextureCoordBuffer.itemSize,sphereVertexNormalBuffer.itemSize,sphereVertexIndexBuffer.numItems);
+    }
+
+
+    function tick() {
+        requestAnimFrame(tick);
+        drawScene();
+    }
+
+
+ 
+	//a list of every single object that is getting render even if its off screen. Be hold its grandness.
+	var objectsToRender=[];
+	
+
+
+   
+    function webGLStart() {
+		//@@@@@yes yes yes ik I should pass the canvas id in rather then hard coding it in
+		//but alas idk how to do that with html,plz halp .
+        var canvas = document.getElementById("lesson04-canvas");
+		
+		//inits the GL functions.
+        initGL(canvas);
+		
+		//inits shaders. shaders shade.
+        initShaders()
+		
+		//init buffers, aka create any objects that are going to be in the world at start.
+        initBuffers();
+		initTexture();
+
+		
+		
+		//make the background black.
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		
+		//enable depth aka projective view.
+        gl.enable(gl.DEPTH_TEST);
+		
+		//for sphere
+		canvas.onmousedown = handleMouseDown;
+		document.onmouseup = handleMouseUp;
+		document.onmousemove = handleMouseMove;
+
+		
+		
+		
+		//the calculation-draw file caller, whenever the screen is 
+		//ready to refresh,this tick calls it.
+        tick();
+    }
+</script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+    
+	<!- @@@@@how can I have it where html gets the size of the window oh and the canvas id mentioned before ->
+    <canvas id="lesson04-canvas" style="border: none;" width="1920" height="1080"></canvas>
+
+	<br/>
+	
+	Spin the sphere by dragging it with the mouse.
+    <br/>
+
+   
+
+  <br/>
+Use the cursor keys or WASD to run around, and <code>Page Up</code>/<code>Page Down</code> to
+look up and down.
+
+<br/>
+<br/>
+    
+</body>
+
+</html>

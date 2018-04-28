@@ -1,0 +1,907 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38559,        899]
+NotebookOptionsPosition[     30895,        708]
+NotebookOutlinePosition[     31678,        735]
+CellTagsIndexPosition[     31635,        732]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Team Grapid Requirements\n",
+ StyleBox["by",
+  FontSize->10],
+ "\n",
+ StyleBox["Yoonah Lee, Shah Rafique, Matthew Smitherman",
+  FontSize->14]
+}], "Title",
+ CellChangeTimes->{{3.7270369174445195`*^9, 3.7270369555402236`*^9}, {
+  3.7270384260857306`*^9, 3.7270384562305145`*^9}, {3.7270403114753747`*^9, 
+  3.7270403310113955`*^9}, {3.7275267737723083`*^9, 3.7275267763010845`*^9}},
+ TextAlignment->Center,
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"5a954a04-d772-43c3-9c97-312420a62d36"],
+
+Cell[CellGroupData[{
+
+Cell["Project Description", "Chapter",
+ CellChangeTimes->{{3.7270383640427485`*^9, 3.7270383721916404`*^9}},
+ FontFamily->"Arial",
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"b10ae158-6643-46cc-b012-fd712001455f"],
+
+Cell["\<\
+The program will generate various objects each with unique textures, movement \
+and data needed to render properly. Additionally the program will correctly \
+render each object based on where the eye is by accepting user input for \
+movement of the eye. User input will also consist of allowing the user to \
+create various predefined objects and place them.  \
+\>", "Text",
+ CellChangeTimes->{{3.7270383980453734`*^9, 3.7270384079365273`*^9}, {
+   3.7270385104065948`*^9, 3.7270385666469564`*^9}, {3.727038664903472*^9, 
+   3.727038762472466*^9}, 3.7270388329850426`*^9, {3.7277019823707027`*^9, 
+   3.7277020316105194`*^9}, {3.7277036628621025`*^9, 
+   3.7277037638877864`*^9}, {3.727703823721504*^9, 3.727703843663185*^9}, {
+   3.72770393100978*^9, 3.7277039765933213`*^9}, {3.727704127892529*^9, 
+   3.7277041307520056`*^9}, {3.7277042133038006`*^9, 3.727704298457512*^9}, {
+   3.7277043439703045`*^9, 3.7277043486724977`*^9}, {3.727704432786677*^9, 
+   3.7277045079718103`*^9}, {3.7277046653513255`*^9, 3.727704671143575*^9}, {
+   3.727704771434108*^9, 3.7277047778658657`*^9}, {3.7277048108590207`*^9, 
+   3.7277049768467865`*^9}, {3.7277050553937435`*^9, 
+   3.7277050575500727`*^9}, {3.727705116112177*^9, 3.7277051164378414`*^9}, {
+   3.7277051794931817`*^9, 3.727705268242285*^9}, {3.7277054010959196`*^9, 
+   3.727705408054601*^9}, {3.7277054544646263`*^9, 3.7277054577303667`*^9}, {
+   3.727705563045966*^9, 3.7277055760205374`*^9}, {3.7277056456386027`*^9, 
+   3.7277058067903156`*^9}, {3.7277058866347766`*^9, 
+   3.7277059504461365`*^9}, {3.7277060255599227`*^9, 3.727706091098519*^9}, {
+   3.727706124509648*^9, 3.7277063981031027`*^9}, {3.727706519403545*^9, 
+   3.727706521622434*^9}, {3.727706563576718*^9, 3.7277065739581594`*^9}, {
+   3.7277066787590523`*^9, 3.727706698560053*^9}, {3.7277951737882075`*^9, 
+   3.7277951983203*^9}, {3.7277980548275623`*^9, 3.7277980809066153`*^9}, {
+   3.73382359305544*^9, 3.733823600718004*^9}, {3.7338236675200443`*^9, 
+   3.733823714575608*^9}, {3.733823764705394*^9, 3.73382386676711*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"e10a32f5-13bc-41f3-a3fa-d04c6a411321"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Functional Requirements ", "Chapter",
+ CellChangeTimes->{{3.727036901570634*^9, 3.7270369149148455`*^9}},
+ FontFamily->"Arial",
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"1f5ee706-9939-49f0-b7a7-3e95a4ad47ba"],
+
+Cell[" Display cube\[CloseCurlyQuote]s, square pyramid\[CloseCurlyQuote]s and \
+sphere\[CloseCurlyQuote]s.", "Subchapter",
+ CellChangeTimes->{{3.7270370378069286`*^9, 3.7270370867588806`*^9}, {
+   3.727039306876299*^9, 3.727039307052389*^9}, 3.7270393971490602`*^9, {
+   3.727699937778679*^9, 3.7276999586268716`*^9}, {3.727703645584581*^9, 
+   3.727703653880519*^9}, {3.7277045424691205`*^9, 3.7277045494772787`*^9}, {
+   3.727713355655959*^9, 3.7277134560046897`*^9}, {3.7277135439622374`*^9, 
+   3.7277135546056175`*^9}, {3.733823905474038*^9, 3.7338239286427803`*^9}, 
+   3.733824045925845*^9},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"5d404660-9ad9-4062-a1fc-c3a16e96389a"],
+
+Cell["\<\
+ Display multiple simulations textures based off the texture assigned to the \
+object at creation.\
+\>", "Subchapter",
+ CellChangeTimes->{{3.727037101151615*^9, 3.7270371879184217`*^9}, {
+   3.7270376271259356`*^9, 3.7270376325003443`*^9}, {3.7270376773602977`*^9, 
+   3.727037698846388*^9}, {3.727039308924724*^9, 3.72703930910085*^9}, {
+   3.7276999744187746`*^9, 3.727699974554783*^9}, {3.7277045565654716`*^9, 
+   3.7277045595256443`*^9}, {3.7277140758702106`*^9, 
+   3.7277140787732697`*^9}, {3.7277982396617994`*^9, 
+   3.7277982426774864`*^9}, {3.7338239307389393`*^9, 3.7338239839389715`*^9}, 
+   3.7338240448387623`*^9},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"3dfc8b9c-7f53-46b2-a65c-b90278a9f41e"],
+
+Cell["\<\
+ Ability to disable textures for a object and instead use colors.\
+\>", "Subchapter",
+ CellChangeTimes->{{3.727037197292633*^9, 3.727037235526574*^9}, {
+   3.727039309948447*^9, 3.7270393101245756`*^9}, {3.7270393930530977`*^9, 
+   3.727039395773057*^9}, 3.7270403305800705`*^9, 3.72770366045083*^9, {
+   3.727713881624673*^9, 3.727713883234111*^9}, {3.727713917659476*^9, 
+   3.727713954730002*^9}, {3.727714008602985*^9, 3.727714034519966*^9}, {
+   3.733823988579317*^9, 3.733824002515357*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"ce667cd4-94d7-4ab9-b44b-b5dd0d5d911a"],
+
+Cell[" Rotate objects.", "Subchapter",
+ CellChangeTimes->{{3.7270372701055174`*^9, 3.727037286839927*^9}, {
+   3.7270393108121233`*^9, 3.727039310988249*^9}, 3.7270393921094227`*^9, {
+   3.7277018239626427`*^9, 3.7277018465149326`*^9}, 3.727703669345604*^9, 
+   3.727713862723748*^9, {3.733824030677684*^9, 3.733824042005549*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"22b96e99-dc84-49f3-9404-5825cbdae602"],
+
+Cell[" Animate the rotation.", "Subchapter",
+ CellChangeTimes->{{3.7270372883241262`*^9, 3.7270373355140452`*^9}, {
+   3.727037531327997*^9, 3.727037533453175*^9}, {3.7270387795286903`*^9, 
+   3.7270387803763423`*^9}, {3.727039311772767*^9, 3.727039311948882*^9}, 
+   3.7270393911167545`*^9, 3.7277135903508453`*^9, {3.727714039915765*^9, 
+   3.727714050903274*^9}, {3.7277141100330334`*^9, 3.7277141685802307`*^9}, {
+   3.7277142017153673`*^9, 3.7277142019653783`*^9}, {3.7338240484850273`*^9, 
+   3.7338240519092956`*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"4c1fd11a-0da3-4afa-afa2-22f3442e78ed"],
+
+Cell[" Handle user input to change location of the eye.", "Subchapter",
+ CellChangeTimes->{{3.727037337389016*^9, 3.727037352590559*^9}, {
+   3.7270392404756455`*^9, 3.727039242123828*^9}, {3.7270393126363907`*^9, 
+   3.7270393128125153`*^9}, 3.727039390461237*^9, {3.7277010665222397`*^9, 
+   3.7277010771228456`*^9}, 3.727707944213924*^9, {3.72771365207078*^9, 
+   3.7277136597287245`*^9}, {3.7277137253797493`*^9, 3.727713825387975*^9}, {
+   3.7338240556375723`*^9, 3.7338240650132895`*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"4a3f1910-d0f3-4902-b705-0f0821616a5d"],
+
+Cell[" Handle user input to create new objects at run time ", "Subchapter",
+ CellChangeTimes->{{3.727037821644528*^9, 3.7270378326288767`*^9}, {
+   3.7270387648882227`*^9, 3.7270387669846864`*^9}, {3.727039313387971*^9, 
+   3.727039313565053*^9}, 3.7270393897247562`*^9, {3.727713828892789*^9, 
+   3.7277138351618977`*^9}, {3.7277142193440557`*^9, 
+   3.7277142945817566`*^9}, {3.7277964001565294`*^9, 3.72779640328164*^9}, {
+   3.7277971670420837`*^9, 3.7277971694171877`*^9}, {3.733824070214302*^9, 
+   3.73382408039108*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"41379c30-edf4-497e-a367-562734a76673"],
+
+Cell["\<\
+ Texturing along with correct orientation of textures based on object \
+orientation.\
+\>", "Subchapter",
+ CellChangeTimes->{{3.727039229204508*^9, 3.727039254143406*^9}, {
+   3.727039314700869*^9, 3.727039316300019*^9}, 3.7270393887810383`*^9, {
+   3.7270402680507402`*^9, 3.7270402748832955`*^9}, {3.727701043506923*^9, 
+   3.7277010567946835`*^9}, 3.727707946478572*^9, {3.727798091469492*^9, 
+   3.7277980928601685`*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"d351b516-8eec-4ef8-9993-8c9a78a9e80a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quality Requirements", "Chapter",
+ CellChangeTimes->{{3.727039263187888*^9, 3.7270392679683247`*^9}, {
+  3.727526423438288*^9, 3.727526425934065*^9}},
+ FontFamily->"Arial",
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"bebbe3f4-89d3-4d29-b8b0-730a4cd8759a"],
+
+Cell[CellGroupData[{
+
+Cell["Development process to ensure quality", "Subchapter",
+ CellChangeTimes->{{3.727700308458881*^9, 3.727700334218354*^9}},
+ FontFamily->"Arial",ExpressionUUID->"84b79d8b-2936-45d3-b770-266034aa8b8f"],
+
+Cell["\<\
+Our main development process model is rapid prototyping, an approach in which \
+poorly understood requirements are usually
+implemented first. While the prototype is constructed, factors like \
+efficiency, maintainability, and documentation are secondary to the creation \
+of functioning models. This approach was selected due to the team\
+\[CloseCurlyQuote]s small size and relative inexperience with selected \
+project tools and languages.    
+
+The development process ended up as follows: Each member pursued different \
+areas of the program to make prototypes. After each prototype was complete, \
+the prototypes would merged together. Group member Yoonah Lee was tasked with \
+creating a sphere and allowing for rotation of a objected based on user input \
+and loading in multiple textures. Group member Shah Rafique was tasked with \
+reducing copied code, streamlining the pipeline, creating the base object, \
+square pyramid and cube object for rendering, simultaneous textures and \
+rotation and animation. Group member Matthew Smitherman was tasked with user \
+GUI, creation of objects during run time, customization of user placed \
+objects, node.js and usage of Vue.js.\
+\>", "Text",
+ CellChangeTimes->{{3.7270393429961724`*^9, 3.727039402444886*^9}, 
+   3.727040099105852*^9, {3.7277000567974863`*^9, 3.727700193298294*^9}, {
+   3.7277002262271776`*^9, 3.7277002680665703`*^9}, {3.7277003468190746`*^9, 
+   3.7277005275394115`*^9}, {3.7277006288032036`*^9, 3.7277006432030272`*^9}, 
+   3.7277074892180557`*^9, {3.7277079170210543`*^9, 3.7277079339387636`*^9}, {
+   3.7277084584934063`*^9, 3.7277084893791137`*^9}, {3.7277086831692085`*^9, 
+   3.7277086858280973`*^9}, {3.7277093834762735`*^9, 
+   3.7277093936725254`*^9}, {3.7277100858236217`*^9, 
+   3.7277101497123985`*^9}, {3.727710184500719*^9, 3.7277106162084384`*^9}, {
+   3.727710653226014*^9, 3.727710745371608*^9}, {3.7277107762182903`*^9, 
+   3.7277107814694433`*^9}, {3.727710867143664*^9, 3.7277109436158323`*^9}, {
+   3.72771098038164*^9, 3.727711113637781*^9}, {3.7277111526537066`*^9, 
+   3.727711187763996*^9}, {3.7277112467809486`*^9, 3.7277112682352476`*^9}, {
+   3.7277113025505395`*^9, 3.727711341213997*^9}, {3.727711376559169*^9, 
+   3.7277116099288607`*^9}, {3.72771164200464*^9, 3.7277117733034887`*^9}, {
+   3.7277118489154606`*^9, 3.727711906191822*^9}, 3.727711938967264*^9, {
+   3.7277119907476645`*^9, 3.727711995252815*^9}, {3.7277120670401917`*^9, 
+   3.7277123181566644`*^9}, {3.727712368323104*^9, 3.727712387352652*^9}, {
+   3.7277124265460663`*^9, 3.727712427249219*^9}, {3.7277124599020185`*^9, 
+   3.727712486667354*^9}, {3.7277125423508563`*^9, 3.727712631709138*^9}, {
+   3.7277126715694866`*^9, 3.727712865594101*^9}, {3.727712902683725*^9, 
+   3.7277129053115587`*^9}, {3.727712952312577*^9, 3.7277130247053833`*^9}, 
+   3.727713279266334*^9, 3.727798030873581*^9, {3.733824338683484*^9, 
+   3.7338245570690775`*^9}, {3.733824599981327*^9, 3.733824695637583*^9}, {
+   3.733825061348925*^9, 3.7338251636547747`*^9}},
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"17628543-237f-49b7-a8c2-c1ef4be5dc92"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Errors", "Subchapter",
+ CellChangeTimes->{{3.7270401012133074`*^9, 3.727040156706192*^9}, {
+  3.7277003392266407`*^9, 3.727700340226698*^9}, {3.7277971896679115`*^9, 
+  3.72779719396494*^9}, {3.7277972388082*^9, 3.7277972416304955`*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"3d1142bf-4248-426e-a12c-9f83bec051e1"],
+
+Cell["\<\
+Reliability is not a critical aspect of this application, as it is not a \
+control application for security or safety-critical systems. However, in the \
+interest of ease-of-use, we want to avoid system failure in the general case \
+as much as possible, with the following error cases being of particular \
+concern:\
+\>", "Text",
+ CellChangeTimes->{{3.72779724390798*^9, 3.727797258330427*^9}, {
+  3.727797356880813*^9, 3.7277974257582684`*^9}, {3.7277974742755685`*^9, 
+  3.727797528840067*^9}, {3.72779756232558*^9, 3.7277975803887744`*^9}, {
+  3.727799057958042*^9, 
+  3.727799146680171*^9}},ExpressionUUID->"ae9344a2-d3ea-4233-bd97-\
+a29ccc45129b"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+User input: User enters some form of input that is either unrecognized or \
+unaccepted and thus not accounted for. \
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.72704016143649*^9, 3.727040181418527*^9}, {
+   3.727040336915621*^9, 3.7270403905430913`*^9}, {3.7277006867785196`*^9, 
+   3.72770069028272*^9}, {3.7277084162571945`*^9, 3.7277084358255405`*^9}, {
+   3.727797202574575*^9, 3.727797202574575*^9}, 3.727799151195223*^9, {
+   3.733825172264448*^9, 3.7338251722654657`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"9ea6eed5-0dc9-484f-a983-cfafdec6994f"],
+
+Cell["\<\
+Object constructors are passed a incorrect parameter which happens to be \
+uncaught when assigning that parameter to a field.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.72704016143649*^9, 3.727040181418527*^9}, {
+   3.727040336915621*^9, 3.7270403905430913`*^9}, {3.7277006867785196`*^9, 
+   3.72770069028272*^9}, {3.7277084162571945`*^9, 3.7277084358255405`*^9}, {
+   3.727797202574575*^9, 3.727797202574575*^9}, 3.727799151195223*^9, {
+   3.733825174437587*^9, 3.7338252200060844`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"fbee825b-1131-462b-92f2-58698a972078"],
+
+Cell["\<\
+Stack overflow, divide by 0, logic errors and matrix transformations accuracy \
+degradation. \
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.72704016143649*^9, 3.7270401986588945`*^9}, {
+  3.7270403927877607`*^9, 3.727040405443842*^9}, {3.7277007017783775`*^9, 
+  3.7277007064346437`*^9}, {3.727707567967464*^9, 3.727707578111902*^9}, {
+  3.7277081818905306`*^9, 3.7277083302001224`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"e21671e8-1dbe-4b47-a662-db09a9e9e8ba"],
+
+Cell["\<\
+Overtaxing of system resources such as running out of VRAM/RAM or \
+overburdening CPU.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.72704016143649*^9, 3.727040216050418*^9}, {
+  3.727040407508276*^9, 3.727040463924756*^9}, {3.7277083224122343`*^9, 
+  3.727708401188515*^9}, {3.733825245016987*^9, 3.733825245016987*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"8988f573-d59e-4b92-89db-bcc3e50e76b6"],
+
+Cell["Graphical errors due to GPU type.", "ItemNumbered",
+ CellChangeTimes->{{3.72704016143649*^9, 3.727040216050418*^9}, {
+  3.727040407508276*^9, 3.727040463924756*^9}, {3.7277083224122343`*^9, 
+  3.727708401188515*^9}, {3.733825246086071*^9, 3.7338252588380356`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"604521f0-9382-408e-8eb9-beae3832c9c6"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Maintenance ", "Subchapter",
+ CellChangeTimes->{{3.727040524191012*^9, 3.7270406395898905`*^9}, {
+   3.7270406754616933`*^9, 3.7270407191099615`*^9}, 3.7277007144751034`*^9},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"8ac0508b-ab4b-40ea-8545-3ddab2eec2a4"],
+
+Cell["\<\
+Maintenance will only be available for 2nd semester of the 2017-2018 academic \
+year.\
+\>", "Subitem",
+ CellChangeTimes->{{3.727700719275378*^9, 3.727700736834382*^9}, 
+   3.7277075916663294`*^9},ExpressionUUID->"5ca64325-e07e-45f6-92ae-\
+f946c87e9d80"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Platform Requirements", "Chapter",
+ CellChangeTimes->{{3.727040735615818*^9, 3.727040746534642*^9}},
+ FontFamily->"Arial",
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"616e4f79-e1d9-4971-a89b-d95005945cfe"],
+
+Cell[CellGroupData[{
+
+Cell["Operating Systems ", "Subchapter",
+ CellChangeTimes->{{3.727040768670537*^9, 3.72704079229454*^9}, {
+  3.7277132151501894`*^9, 3.7277132165252523`*^9}},
+ FontFamily->"Arial",
+ FontSize->16,
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"1ede34ab-8b75-4ee1-9b64-b4d43709aec7"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Windows 7, as it still common to see it in use and also because one of the \
+group members is using windows 7.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.72704090483426*^9, 3.7270409155539403`*^9}, {
+   3.727700820970195*^9, 3.727700846706667*^9}, 3.7277080092798653`*^9},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"c2457945-351b-412c-9c4a-bcb3d6231d51"],
+
+Cell["\<\
+Windows 10, latest in Microsoft operating systems and also the operating \
+system of most of the university lab computers.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.72704090483426*^9, 3.727040918231863*^9}, {
+   3.727700848722782*^9, 3.7277008793945365`*^9}, 3.7277076003559923`*^9, {
+   3.7277080218130836`*^9, 3.7277080928385077`*^9}, {3.727713160833527*^9, 
+   3.727713164596115*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"852aa894-1528-4d07-9ec3-a649c6e3476f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tools", "Subchapter",
+ CellChangeTimes->{{3.727041150498581*^9, 3.727041159337908*^9}},
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"4f924942-87e7-486b-8254-536748b01c1e"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Browser capable of using WebGL and capable of accepting non JavaScript files \
+such as textures.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.7270412249479823`*^9, 3.727041234178618*^9}, {
+   3.727700753362328*^9, 3.7277007791228013`*^9}, 3.727700817354988*^9, 
+   3.727707603500617*^9, 3.727707650838526*^9, {3.7338252393015614`*^9, 
+   3.7338252803426876`*^9}, {3.7338253125351152`*^9, 3.7338253142302656`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"020a5ab0-2eb8-45af-bbf7-eceed9270ab5"],
+
+Cell["Notepad++", "Subsubitem",
+ CellChangeTimes->{{3.7270412249479823`*^9, 3.7270412393143034`*^9}, {
+   3.727700780338871*^9, 3.7277008163709316`*^9}, {3.727707606969552*^9, 
+   3.727707648227614*^9}, 3.7338252297818155`*^9, {3.733825320727744*^9, 
+   3.7338253229869285`*^9}, 3.733825353287247*^9},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"837ebd1f-73ad-4844-9a88-49901980ddd1"],
+
+Cell["Mozilla WebGL API.", "Subsubitem",
+ CellChangeTimes->{{3.7270412249479823`*^9, 3.7270412393143034`*^9}, {
+   3.727700780338871*^9, 3.7277008163709316`*^9}, {3.727707606969552*^9, 
+   3.727707648227614*^9}, 3.7338252297818155`*^9, {3.733825320727744*^9, 
+   3.7338253527431884`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"a6f54226-3470-45c7-92a8-bff4c29e2c5b"],
+
+Cell["Browser console.", "Subsubitem",
+ CellChangeTimes->{{3.7270412249479823`*^9, 3.7270412393143034`*^9}, {
+   3.727700780338871*^9, 3.7277008163709316`*^9}, {3.727707606969552*^9, 
+   3.727707648227614*^9}, 3.7338252297818155`*^9, {3.733825320727744*^9, 
+   3.733825350775036*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"585729a4-49ad-4f15-b63f-5181acb78d5e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Hardware", "Subchapter",
+ CellChangeTimes->{{3.7270412752681074`*^9, 3.7270412841985035`*^9}},
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"1d8e5418-ddcf-4e35-b2f7-19d886a37900"],
+
+Cell["\<\
+Basic CPU to be able to perform calculations.
+Basic GPU, can be in CPU but has to be able to use OpenGL 4.3+ (the latest \
+version of openGL supported by university lab computers).
+Basic storage device to be able to contain program.
+Basic RAM and enough RAM allocation so that the program can run.
+Basic Monitor so that the user can see the graphics.
+Basic keyboard and mouse so that the user can interact with the program.\
+\>", "Text",
+ CellChangeTimes->{{3.727041286516179*^9, 3.727041330066433*^9}, {
+   3.72770091792274*^9, 3.727700931277504*^9}, {3.72770109117865*^9, 
+   3.727701154034245*^9}, 3.727707663185916*^9, {3.7277078025737934`*^9, 
+   3.7277078242774954`*^9}, {3.7277131112395725`*^9, 
+   3.7277131829594655`*^9}, {3.7338253583116283`*^9, 3.7338253634320097`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"900a20b4-ad2d-4f19-be9d-98dd30856409"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Software", "Subchapter",
+ CellChangeTimes->{{3.7338253666522446`*^9, 
+  3.733825388312916*^9}},ExpressionUUID->"4d1c1a7d-8b4a-443e-b11a-\
+ba04959f422a"],
+
+Cell["\<\
+Firefox, Microsoft Edge or Safari browsers as they allow for non JavaScript \
+files to be loaded.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.733825389946027*^9, 
+  3.7338254489495254`*^9}},ExpressionUUID->"d46ef048-c01f-4337-8e59-\
+7fabc925c25d"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Process Requirements", "Chapter",
+ CellChangeTimes->{{3.7270414486134977`*^9, 3.727041461275585*^9}, 
+   3.727525626776893*^9},
+ FontFamily->"Arial",
+ Background->GrayLevel[
+  0.85],ExpressionUUID->"ac674b2e-7b4e-4e95-9395-8e11ea13ddf6"],
+
+Cell[CellGroupData[{
+
+Cell["People", "Subchapter",
+ CellChangeTimes->{{3.7275257185965824`*^9, 3.7275257352205577`*^9}},
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"3cbdc834-92f9-41c5-b794-15c8776ffd0e"],
+
+Cell[CellGroupData[{
+
+Cell["Programmers", "Subitem",
+ CellChangeTimes->{{3.7275257500292296`*^9, 3.7275257726445103`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"a1a97ad4-8a61-4959-898f-0d4664bd0b44"],
+
+Cell[CellGroupData[{
+
+Cell["Yoonah Lee\t", "Subsubitem",
+ CellChangeTimes->{{3.727525775583647*^9, 3.727525790295238*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"f7ad3d09-2841-458c-a6e4-dc75508d6f8c"],
+
+Cell["Shah Rafique", "Subsubitem",
+ CellChangeTimes->{{3.727525775583647*^9, 3.7275257956610975`*^9}, {
+  3.7275267841727705`*^9, 3.7275267847491693`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"23fce0ce-1f80-41ef-b472-95d7ba56b10e"],
+
+Cell["Matthew Smitherman", "Subsubitem",
+ CellChangeTimes->{{3.727525775583647*^9, 3.727525806069595*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"5847e1bf-3656-4991-bc7b-aaa411156b10"]
+}, Open  ]],
+
+Cell["Professors/Advisors", "Subitem",
+ CellChangeTimes->{{3.7275258106418753`*^9, 3.7275258419734993`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"02740ee2-adc1-45a0-bd36-c92e021505dd"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Chandana Ariyawansa (C.A.), professor for CSC 495: Intro to Graphics.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.727525845455961*^9, 3.727525845590049*^9}, {
+  3.7275258817352514`*^9, 3.7275258834144735`*^9}, {3.727700950698615*^9, 
+  3.7277009708747687`*^9}, {3.7277078470982637`*^9, 3.727707872929759*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"6c61b4d0-5094-4ddd-98fc-19f8786a1338"],
+
+Cell["Ike Quigley, professor of CSC 340: Software Engineering.", "Subsubitem",
+ CellChangeTimes->{{3.727525861936819*^9, 3.727525894054124*^9}, {
+  3.727700960098152*^9, 3.727700969554693*^9}, {3.72770787716821*^9, 
+  3.727707888369731*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"8e0883e1-e9f2-44f0-9a2a-ea8e5f6c4bdb"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Costs", "Subchapter",
+ CellChangeTimes->{{3.727525983249377*^9, 3.7275259853349233`*^9}},
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"0011fc06-e56e-4de6-9715-09b194c62a58"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Time, as learning graphics and creating matrix libraries will take time.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.727526000963132*^9, 3.7275260068903913`*^9}, {
+  3.727701641939231*^9, 3.7277016545149508`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"56850d96-6a21-4325-aa1d-50775a7cb9aa"],
+
+Cell["\<\
+$0, note that the GPU and web browser has to be able to use WebGL and accept \
+non JavaScript files.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.727526009793495*^9, 3.727526017222892*^9}, {
+   3.7275262309534636`*^9, 3.7275262502813835`*^9}, 3.727707894348153*^9, {
+   3.7277945246728053`*^9, 3.7277945369077435`*^9}, {3.7277991777281904`*^9, 
+   3.727799179296248*^9}, {3.733825466440839*^9, 3.73382548632839*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"c4f62b00-952d-405a-85dd-f36cc93a1c3c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Dates (Deadlines)", "Subchapter",
+ CellChangeTimes->{{3.7275263571703424`*^9, 3.727526359050699*^9}, {
+  3.727796098067639*^9, 3.727796101677142*^9}},
+ FontFamily->"Arial",
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"8cdd187d-00a5-4ee3-bc5c-0d479ae38b5a"],
+
+Cell[CellGroupData[{
+
+Cell["4/23/18: Multiple objects with textures or color only", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"8bece653-89c1-4739-8550-e1763a8f03f3"],
+
+Cell["4/25/18: Incorporate sphere into object hierarchy ", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.733826067122658*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"2780bf5e-3d1e-408f-b361-6676d4a7de6a"],
+
+Cell["\<\
+4/26/18: Start combining object classes into the Vue framework to allow those \
+objects to be creatable\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.733826121186021*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"43fac136-ee3c-468b-9b34-dcaac2c8d847"],
+
+Cell["\<\
+4/27/18: Implement user control and polish structure of program,present to \
+CSC 340 class\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}, {3.7338261270424633`*^9, 
+   3.7338261662304907`*^9}, {3.733826203811346*^9, 3.733826210610858*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"57b32b34-80bb-4529-b540-0b36259ff262"],
+
+Cell["4/28/18: Incorporate lighting", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}, {3.7338261474420743`*^9, 
+   3.733826181074626*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"4d561f75-9ddd-4cf6-9dea-6bcd0684588d"],
+
+Cell["\<\
+4/29/18: Add more user controls such as specify position,color and texture of \
+objects.\
+\>", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}, {3.7338261486421328`*^9, 
+   3.733826149042181*^9}, {3.733826236850871*^9, 3.733826254372222*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"ec061e4b-c428-4f30-8cf8-c42b564dd171"],
+
+Cell["4/30/18: Clean program up.", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}, {3.733826150306279*^9, 
+   3.733826150722289*^9}, {3.733826257892481*^9, 3.733826276132874*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"5248001a-d3dd-4f72-b8f2-beb0777c88c0"],
+
+Cell["5/1/18: Clean program up, present to CSC 495 class", "Subsubitem",
+ CellChangeTimes->{{3.7275263799726253`*^9, 3.7275264104630146`*^9}, 
+   3.7277017979461546`*^9, {3.7277933811280837`*^9, 3.7277933820030794`*^9}, {
+   3.7277947053367233`*^9, 3.7277947496354275`*^9}, {3.727794945158495*^9, 
+   3.7277949490805087`*^9}, {3.733825560106002*^9, 3.7338255608420477`*^9}, {
+   3.7338260247193894`*^9, 3.7338260429108233`*^9}, {3.73382617129888*^9, 
+   3.733826172562951*^9}, {3.7338262124030457`*^9, 3.733826217043361*^9}, {
+   3.733826264099958*^9, 3.7338262817962937`*^9}},
+ Background->RGBColor[
+  1, 1, 0.85],ExpressionUUID->"f2cfd349-2fbc-49d9-a590-33871940f111"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{
+    RowBox[{"EvaluationNotebook", "[", "]"}], ",", " ", 
+    RowBox[{"Background", " ", "->", " ", "LightYellow"}]}], "]"}], 
+  ";"}]], "Code",
+ CellOpen->False,
+ CellChangeTimes->{{3.727699685118011*^9, 3.7276997632248573`*^9}},
+ FontFamily->"Arial",
+ FontWeight->"Plain",ExpressionUUID->"765d8869-8e5b-43b2-b895-646646975602"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1904, 997},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+Magnification:>1.5 Inherited,
+Background->RGBColor[1, 1, 0.85],
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Chapter"], FontSize -> 24], 
+   Cell[
+    StyleData["Subsubitem"], FontSize -> 14], 
+   Cell[
+    StyleData["Subchapter"], FontSize -> 16]}, Visible -> False, 
+  FrontEndVersion -> "11.1 for Microsoft Windows (64-bit) (April 18, 2017)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 538, 14, 187, "Title", "ExpressionUUID" -> \
+"5a954a04-d772-43c3-9c97-312420a62d36"],
+Cell[CellGroupData[{
+Cell[1143, 40, 218, 4, 103, "Chapter", "ExpressionUUID" -> \
+"33deed70-434b-46a8-8120-0b13938bb7fc"],
+Cell[1364, 46, 2152, 31, 75, "Text", "ExpressionUUID" -> \
+"e10a32f5-13bc-41f3-a3fa-d04c6a411321"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3553, 82, 221, 4, 103, "Chapter", "ExpressionUUID" -> \
+"1f5ee706-9939-49f0-b7a7-3e95a4ad47ba"],
+Cell[3777, 88, 728, 12, 69, "Subchapter", "ExpressionUUID" -> \
+"5d404660-9ad9-4062-a1fc-c3a16e96389a"],
+Cell[4508, 102, 769, 15, 43, "Subchapter", "ExpressionUUID" -> \
+"3dfc8b9c-7f53-46b2-a65c-b90278a9f41e"],
+Cell[5280, 119, 636, 12, 43, "Subchapter", "ExpressionUUID" -> \
+"ce667cd4-94d7-4ab9-b44b-b5dd0d5d911a"],
+Cell[5919, 133, 460, 8, 43, "Subchapter", "ExpressionUUID" -> \
+"22b96e99-dc84-49f3-9404-5825cbdae602"],
+Cell[6382, 143, 654, 11, 43, "Subchapter", "ExpressionUUID" -> \
+"4c1fd11a-0da3-4afa-afa2-22f3442e78ed"],
+Cell[7039, 156, 624, 10, 43, "Subchapter", "ExpressionUUID" -> \
+"4a3f1910-d0f3-4902-b705-0f0821616a5d"],
+Cell[7666, 168, 657, 11, 43, "Subchapter", "ExpressionUUID" -> \
+"41379c30-edf4-497e-a367-562734a76673"],
+Cell[8326, 181, 564, 12, 43, "Subchapter", "ExpressionUUID" -> \
+"0a73c4b1-055e-4afc-a984-66430a96a7e0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8927, 198, 266, 5, 103, "Chapter", "ExpressionUUID" -> \
+"bebbe3f4-89d3-4d29-b8b0-730a4cd8759a"],
+Cell[CellGroupData[{
+Cell[9218, 207, 202, 2, 69, "Subchapter", "ExpressionUUID" -> \
+"1bdeafcc-77e0-47a1-8a0f-b14fcef87dca"],
+Cell[9423, 211, 3135, 47, 301, "Text", "ExpressionUUID" -> \
+"17628543-237f-49b7-a8c2-c1ef4be5dc92"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12595, 263, 373, 7, 69, "Subchapter", "ExpressionUUID" -> \
+"3d1142bf-4248-426e-a12c-9f83bec051e1"],
+Cell[12971, 272, 662, 12, 75, "Text", "ExpressionUUID" -> \
+"9935cb75-276d-4d77-8c71-0498c66e002b"],
+Cell[CellGroupData[{
+Cell[13658, 288, 582, 10, 44, "ItemNumbered", "ExpressionUUID" -> \
+"9ea6eed5-0dc9-484f-a983-cfafdec6994f"],
+Cell[14243, 300, 592, 10, 44, "ItemNumbered", "ExpressionUUID" -> \
+"fbee825b-1131-462b-92f2-58698a972078"],
+Cell[14838, 312, 488, 9, 44, "ItemNumbered", "ExpressionUUID" -> \
+"d147b4ce-44c1-4879-ade7-a0106c5287e4"],
+Cell[15329, 323, 422, 8, 44, "ItemNumbered", "ExpressionUUID" -> \
+"8988f573-d59e-4b92-89db-bcc3e50e76b6"],
+Cell[15754, 333, 363, 5, 44, "ItemNumbered", "ExpressionUUID" -> \
+"604521f0-9382-408e-8eb9-beae3832c9c6"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16166, 344, 310, 6, 69, "Subchapter", "ExpressionUUID" -> \
+"4bbe0c75-1d18-4597-bc6d-5cfae2ad0a2b"],
+Cell[16479, 352, 263, 6, 36, "Subitem", "ExpressionUUID" -> \
+"6fc171ad-2f4d-44f3-8dea-1c73f1967d92"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16791, 364, 216, 4, 103, "Chapter", "ExpressionUUID" -> \
+"341f7f78-64ae-4557-900c-a6c47e1068f8"],
+Cell[CellGroupData[{
+Cell[17032, 372, 288, 6, 69, "Subchapter", "ExpressionUUID" -> \
+"5fa7eca1-2c02-4e31-ae81-1422c4fd4f1c"],
+Cell[CellGroupData[{
+Cell[17345, 382, 374, 7, 36, "Subsubitem", "ExpressionUUID" -> \
+"1469286b-def4-433c-adca-c7f6395158d4"],
+Cell[17722, 391, 490, 9, 36, "Subsubitem", "ExpressionUUID" -> \
+"957f1aeb-ff73-4bd4-9cf8-07830d6aaed4"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18261, 406, 208, 4, 69, "Subchapter", "ExpressionUUID" -> \
+"18abda10-a9a8-4ee6-8d6e-1658a6cd0719"],
+Cell[CellGroupData[{
+Cell[18494, 414, 513, 9, 36, "Subsubitem", "ExpressionUUID" -> \
+"020a5ab0-2eb8-45af-bbf7-eceed9270ab5"],
+Cell[19010, 425, 394, 6, 36, "Subsubitem", "ExpressionUUID" -> \
+"837ebd1f-73ad-4844-9a88-49901980ddd1"],
+Cell[19407, 433, 381, 6, 36, "Subsubitem", "ExpressionUUID" -> \
+"a6f54226-3470-45c7-92a8-bff4c29e2c5b"],
+Cell[19791, 441, 377, 6, 36, "Subsubitem", "ExpressionUUID" -> \
+"585729a4-49ad-4f15-b63f-5181acb78d5e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20217, 453, 215, 4, 69, "Subchapter", "ExpressionUUID" -> \
+"57f0b998-eec3-44ce-9b26-33efd6fa01b4"],
+Cell[20435, 459, 884, 15, 189, "Text", "ExpressionUUID" -> \
+"900a20b4-ad2d-4f19-be9d-98dd30856409"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21356, 479, 158, 3, 76, "Subchapter", "ExpressionUUID" -> \
+"4d1c1a7d-8b4a-443e-b11a-ba04959f422a"],
+Cell[21517, 484, 255, 6, 36, "Subsubitem", "ExpressionUUID" -> \
+"d46ef048-c01f-4337-8e59-7fabc925c25d"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21821, 496, 243, 5, 103, "Chapter", "ExpressionUUID" -> \
+"cdb2b7d1-779f-439c-aaf1-b86773e53898"],
+Cell[CellGroupData[{
+Cell[22089, 505, 213, 4, 69, "Subchapter", "ExpressionUUID" -> \
+"6423ea6f-3d92-4d0b-93e9-8453a562bfcb"],
+Cell[CellGroupData[{
+Cell[22327, 513, 193, 3, 36, "Subitem", "ExpressionUUID" -> \
+"0f208a76-4a9e-4b54-9d75-ef4e71a93d85"],
+Cell[CellGroupData[{
+Cell[22545, 520, 193, 3, 36, "Subsubitem", "ExpressionUUID" -> \
+"855f958f-2f1d-40dd-a723-3753dbf8f8a6"],
+Cell[22741, 525, 248, 4, 36, "Subsubitem", "ExpressionUUID" -> \
+"926252fc-f549-4b7b-8b9e-4667306a8167"],
+Cell[22992, 531, 199, 3, 36, "Subsubitem", "ExpressionUUID" -> \
+"c8492417-bcc5-4abd-ba43-3386e1d775e7"]
+}, Open  ]],
+Cell[23206, 537, 201, 3, 36, "Subitem", "ExpressionUUID" -> \
+"38988355-48ae-47cf-8c74-efd28fac5015"],
+Cell[CellGroupData[{
+Cell[23432, 544, 410, 7, 36, "Subsubitem", "ExpressionUUID" -> \
+"08cb2c7d-b2e7-4a70-83e5-da8d096cc55a"],
+Cell[23845, 553, 334, 5, 36, "Subsubitem", "ExpressionUUID" -> \
+"c3b3212f-6262-4197-b10c-c8aefb7a9d87"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24240, 565, 210, 4, 69, "Subchapter", "ExpressionUUID" -> \
+"1423122e-a9e2-416d-b7b9-5a017108695a"],
+Cell[CellGroupData[{
+Cell[24475, 573, 314, 6, 36, "Subsubitem", "ExpressionUUID" -> \
+"e071fe52-01fc-4a7c-a4f2-0b7fe50d1b28"],
+Cell[24792, 581, 516, 9, 36, "Subsubitem", "ExpressionUUID" -> \
+"c4f62b00-952d-405a-85dd-f36cc93a1c3c"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25357, 596, 271, 5, 69, "Subchapter", "ExpressionUUID" -> \
+"58a3f753-418b-4500-bcc8-12447da5aaa8"],
+Cell[CellGroupData[{
+Cell[25653, 605, 524, 7, 36, "Subsubitem", "ExpressionUUID" -> \
+"8bece653-89c1-4739-8550-e1763a8f03f3"],
+Cell[26180, 614, 519, 7, 36, "Subsubitem", "ExpressionUUID" -> \
+"2780bf5e-3d1e-408f-b361-6676d4a7de6a"],
+Cell[26702, 623, 580, 10, 36, "Subsubitem", "ExpressionUUID" -> \
+"43fac136-ee3c-468b-9b34-dcaac2c8d847"],
+Cell[27285, 635, 669, 11, 36, "Subsubitem", "ExpressionUUID" -> \
+"57b32b34-80bb-4529-b540-0b36259ff262"],
+Cell[27957, 648, 552, 8, 36, "Subsubitem", "ExpressionUUID" -> \
+"4d561f75-9ddd-4cf6-9dea-6bcd0684588d"],
+Cell[28512, 658, 665, 11, 36, "Subsubitem", "ExpressionUUID" -> \
+"ec061e4b-c428-4f30-8cf8-c42b564dd171"],
+Cell[29180, 671, 593, 8, 36, "Subsubitem", "ExpressionUUID" -> \
+"5248001a-d3dd-4f72-b8f2-beb0777c88c0"],
+Cell[29776, 681, 670, 9, 36, "Subsubitem", "ExpressionUUID" -> \
+"f2cfd349-2fbc-49d9-a590-33871940f111"]
+}, Open  ]],
+Cell[30461, 693, 394, 10, 32, "Code", "ExpressionUUID" -> \
+"0aae7c87-3e95-45e0-b21c-541d1f09e2f3",
+ CellOpen->False]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
