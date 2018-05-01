@@ -238,7 +238,7 @@ function drawScene(_shaderProgram) {
 			
 			mat4.identity(modelViewMatrix);
 			mat4.translate(modelViewMatrix, modelViewMatrix, currObj.place);
-			mat4.rotateY(modelViewMatrix, modelViewMatrix, 30);
+			//mat4.rotateY(modelViewMatrix, modelViewMatrix, 30);
 			
 			let posBufferRef = currObj.type + "_vertexArray";
 			gl.bindBuffer(gl.ARRAY_BUFFER, objArray[posBufferRef]);
