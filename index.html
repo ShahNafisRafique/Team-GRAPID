@@ -78,7 +78,7 @@ based on the class attributes of the DOM element div tags below-->
 				<div id = "grapid-app">
 				<!-- we initialize a custom vue instance, canvas-view, based on the vue 
 				component constructor defined in canvasView.js -->
-					<canvas-view></canvas-view>
+					<canvas-view :program = "program"></canvas-view>
 					<!-- we do the same for the color-picker and shape-adder components -->
 					<color-picker :change = "updateColor"></color-picker>
 					<shape-adder v-bind:hue = "hue" :program = "program"></shape-adder>
@@ -88,7 +88,7 @@ based on the class attributes of the DOM element div tags below-->
 				the html templates below describe the DOM elements that we include 
 				in a each component (e.g. the canvas-view component has a canvas element)  -->
 				<template id = "canvas-view-template">
-					<div class = "canvas-el">
+					<div class = "canvas-el" @click = "drag">
 						<canvas ref = "grapid-canvas"></canvas>
 					</div>
 				</template>

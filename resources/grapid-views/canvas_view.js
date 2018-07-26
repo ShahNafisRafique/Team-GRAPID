@@ -9,6 +9,7 @@ Last Updated: 4/26/2018
 
 Vue.component("canvas-view", {
 	template: "#canvas-view-template",
+  props : ["program"],
 	data: function () {
 		return {
 			isVisible: true,
@@ -43,12 +44,17 @@ Vue.component("canvas-view", {
 				this.isVisible = !this.isVisible;
 			},
 			setFocus: function(event) {
-				console.log(this.objects);
+        let objArr = this.objects;
+        this.selected = sceneObjectModule.getSelectedObj;
+				console.log(this.selected);
 			},
 			drag: function(event) {
-				if(mode === "drag"){
-					p = get_coords(event);
+				if(this.mode === "drag"){
+					p = this.get_coords(event);
+          console.log(p.x, p.y);
+          sceneObjectModule.setPlace(p.x, p.y);
 					//set object x y to event x y, redraw
+          sceneObjectModule.drawScene(this.program);
 				}
 			},
 			get_coords: function(event) {

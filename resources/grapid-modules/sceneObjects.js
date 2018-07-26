@@ -18,6 +18,9 @@ Last Updated: 4/26/2018
   //objects that have been created.
 	
 	objArray.activeClasses = {};
+  
+  //declare var to store index of selected object
+  var selected = 0;
 	/* 
     When a new type of object is create, createBuffers 
     creates a webgl buffer for each property that kind of object has.
@@ -207,6 +210,7 @@ Last Updated: 4/26/2018
 				obj.index = objArray.length;
 				objArray.push(obj);
 				init.buffers(obj, objArray);
+        setSelectedIndex(obj);
         
 			} else {
         
@@ -214,13 +218,58 @@ Last Updated: 4/26/2018
         
 			}
 	}
+  
+  
+  function setSelectedIndex(_obj) {
+    
+    if(_obj !== Number) {
+      
+      selected = _obj.index;
+      
+    } else {
+      
+      selected = _obj;
+      
+    }
+  }
+  
+  
+  function getSelectedObj(){
+    
+    return objArray[selected];
+    
+  }
+  
+  
+  function incrementSelected() {
+    
+    if(selected < objArray.length - 1) {
+      
+      selected++;
+      
+    } else {
+      
+      setSelectedIndex(0);
+      
+    }
+  }
 
 
 function setMatrixUniforms(_shaderProgram, _perspectiveMatrix, _modelViewMatrix) {
 	gl.uniformMatrix4fv(_shaderProgram.pMatrixUniform, false, _perspectiveMatrix);
 	gl.uniformMatrix4fv(_shaderProgram.mvMatrixUniform, false, _modelViewMatrix);
 	}
-
+  
+function setPlace(_newX, _newY){
+  
+  let obj = objArray[selected];
+  console.log(obj);
+  
+  let dx = obj.place[0] - (_newX / (gl.viewportWidth/2));
+  let dy = obj.place[1] - (_newY / (gl.viewportHeight/2));
+  let dz = obj.place[2];
+  obj.place = [-dx, -dy, dz];
+}
 
 function drawScene(_shaderProgram) {
 		
@@ -238,7 +287,7 @@ function drawScene(_shaderProgram) {
 			
 			mat4.identity(modelViewMatrix);
 			mat4.translate(modelViewMatrix, modelViewMatrix, currObj.place);
-			mat4.rotateY(modelViewMatrix, modelViewMatrix, 30);
+			//mat4.rotateY(modelViewMatrix, modelViewMatrix, 30);
 			
 			let posBufferRef = currObj.type + "_vertexArray";
 			gl.bindBuffer(gl.ARRAY_BUFFER, objArray[posBufferRef]);
@@ -309,7 +358,23 @@ function drawScene(_shaderProgram) {
 		
 		"getObjArray" : function() {
 			return objArray;
-		}
+		},
+    
+    "setSelectedIndex" : function(_obj) { 
+      return setSelectedIndex(_obj);
+    },
+    
+    "getSelectedObj" : function() {
+      return getSelectedObj();
+    },
+    
+    "incrementSelected" : function() {
+      return incrementSelected();
+    },
+    
+    "setPlace" : function(_x, _y){
+      return setPlace(_x, _y);
+    }
 		
 	};
 
